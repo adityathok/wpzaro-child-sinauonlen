@@ -1,0 +1,68 @@
+.container,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+    max-width: 500px;
+}
+
+body {
+    background-color: #f7f7f7;
+}
+
+#page-content {
+    min-height: 80vh;
+    padding-bottom: 80px;
+}
+
+.bottom-navmenu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#navMenuBottom a.nav-link {
+    font-size: .75rem;
+    border-radius: 10rem;
+    position: relative;
+}
+
+#navMenuBottom a.nav-link .fa {
+    display: block;
+    text-align: center;
+    font-size: 1rem;
+}
+
+#navMenuBottom .current-menu-item>a .fa {
+    color: #333333;
+}
+
+#navMenuBottom .current-menu-item>a.nav-link:after {
+    content: "\f111";
+    font-family: 'fontawesome';
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: .5rem;
+    color: #000;
+}
+
+.row>.content-area,
+.row>.widget-area {
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+.admin-bar #offcanvasMenuHeader {
+    padding-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    #offcanvasMenuHeader {
+        width: 80%;
+    }
+}

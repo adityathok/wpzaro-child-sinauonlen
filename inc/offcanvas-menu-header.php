@@ -15,6 +15,16 @@ function add_offcanvas_menuheader(){
                 'url'   => $linkprofile.'notifications/',
                 'icon'  => 'fa fa-bell',
             ],
+            'forums' => [
+                'title' => 'Forum',
+                'url'   => $linkprofile.'forum/',
+                'icon'  => 'fa fa-comments',
+            ],
+            'setting' => [
+                'title' => 'Settings',
+                'url'   => $linkprofile.'settings/',
+                'icon'  => 'fa fa-gear',
+            ],
             'logout' => [
                 'title' => 'Logout',
                 'url'   => wp_logout_url(home_url()),
@@ -33,24 +43,26 @@ function add_offcanvas_menuheader(){
     ?>
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenuHeader" aria-labelledby="offcanvasMenuHeaderlabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasMenuHeaderlabel">Offcanvas</h5>
+        <h5 class="offcanvas-title" id="offcanvasMenuHeaderlabel">
+            <?php bp_displayed_user_username(); ?>
+        </h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body p-0">
-        <div class="list-group">
+        <div class="list-group list-group-offcanvas-header">
             <?php
             foreach ($arraymenu as $key => $value) {
                 $submenu = isset($value['submenu'])?$value['submenu']:'';
                 ?>
                 <a href="<?php echo $value['url']; ?>" class="list-group-item rounded-0">
-                    <i class="<?php echo $value['icon']; ?> mr-3 text-muted" aria-hidden="true"></i>
+                    <i class="<?php echo $value['icon']; ?>" aria-hidden="true"></i>
                     <?php echo $value['title']; ?>
                 </a>
 
                 <?php if($submenu): ?>
                     <?php foreach ($submenu as $key => $value) { ?>
                         <a href="<?php echo $value['url']; ?>" class="list-group-item rounded-0" data-parent="<?php echo $key; ?>">
-                            <i class="<?php echo $value['icon']; ?> mr-3 text-muted" aria-hidden="true"></i>
+                            <i class="<?php echo $value['icon']; ?>" aria-hidden="true"></i>
                             <?php echo $value['title']; ?>
                         </a>
                     <?php } ?>

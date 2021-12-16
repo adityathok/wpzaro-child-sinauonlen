@@ -18,6 +18,8 @@
  * Load other required files
  *
  */
+require_once('inc/css-wp-form.php');
+require_once('inc/class_AdMember.php');
 require_once('inc/login-form.php');
 require_once('inc/header-builder.php');
 require_once('inc/footer-builder.php');
@@ -62,7 +64,7 @@ if( ! function_exists( 'wpzaro_child_enqueue_parent_style') ) {
 	
 }
 
-add_action( 'after_setup_theme', 'wpzarochild_theme_setup', 9 );
+add_action( 'after_setup_theme', 'wpzarochild_theme_setup', 20 );
 
 function wpzarochild_theme_setup() {
 	

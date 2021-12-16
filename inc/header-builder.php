@@ -2,7 +2,7 @@
 if ( ! function_exists( 'wpzaro_header_nav_menu' ) ) {
     add_action('wpzaro_header','wpzaro_header_nav_menu',20);
     function wpzaro_header_nav_menu() {
-        $backurl = $_SERVER['HTTP_REFERER'];
+        $backurl = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
         $conturl = $backurl&&strpos($backurl, home_url())!==false?$backurl:home_url();
         ?>            
         <div class="header-navmenu">

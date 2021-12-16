@@ -82,6 +82,20 @@ body {
     border-radius: 0.25rem;
 }
 
+#bbpress-forums fieldset.bbp-form {
+    background-color: #fff;
+    padding: 2rem;
+}
+
+body.my-account #page-content,
+body.my-account #page-wrapper {
+    padding-top: 0;
+}
+
+body.my-account .entry-header {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
     #offcanvasMenuHeader {
         width: 80%;

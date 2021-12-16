@@ -15,10 +15,15 @@ function add_offcanvas_menuheader(){
                 'url'   => $linkprofile.'notifications/',
                 'icon'  => 'fa fa-bell',
             ],
+            'message' => [
+                'title' => 'Pesan',
+                'url'   => $linkprofile.'messages/',
+                'icon'  => 'fa fa-comment',
+            ],
             'forums' => [
                 'title' => 'Forum',
                 'url'   => $linkprofile.'forum/',
-                'icon'  => 'fa fa-comments',
+                'icon'  => 'fa fa-users',
             ],
             'setting' => [
                 'title' => 'Settings',

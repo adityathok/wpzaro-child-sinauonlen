@@ -30,6 +30,18 @@ function add_offcanvas_menuheader(){
                 'url'   => $linkprofile.'settings/',
                 'icon'  => 'fa fa-gear',
             ],
+            'admin' => [
+                'title' => 'Admin',
+                'url'   => home_url().'/admin-settings/',
+                'icon'  => 'fa fa-gears',
+                'submenu' => [                    
+                    'opt-kelas' => [
+                        'title' => 'Kelas',
+                        'url'   => home_url().'/admin-settings/?pg=kelas',
+                        'icon'  => 'fa fa-group',
+                    ],
+                ]
+            ],
             'logout' => [
                 'title' => 'Logout',
                 'url'   => wp_logout_url(home_url()),
@@ -54,28 +66,37 @@ function add_offcanvas_menuheader(){
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body p-0">
-        <div class="list-group list-group-offcanvas-header">
+        <ul class="list-group list-group-offcanvas-header">
             <?php
             foreach ($arraymenu as $key => $value) {
                 $submenu = isset($value['submenu'])?$value['submenu']:'';
                 ?>
-                <a href="<?php echo $value['url']; ?>" class="list-group-item rounded-0">
-                    <i class="<?php echo $value['icon']; ?>" aria-hidden="true"></i>
-                    <?php echo $value['title']; ?>
-                </a>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <a href="<?php echo $value['url']; ?>" class="d-block">
+                        <i class="<?php echo $value['icon']; ?>" aria-hidden="true"></i>
+                        <?php echo $value['title']; ?>
+                    </a>
+                    <?php if($submenu): ?>
+                        <span class="btn btn-sm btn-light pull-right">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </span>
+                    <?php endif; ?>
+                </li>
 
                 <?php if($submenu): ?>
                     <?php foreach ($submenu as $key => $value) { ?>
-                        <a href="<?php echo $value['url']; ?>" class="list-group-item rounded-0" data-parent="<?php echo $key; ?>">
-                            <i class="<?php echo $value['icon']; ?>" aria-hidden="true"></i>
-                            <?php echo $value['title']; ?>
-                        </a>
+                        <li class="list-group-item d-flex justify-content-between align-items-start" data-parent="<?php echo $key; ?>">
+                            <a href="<?php echo $value['url']; ?>" class="d-block">
+                                <i class="<?php echo $value['icon']; ?>" aria-hidden="true"></i>
+                                <?php echo $value['title']; ?>
+                            </a>
+                        </li>
                     <?php } ?>
                 <?php endif; ?>
                 <?php
             }
             ?>
-        </div>
+        </ul>
     </div>
     </div>
     <?php

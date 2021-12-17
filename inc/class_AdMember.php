@@ -188,7 +188,7 @@ class AdMember {
         
         echo '<form name="input" method="POST" id="formMember" action="">';
 	    
-            echo $action=='edit'?'<h4 class="font-weight-bold">Edit Profil</h4><hr>':'';
+            echo $action=='edit'?'<div class="fw-bold">Edit Profil</div><hr>':'';
 	    
             echo '<input type="hidden" id="role" value="'.$role.'" name="role">';
             
@@ -200,7 +200,7 @@ class AdMember {
             //Loop
         	foreach ($arraymeta as $idmeta => $fields ) {
         	    
-        		echo '<div class="form-group fields-'.$idmeta.'">';	
+        		echo '<div class="form-group mb-3 fields-'.$idmeta.'">';	
         		    $reqstar = (isset($fields['required']) && $fields['required']==true)?'*':'';
 
         			if (isset($fields['required']) && $fields['required']==true) { $req = 'required'; } else { $req = ''; }
@@ -242,7 +242,7 @@ class AdMember {
             		 
             	    //show label             		    
                     if ($fields['type']!=='hidden' && empty($condition2)) {
-                        echo '<label for="'.$idmeta.'" class="font-weight-bold">'.$fields['title'].$reqstar.'</label>';
+                        echo '<label for="'.$idmeta.'" class="fw-bold form-label">'.$fields['title'].$reqstar.'</label>';
                     }
                     
                     //show field
@@ -379,27 +379,27 @@ class AdMember {
         	}
         	//END Loop
         	
-    	    echo '<div class="text-right my-3"><button name="inpudata" type="submit" class="btn btn-info simpanUserbaru1"><i class="fa fa-floppy-o" aria-hidden="true"></i> Simpan</button></div>';
+    	    echo '<div class="text-right my-3"><button name="inpudata" type="submit" class="btn btn-info bg-success text-white px-4 py-3 rounded simpanUserbaru1"><i class="fa fa-floppy-o" aria-hidden="true"></i> Simpan</button></div>';
 	    echo '</form>';	
     }
     
     ///Tampil profil
-    public static function lihatMember($user_id=null) {
+    public static function lihatMember($user_id=null,$arraymeta=null) {
         if(!empty($user_id) && !empty(get_userdata( $user_id ))):
             
             $userdata   = get_userdata( $user_id );
-            $arraymeta  = self::$metakey;
+			$arraymeta  = !empty($arraymeta)?$arraymeta:self::$metakey;
             
             echo '<table class="table">';
         	foreach ($arraymeta as $idmeta => $fields) {
         		$value = get_user_meta($user_id,$idmeta,true);
         		if ($idmeta=="user_login") {
         		    $user_info = get_userdata($user_id);
-        		    echo '<tr><td class="font-weight-bold">'.$fields['title'].'</td><td>'.$user_info->user_login.'</td></tr>';
+        		    echo '<tr><td class="fw-bold">'.$fields['title'].'</td><td>'.$user_info->user_login.'</td></tr>';
         		}	
         		if (!($idmeta=="user_pass" || $idmeta=="user_email" || $idmeta=="user_login")) {
         			echo '<tr class="fields-'.$idmeta.'">';	
-        				echo '<td class="font-weight-bold">'.$fields['title'].'</td>';
+        				echo '<td class="fw-bold">'.$fields['title'].'</td>';
 				
         				if ($fields['type']=='option') {
         					foreach ($fields['option'] as $option1 => $option2 ) {

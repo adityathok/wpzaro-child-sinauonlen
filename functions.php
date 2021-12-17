@@ -97,6 +97,57 @@ function wpzaro_remove_admin_bar() {
     }
 }
 
+// add role
+add_role('guru', __('Guru'),
+    array(
+        'read'              => true, // Allows a user to read
+        'create_posts'      => false, // Allows user to create new posts
+        'edit_posts'        => false, // Allows user to edit their own posts
+        'edit_others_posts' => false, // Allows user to edit others posts too
+        'publish_posts'     => false, // Allows the user to publish posts
+        'manage_categories' => true, // Allows user to manage post categories
+        'upload_files' 		=> true, // Allows user to upload files
+    )
+);
+add_role('siswa', __('Siswa'),
+    array(
+        'read'              => false, // Allows a user to read
+        'create_posts'      => false, // Allows user to create new posts
+        'edit_posts'        => false, // Allows user to edit their own posts
+        'edit_others_posts' => false, // Allows user to edit others posts too
+        'publish_posts'     => false, // Allows the user to publish posts
+        'manage_categories' => false, // Allows user to manage post categories
+        'upload_files' 		=> true,
+    )
+);
+
+
+$metasiswa = [
+    'first_name'    => [
+        'type'      => 'text',
+        'title'     => 'Nama',
+        'desc'      => 'Nama Lengkap',
+        'required'  => false,
+    ],
+    'nohp'     => [
+        'type'      => 'text',
+        'title'     => 'Nomor Handphone',
+        'desc'      => '',
+        'required'  => false,
+    ],
+    'alamat'        => [
+        'type'      => 'textarea',
+        'title'     => 'Detail Alamat',
+        'desc'      => '',
+        'required'  => false,
+    ],
+    'bio'            => [
+         'type'      => 'textarea',
+         'title'     => 'Bio',
+         'required'  => false,
+    ],
+];
+
 //[resize-thumbnail width="300" height="150" linked="true" class="w-100"]
 add_shortcode('resize-thumbnail', 'resize_thumbnail');
 function resize_thumbnail($atts) {

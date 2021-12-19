@@ -2,8 +2,16 @@
 if ( ! function_exists( 'wpzaro_header_nav_menu' ) ) {
     add_action('wpzaro_header','wpzaro_header_nav_menu',20);
     function wpzaro_header_nav_menu() {
-        $backurl = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
-        $conturl = $backurl&&strpos($backurl, home_url())!==false?$backurl:home_url();
+        $urlpage    = get_the_permalink();
+        $pg         = isset($_GET['pg']) ? $_GET['pg'] : '';
+        $backurl    = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+        $conturl    = home_url();
+
+        if ($backurl&&strpos($backurl, home_url().'/admin-settings')!==false&&$pg){
+            $conturl = home_url().'/admin-settings';
+        } elseif ($backurl&&strpos($backurl, home_url())!==false) {
+            $conturl = $backurl;
+        } 
         ?>            
         <div class="header-navmenu sticky-top">
             <div class="header-navmenu-inner container">

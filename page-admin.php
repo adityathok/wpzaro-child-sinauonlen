@@ -44,7 +44,7 @@ $arraymenu      = [
 ?>
 
     <div class="container py-3">
-        <?php if(is_user_logged_in()):
+        <?php if(is_user_logged_in() && current_user_can('administrator')):
             
             switch ($pg) {
                 case "guru":

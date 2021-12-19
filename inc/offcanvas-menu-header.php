@@ -37,11 +37,16 @@ function add_offcanvas_menuheader(){
                 'url'   => home_url().'/admin-settings/',
                 'icon'  => 'fa fa-gears',
                 'role'  => 'administrator',
-                'submenu' => [                    
+                'submenu' => [                   
+                    'opt-guru' => [
+                        'title' => 'Guru',
+                        'url'   => home_url().'/admin-settings/?pg=guru',
+                        'icon'  => 'fa fa-user-circle',
+                    ],                         
                     'opt-kelas' => [
                         'title' => 'Kelas',
                         'url'   => home_url().'/admin-settings/?pg=kelas',
-                        'icon'  => 'fa fa-group',
+                        'icon'  => 'fa fa-vcard',
                     ],                    
                     'opt-jurusan' => [
                         'title' => 'Jurusan',

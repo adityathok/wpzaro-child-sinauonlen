@@ -80,6 +80,7 @@ class AdMember {
         $password   = isset($args['user_pass'])&&!empty($args['user_pass'])?$args['user_pass']:'';
         $username   = isset($args['user_login'])&&!empty($args['user_login'])?$args['user_login']:self::generate_username($args['first_name'],200);
         $email      = isset($args['user_email'])&&!empty($args['user_email'])?$args['user_email']:'';
+        $first_name	= isset($args['first_name'])&&!empty($args['first_name'])?$args['first_name']:'';
         $role       = isset($args['role'])&&!empty($args['role'])?$args['role']:'subscriber';
         $success    = false;
         if ( !$username ):
@@ -96,15 +97,19 @@ class AdMember {
                 'user_login'    => $username,
                 'user_email'    => $email,
                 'role'          => $role,
+                'first_name'	=> $first_name,
+                'display_name'	=> $first_name,
             );
             $new_user = wp_insert_user( $userdata );
             
             foreach ($args as $id => $value) {
-                if($id!='user_login' || $id!='user_pass' || $id!='user_email' || $id!='role') {
+                if($id!='user_login' || $id!='user_pass' || $id!='user_email' || $id!='role' || $id!='first_name') {
                     add_user_meta($new_user, $id, $value);
                 }
             }
-            
+            add_user_meta($new_user, 'date_update_data', current_time( 'mysql', 1 ));
+            add_user_meta($new_user, 'date_registered', current_time( 'mysql', 1 ));
+
             $message = '<div class="alert alert-success"><strong>'.$username.'</strong> Berhasil ditambahkan</div>';
             $succses = true;
             
@@ -142,24 +147,25 @@ class AdMember {
     		//update meta user
     		foreach ($args as $id => $value) {
     			if (!($id=="user_pass" || $id=="user_email" || $id=="user_login")) {
-			    //if not upload file
-			    if ($id!='-upload-file') {
-				    update_user_meta( $user_id, $id, $value);
-			    } else {
-				//print_r($value);
-				foreach($value as $idfile => $val ) {
-				    //upload file
-				    $attachment_id = media_handle_upload( $idfile, 1 );
-				    //delete previous file 
-				    if (get_user_meta($user_id, $idfile,true)) {
-							wp_delete_attachment( get_user_meta($user_id, $idfile,true) );
+					//if not upload file
+					if ($id!='-upload-file') {
+						update_user_meta( $user_id, $id, $value);
+					} else {
+						//print_r($value);
+						foreach($value as $idfile => $val ) {
+							//upload file
+							$attachment_id = media_handle_upload( $idfile, 1 );
+							//delete previous file 
+							if (get_user_meta($user_id, $idfile,true)) {
+									wp_delete_attachment( get_user_meta($user_id, $idfile,true) );
+								}
+								//update to meta user
+							update_user_meta( $user_id, $idfile, $attachment_id);
 						}
-						//update to meta user
-				    update_user_meta( $user_id, $idfile, $attachment_id);
-				}
-			    }
+					}
     			}
-    		}
+    		}			
+            update_user_meta($user_id, 'date_update_data', current_time( 'mysql', 1 ));
     		
     		$message .= '<div class="alert alert-success">Data Berhasil diupdate</div>';
     		
@@ -188,22 +194,30 @@ class AdMember {
         $user_info  = $action=='edit'&&!empty($args['ID'])?get_userdata($args['ID']):'';
         
         ///Input data
-        if(isset($_POST['inpudata']) && $action=='add') {
+        if(isset($_POST['inpudata']) && $action=='add' && $_POST['sesiform'] == $_SESSION['sesiform']) {
             echo self::tambahMember($_POST);
+			$_SESSION['sesiform'] = uniqid();
         }
         ///edit data
-        if(isset($_POST['inpudata']) && $action=='edit') {
-	    if(isset($_FILES)) {
+        if(isset($_POST['inpudata']) && $action=='edit' && $_POST['sesiform'] == $_SESSION['sesiform']) {
+	    	if(isset($_FILES)) {
                 $_POST['-upload-file'] = $_FILES;
             }
             echo self::updateMember($_POST);
+			$_SESSION['sesiform'] = uniqid();
         }
+
+		if(!isset($_SESSION['sesiform']) || empty($_SESSION['sesiform'])) {
+			$_SESSION['sesiform'] = uniqid();
+		}
+		$sesiform   = $_SESSION['sesiform'];
         
         echo '<form name="input" method="POST" id="formMember" action="">';
 	    
             echo $action=='edit'?'<div class="fw-bold">Edit Profil</div><hr>':'';
 	    
             echo '<input type="hidden" id="role" value="'.$role.'" name="role">';
+            echo '<input type="hidden" id="sesiform" value="'.$sesiform.'" name="sesiform">';
             
             ///edit data
             if( $action=='edit') {

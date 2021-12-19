@@ -14,19 +14,30 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 
 $pg         = isset($_GET['pg']) ? $_GET['pg'] : '';
+$act        = isset($_GET['act']) ? $_GET['act'] : '';
 $current_id = get_current_user_id();
 $urlpage    = get_the_permalink();
       
 $arraymenu      = [
+    'guru' => [
+        'title' => 'Guru',
+        'url'   => $urlpage.'?pg=guru',
+        'icon'  => 'fa fa-user-circle',
+    ],
+    'siswa' => [
+        'title' => 'Siswa',
+        'url'   => $urlpage.'?pg=siswa',
+        'icon'  => 'fa fa-user-circle-o',
+    ],
     'kelas' => [
         'title' => 'Kelas',
         'url'   => $urlpage.'?pg=kelas',
         'icon'  => 'fa fa-vcard',
     ],
-    'register' => [
-        'title' => 'Daftar',
-        'url'   => get_home_url().'/register',
-        'icon'  => 'fa fa-pencil-square',
+    'jurusan' => [
+        'title' => 'Jurusan',
+        'url'   => $urlpage.'?pg=jurusan',
+        'icon'  => 'fa fa-language',
     ],
 ];
 
@@ -36,8 +47,14 @@ $arraymenu      = [
         <?php if(is_user_logged_in()):
             
             switch ($pg) {
+                case "guru":
+                    require_once('inc/admin/guru.php');
+                    break;
                 case "kelas":
                     require_once('inc/admin/kelas.php');
+                    break;
+                case "jurusan":
+                    require_once('inc/admin/jurusan.php');
                     break;
                 default:
                 ?>

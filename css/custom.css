@@ -61,7 +61,7 @@ body {
     padding-top: 2rem;
 }
 
-.list-group-offcanvas-header a i {
+.list-group a i {
     width: 1.5rem;
     text-align: center;
     opacity: .4;
@@ -94,6 +94,15 @@ body.my-account #page-wrapper {
 
 body.my-account .entry-header {
     display: none;
+}
+
+.card-profile-member .table tr td {
+    width: 100%;
+    display: block;
+}
+
+.card-profile-member .table tr td:first-child {
+    border-bottom: 0;
 }
 
 @media screen and (max-width: 768px) {

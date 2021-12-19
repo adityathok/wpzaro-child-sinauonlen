@@ -148,6 +148,50 @@ $metasiswa = [
     ],
 ];
 
+//generate list group menu
+function listmenugroup($arraymenu) {
+    ?>
+    <ul class="list-group list-group-menu">
+        <?php
+        foreach ($arraymenu as $key => $value) {
+            $submenu    = isset($value['submenu'])?$value['submenu']:'';
+            $role       = isset($value['role'])?$value['role']:'';
+
+            if(!empty($role) && !current_user_can($role)) {
+                continue;
+            }
+            ?>
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <a href="<?php echo $value['url']; ?>" class="d-block">
+                    <i class="<?php echo $value['icon']; ?>" aria-hidden="true"></i>
+                    <?php echo $value['title']; ?>
+                </a>
+                <?php if($submenu): ?>
+                    <span class="btn btn-sm btn-light pull-right" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $key; ?>">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </span>
+                <?php endif; ?>
+            </li>
+
+            <?php if($submenu): ?>
+                <ul class="collapse p-0" id="collapse<?php echo $key; ?>">
+                <?php foreach ($submenu as $skey => $svalue) { ?>
+                    <li class="list-group-item d-flex bg-light ps-4" data-parent="<?php echo $key; ?>">
+                        <a href="<?php echo $svalue['url']; ?>" class="d-block">
+                            <i class="<?php echo $svalue['icon']; ?>" aria-hidden="true"></i>
+                            <?php echo $svalue['title']; ?>
+                        </a>
+                    </li>
+                <?php } ?>
+                </ul>
+            <?php endif; ?>
+            <?php
+        }
+        ?>
+    </ul>
+    <?php
+}
+
 //[resize-thumbnail width="300" height="150" linked="true" class="w-100"]
 add_shortcode('resize-thumbnail', 'resize_thumbnail');
 function resize_thumbnail($atts) {

@@ -18,12 +18,6 @@
 				<div class="card-body p-3">
 					<form action="" method="POST">
 						<div class="form-group mb-3">
-							<label for="username" class="form-label">Username</label>
-							<input type="username" name="user_login" class="form-control checkUsername" id="username"
-								placeholder="Username" aria-describedby="usernameHelp" required>
-							<small id="usernameHelp" class="form-text text-muted">username/id anda, tulis tanpa spasi</small>
-						</div>
-						<div class="form-group mb-3">
 							<label for="first_name" class="form-label">Nama</label>
 							<input type="text" name="first_name" class="form-control" id="first_name" placeholder="Nama" required>
 						</div>
@@ -35,6 +29,7 @@
 							<label for="pass" class="form-label">Password</label>
 							<input type="password" name="user_pass" class="form-control" id="pass" placeholder="Password" required>
 						</div>
+						<input type="hidden" name="role" value="siswa">
 						<button type="submit" id="submit-register" class="btn btn-info my-2">Daftar</button>
 						<a href="<?= home_url();?>/login" class="btn btn-outline-dark btn-sm my-2 ml-2">Login</a>
 					</form>					

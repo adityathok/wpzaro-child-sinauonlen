@@ -5,5 +5,6 @@ jQuery(function($) {
         $('#loginform #wp-submit').addClass('btn btn-primary rounded-pill py-3 px-5 mt-4 text-center');
         $('#loginform .login-remember').addClass('d-none');
         $('#loginform #rememberme').attr('checked', 'checked');
+        $('#loginform .login-submit').append('<a class="btn btn-outline-primary rounded-pill py-3 px-5 mt-4 text-center" href="'+themepath.homeUrl+'/register/">Register</a>');
     }
 });

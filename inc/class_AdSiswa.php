@@ -4,12 +4,14 @@
  * Basic Member Class for Wordpress Memership
  */
 
-class AdGuru {
+class AdSiswa {
 
+    public $datajurusan;
     public $datakelas;
     public $metakey;
 
     public function __construct(){
+        $this->datajurusan  = get_option( '_data_jurusan', ['Jurusan'] );
         $this->datakelas    = get_option( '_data_kelas', ['Kelas'] );
         $this->metakey     = [
             'user_login'    => [
@@ -70,6 +72,20 @@ class AdGuru {
                 'title'     => 'Bio',
                 'required'  => false,
             ],
+            'kelas' => [
+                'type'      => 'option',
+                'title'     => 'Kelas',
+                'desc'      => '',
+                'required'  => true,
+                'option'    => $this->datakelas,
+            ],
+            'jurusan' => [
+                'type'      => 'option',
+                'title'     => 'Jurusan',
+                'desc'      => '',
+                'required'  => true,
+                'option'    => $this->datajurusan,
+            ],
             'user_pass'     => [
                 'type'      => 'password',
                 'title'     => 'Password',
@@ -78,20 +94,15 @@ class AdGuru {
         ];
     }
 
+
     public function form($args=null,$action=null) {
 
         $args           = $args?$args:[];
-        $args['role']   = 'guru';
+        $args['role']   = 'siswa';
         $action         = $action?$action:'add';
 
         $form           = new AdMember();
         $result         = $form->formMember($args,$action,$this->metakey);
-
-        if($result['success']==true) {
-            echo $result['message'];
-        } else {
-            echo $result['message'];
-        }
 
     }
 

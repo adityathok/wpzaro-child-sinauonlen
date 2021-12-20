@@ -21,6 +21,7 @@
 require_once('inc/css-wp-form.php');
 require_once('inc/class_AdMember.php');
 require_once('inc/class_AdGuru.php');
+require_once('inc/class_AdSiswa.php');
 require_once('inc/login-form.php');
 require_once('inc/header-builder.php');
 require_once('inc/footer-builder.php');
@@ -122,33 +123,6 @@ add_role('siswa', __('Siswa'),
     )
 );
 
-
-$metasiswa = [
-    'first_name'    => [
-        'type'      => 'text',
-        'title'     => 'Nama',
-        'desc'      => 'Nama Lengkap',
-        'required'  => false,
-    ],
-    'nohp'     => [
-        'type'      => 'text',
-        'title'     => 'Nomor Handphone',
-        'desc'      => '',
-        'required'  => false,
-    ],
-    'alamat'        => [
-        'type'      => 'textarea',
-        'title'     => 'Detail Alamat',
-        'desc'      => '',
-        'required'  => false,
-    ],
-    'bio'            => [
-         'type'      => 'textarea',
-         'title'     => 'Bio',
-         'required'  => false,
-    ],
-];
-
 function register_my_session()
 {
   if( !session_id() )
@@ -158,6 +132,23 @@ function register_my_session()
 }
 
 add_action('init', 'register_my_session');
+
+function adget_url_ava($userid){
+    $url = bp_core_fetch_avatar ( 
+        array(
+            'item_id' => $userid, 
+            'type'    => 'thumb',
+            'html'   => FALSE
+        ) 
+    );
+    return $url;
+}
+
+function user_has_role($user_id, $role_name) {
+    $user_meta  = get_userdata($user_id);
+    $user_roles = $user_meta->roles;
+    return in_array($role_name, $user_roles);
+}
 
 //generate list group menu
 function listmenugroup($arraymenu) {

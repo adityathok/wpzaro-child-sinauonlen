@@ -1,18 +1,19 @@
 <div class="card shadow-sm border-0">
     <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-start">
-        <div class="fw-bold">Guru</div>
-        <a href="<?php echo $urlpage;?>?pg=guru&act=add" class="text-white">
+        <div class="fw-bold">Siswa</div>
+        <a href="<?php echo $urlpage;?>?pg=siswa&act=add" class="text-white">
             <i class="fa fa-plus-circle"></i>
         </a>
     </div>
     <div class="card-body">
         <?php if($act=='add') {
-            $guru = new AdGuru();
-            $guru->form();
+            echo '<div class="fw-bold text-primary mb-3">Tambah siswa</div>';
+            $siswa = new AdSiswa();
+            echo $siswa->form();
         } else {           
     
             $getusers = get_users( array( 
-                'role__in' => array( 'guru'),
+                'role__in' => array( 'siswa'),
             ) );
             // Array of WP_User objects.
             if($getusers) {

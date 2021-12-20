@@ -110,7 +110,8 @@ class AdMember {
             add_user_meta($new_user, 'date_update_data', current_time( 'mysql', 1 ));
             add_user_meta($new_user, 'date_registered', current_time( 'mysql', 1 ));
 
-            $message = '<div class="alert alert-success"><strong>'.$username.'</strong> Berhasil ditambahkan</div>';
+			$uname = $first_name?$first_name:$username;
+            $message = '<div class="alert alert-success"><strong>'.$uname.'</strong> Berhasil ditambahkan</div>';
             $succses = true;
             
         endif;
@@ -119,7 +120,7 @@ class AdMember {
         $result['message']  = $message;
         $result['success']  = $success;
         
-        return $result;
+        return $message;
     }
     
     public static function updateMember($args) {

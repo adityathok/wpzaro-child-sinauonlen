@@ -50,6 +50,9 @@ $arraymenu      = [
                 case "guru":
                     require_once('inc/admin/guru.php');
                     break;
+                case "siswa":
+                    require_once('inc/admin/siswa.php');
+                    break;
                 case "kelas":
                     require_once('inc/admin/kelas.php');
                     break;

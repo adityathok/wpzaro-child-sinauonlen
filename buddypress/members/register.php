@@ -18,6 +18,15 @@
 				<div class="card-body p-3">
 					<form action="" method="POST">
 						<div class="form-group mb-3">
+							<label class="form-label">Daftar sebagai :</label>
+							<div class="switch-field">
+								<input type="radio" id="role-one" name="role" value="siswa" checked/>
+								<label for="role-one">Siswa</label>
+								<input type="radio" id="role-two" name="role" value="guru" />
+								<label for="role-two">Guru</label>
+							</div>
+						</div>
+						<div class="form-group mb-3">
 							<label for="first_name" class="form-label">Nama</label>
 							<input type="text" name="first_name" class="form-control" id="first_name" placeholder="Nama" required>
 						</div>

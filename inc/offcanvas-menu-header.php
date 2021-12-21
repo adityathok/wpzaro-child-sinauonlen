@@ -42,7 +42,12 @@ function add_offcanvas_menuheader(){
                         'title' => 'Guru',
                         'url'   => home_url().'/admin-settings/?pg=guru',
                         'icon'  => 'fa fa-user-circle',
-                    ],                         
+                    ],                  
+                    'opt-siswa' => [
+                        'title' => 'Siswa',
+                        'url'   => home_url().'/admin-settings/?pg=siswa',
+                        'icon'  => 'fa fa-user-circle-o',
+                    ],                       
                     'opt-kelas' => [
                         'title' => 'Kelas',
                         'url'   => home_url().'/admin-settings/?pg=kelas',

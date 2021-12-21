@@ -1,7 +1,7 @@
 <div class="card shadow-sm border-0">
     <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-start">
         <div class="fw-bold">Guru</div>
-        <a href="<?php echo $urlpage;?>?pg=guru&act=add" class="text-white">
+        <a href="<?php echo $urlpage;?>?pg=guru&act=add" class="btn btn-sm btn-light">
             <i class="fa fa-plus-circle"></i>
         </a>
     </div>

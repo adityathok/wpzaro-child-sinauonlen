@@ -10,10 +10,10 @@ function add_offcanvas_menuheader(){
                 'url'   => $linkprofile.'profile/',
                 'icon'  => 'fa fa-user',
                 'submenu' => [ 
-                    'forums' => [
-                        'title' => 'Forum',
-                        'url'   => $linkprofile.'forum/',
-                        'icon'  => 'fa fa-users',
+                    'editprofile' => [
+                        'title' => 'Edit',
+                        'url'   => $linkprofile.'profile/edit/',
+                        'icon'  => 'fa fa-pencil-square-o',
                     ],
                     'setting' => [
                         'title' => 'Settings',

@@ -6,6 +6,11 @@
  * @version 8.0.0
  */
 
+if(!isset($_SESSION['sesiform']) || empty($_SESSION['sesiform'])) {
+	$_SESSION['sesiform'] = uniqid();
+}
+
+$sesiformPost = isset($_POST['sesiform']) ? $_POST['sesiform'] : '';
 ?>
 
 <?php bp_nouveau_signup_hook( 'before', 'page' ); ?>
@@ -13,7 +18,7 @@
 <div id="register-page" class="page register-page">
 
 	<?php if (!is_user_logged_in()) : ?>
-		<?php if(!isset($_POST['user_login']) && !isset($_POST['user_email']) && !isset($_POST['user_pass']) ):  ?>
+		<?php if($sesiformPost !== $_SESSION['sesiform'] ):  ?>
 			<div class="card card-register-page">
 				<div class="card-body p-3">
 					<form action="" method="POST">
@@ -41,7 +46,7 @@
 							<label for="pass" class="form-label">Password</label>
 							<input type="password" name="user_pass" class="form-control" id="pass" placeholder="Password" required>
 						</div>
-						<input type="hidden" name="role" value="siswa">
+						<input type="hidden" name="sesiform" value="<?php echo $_SESSION['sesiform'];?>">
 						<button type="submit" id="submit-register" class="btn btn-info my-2">Daftar</button>
 						<a href="<?= home_url();?>/login" class="btn btn-outline-dark btn-sm my-2 ml-2">Login</a>
 					</form>					
@@ -54,6 +59,7 @@
 						'message-success'=>'Pendaftaran berhasil, silahkan login'
 					]
 				);
+				$_SESSION['sesiform'] = uniqid();
 			?>
 		<?php endif; ?>
 	<?php else : ?>

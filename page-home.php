@@ -17,7 +17,7 @@ get_header();
     <div class="container">
         <?php if(is_user_logged_in()): ?>
         <?php else: ?>
-            <div class="card mt-4 mb-2 my-4 text-center">
+            <div class="card mt-4 mb-2 my-4">
                 <div class="card-body py-5">
                     <?php echo ad_login_form(); ?>
                 </div>

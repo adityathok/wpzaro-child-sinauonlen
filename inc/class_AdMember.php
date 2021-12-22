@@ -75,14 +75,13 @@ class AdMember {
 		return $username;
 	}
 
-    public static function tambahMember($args) {
-        // print_r($args['user_login']);
+    public static function tambahMember($args,$opt=null) {
+        // print_r($args);
         $password   = isset($args['user_pass'])&&!empty($args['user_pass'])?$args['user_pass']:'';
         $username   = isset($args['user_login'])&&!empty($args['user_login'])?$args['user_login']:self::generate_username($args['first_name'],200);
         $email      = isset($args['user_email'])&&!empty($args['user_email'])?$args['user_email']:'';
         $first_name	= isset($args['first_name'])&&!empty($args['first_name'])?$args['first_name']:'';
         $role       = isset($args['role'])&&!empty($args['role'])?$args['role']:'subscriber';
-        $success    = false;
         if ( !$username ):
             $message = '<div class="alert alert-danger">Maaf, username wajib diisi.</div>';
         elseif ( username_exists($username) ):
@@ -111,15 +110,13 @@ class AdMember {
             add_user_meta($new_user, 'date_registered', current_time( 'mysql', 1 ));
 
 			$uname = $first_name?$first_name:$username;
-            $message = '<div class="alert alert-success"><strong>'.$uname.'</strong> Berhasil ditambahkan</div>';
-            $succses = true;
+			
+            $message = '<div class="alert alert-success">';
+            $message .= isset($opt['message-success'])&&!empty($opt['message-success'])?$opt['message-success']:''.$uname.'</strong> Berhasil ditambahkan</div>';
+            $message .= '</div>';
             
         endif;
-	    
-        $result             = [];
-        $result['message']  = $message;
-        $result['success']  = $success;
-        
+
         return $message;
     }
     

@@ -293,6 +293,7 @@ class AdMember {
             			else if ($fields['type']=='password') {
             				echo '<input type="password" id="'.$idmeta.'" class="form-control" value="'.$value.'" name="'.$idmeta.'" '.$req.'>';
             			} 
+
             			//type input option
             			else if ($fields['type']=='option') {
             				echo '<select id="'.$idmeta.'" class="form-control" name="'.$idmeta.'" '.$req.'>';
@@ -305,7 +306,24 @@ class AdMember {
             				echo '</select>';
             			}  
 				 
-				 
+				 		//type input checkbox
+            			else if ($fields['type']=='checkbox') {
+							$val = $value?$value:[];
+							foreach ($fields['option'] as $option1 => $option2 ) {
+								$option1	= is_numeric($option1)?$option2:$option1;
+								$stringname	= str_replace(' ', '', $option2);
+								$checked	= in_array($option1, $val)?'checked':'';
+								echo '
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="'.$option1.'" name="'.$idmeta.'[]" id="Check'.$stringname.'" '.$checked.'>
+									<label class="form-check-label" for="Check'.$stringname.'">
+										'.$option2.'
+									</label>
+								</div>
+								';
+							}
+            			} 
+
             			//type input alamat
             			else if ($fields['type']=='alamat') {
         			        $provinsi       = isset($value[0][0])?$value[0][0]:'';
@@ -381,7 +399,7 @@ class AdMember {
             				echo '</div>';
             			}
 				 
-				//type input file
+						//type input file
             			if ($fields['type']=='file') {
             			    
             				if($value && wp_get_attachment_url($value)) {

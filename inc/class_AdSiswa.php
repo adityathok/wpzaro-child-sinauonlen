@@ -79,13 +79,13 @@ class AdSiswa {
                 'required'  => true,
                 'option'    => $this->datakelas,
             ],
-            'jurusan' => [
-                'type'      => 'option',
-                'title'     => 'Jurusan',
-                'desc'      => '',
-                'required'  => true,
-                'option'    => $this->datajurusan,
-            ],
+            // 'jurusan' => [
+            //     'type'      => 'option',
+            //     'title'     => 'Jurusan',
+            //     'desc'      => '',
+            //     'required'  => true,
+            //     'option'    => $this->datajurusan,
+            // ],
             'user_pass'     => [
                 'type'      => 'password',
                 'title'     => 'Password',

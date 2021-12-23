@@ -75,6 +75,13 @@ class AdGuru {
                 'title'     => 'Password',
                 'required'  => true,
             ],
+            'kelas' => [
+                'type'      => 'checkbox',
+                'title'     => 'Kelas',
+                'desc'      => '',
+                'required'  => true,
+                'option'    => $this->datakelas,
+            ],
         ];
     }
 

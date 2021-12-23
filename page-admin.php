@@ -34,11 +34,11 @@ $arraymenu      = [
         'url'   => $urlpage.'?pg=kelas',
         'icon'  => 'fa fa-vcard',
     ],
-    'jurusan' => [
-        'title' => 'Jurusan',
-        'url'   => $urlpage.'?pg=jurusan',
-        'icon'  => 'fa fa-language',
-    ],
+    // 'jurusan' => [
+    //     'title' => 'Jurusan',
+    //     'url'   => $urlpage.'?pg=jurusan',
+    //     'icon'  => 'fa fa-language',
+    // ],
 ];
 
 ?>

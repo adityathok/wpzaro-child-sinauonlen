@@ -147,6 +147,14 @@ body.my-account .entry-header {
     border-radius: 0 .25rem .25rem 0;
 }
 
+.buddypress-wrap .bbpress-wrapper .bbp-search-form {
+    width: 100%;
+}
+
+.buddypress-wrap .bbpress-wrapper h2 {
+    font-size: 1.3rem;
+}
+
 @media screen and (max-width: 768px) {
     #offcanvasMenuHeader {
         width: 80%;

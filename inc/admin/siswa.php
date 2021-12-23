@@ -60,7 +60,7 @@
                                         <?php echo $user->display_name; ?>
                                     </div>
                                     <div class="user-kelas text-muted">
-                                        <small><?php echo $user->kelas; ?> - <?php echo $user->jurusan; ?></small>
+                                        <small><?php echo $user->kelas; ?></small>
                                     </div>
                                 </div>
                             </a>
@@ -89,15 +89,6 @@
                                     <option value="">Semua Kelas</option>
                                     <?php foreach( $datakelas as $value): ?>
                                         <option value="<?php echo $value;?>" <?php echo selected($setkelas,$value);?>><?php echo $value;?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="jurusan" class="form-label">Jurusan</label>
-                                <select class="form-select" name="setjurusan" aria-label="Default select example">
-                                    <option value="">Semua Jurusan</option>
-                                    <?php foreach( $datajurusan as $value): ?>
-                                        <option value="<?php echo $value;?>" <?php echo selected($setjurusan,$value);?>><?php echo $value;?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>

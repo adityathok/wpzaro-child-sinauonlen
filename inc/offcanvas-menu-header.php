@@ -53,11 +53,11 @@ function add_offcanvas_menuheader(){
                         'url'   => home_url().'/admin-settings/?pg=kelas',
                         'icon'  => 'fa fa-vcard',
                     ],                    
-                    'opt-jurusan' => [
-                        'title' => 'Jurusan',
-                        'url'   => home_url().'/admin-settings/?pg=jurusan',
-                        'icon'  => 'fa fa-language',
-                    ],
+                    // 'opt-jurusan' => [
+                    //     'title' => 'Jurusan',
+                    //     'url'   => home_url().'/admin-settings/?pg=jurusan',
+                    //     'icon'  => 'fa fa-language',
+                    // ],
                 ]
             ],
             'logout' => [

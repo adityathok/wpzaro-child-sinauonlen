@@ -12,7 +12,11 @@ function ad_login_form() {
 add_shortcode('form_login','shortode_formlogin');
 function shortode_formlogin(){
   ob_start();
+
+  $themeoption = get_option('wpzaro_theme_options');
+
   echo '<div class="card mt-4 mb-2 my-4">';
+  echo '<img src="'.$themeoption['_theme_logo'].'" class="card-img-top" alt="...">';
     echo '<div class="card-body py-5">';
       if(is_user_logged_in()):
         echo '<p>You are logged in</p>';

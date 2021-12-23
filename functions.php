@@ -26,6 +26,7 @@ require_once('inc/login-form.php');
 require_once('inc/header-builder.php');
 require_once('inc/footer-builder.php');
 require_once('inc/offcanvas-menu-header.php');
+require_once('inc/cmb2.php');
 
 /**
  * Load the parent style.css file

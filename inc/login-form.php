@@ -2,7 +2,7 @@
 function ad_login_form() {
   $args = array(
   'echo'            => true,
-  'redirect'        => get_permalink( get_the_ID() ),
+  'redirect'        => get_home_url(),
   'remember'        => true,
   'value_remember'  => true,
   );

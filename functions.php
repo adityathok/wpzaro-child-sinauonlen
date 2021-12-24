@@ -259,3 +259,24 @@ function vd_getexcerpt($atts){
 
 	return ob_get_clean();
 }
+
+//add page style css
+add_action( 'wp_head', 'add_page_style_css' );
+function add_page_style_css(){
+    global $post;
+    if(is_page()):
+        $bgimage = get_post_meta($post->ID, 'bgimage', true);
+        ?>
+        <style>
+            <?php if($bgimage): ?>
+            .page #page {
+                background-image: url(<?php echo $bgimage; ?>);
+                background-repeat: no-repeat;
+                background-position: center top;
+                background-size: cover;
+            }
+            <?php endif; ?>
+        </style>
+        <?php
+    endif;
+}

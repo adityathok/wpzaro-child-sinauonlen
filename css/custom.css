@@ -87,12 +87,7 @@ body {
     padding: 2rem;
 }
 
-body.my-account #page-content,
-body.my-account #page-wrapper {
-    padding-top: 0;
-}
-
-body.my-account .entry-header {
+body.page .entry-header {
     display: none;
 }
 
@@ -153,6 +148,16 @@ body.my-account .entry-header {
 
 .buddypress-wrap .bbpress-wrapper h2 {
     font-size: 1.3rem;
+}
+
+.header-navmenu .title-header {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 1rem;
 }
 
 @media screen and (max-width: 768px) {

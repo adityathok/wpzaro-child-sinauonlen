@@ -16,16 +16,24 @@ if ( ! function_exists( 'wpzaro_header_nav_menu' ) ) {
         <div class="header-navmenu sticky-top">
             <div class="header-navmenu-inner container">
                 <div class="bg-white shadow-sm rounded">
-                    <div class="row justify-content-between py-1">
+                    <div class="row justify-content-between align-items-center py-1">
                         <?php if(!is_front_page()): ?>
-                            <div class="col-1">
+                            <div class="col-2">
                                 <a href="<?php echo $conturl; ?>" class="back-nav-btn btn btn-link text-secondary">
                                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                 </a>
                             </div>
                         <?php endif; ?>
-                        <div class="col">
-
+                        <div class="col text-center">
+                            <div class="title-header text-muted">
+                                <?php
+                                if (bp_is_user()) {
+                                    echo 'Pengaturan profile';
+                                } else if (get_post_type() === 'post' || get_post_type() === 'page') {
+                                    echo get_the_title();
+                                }
+                                ?>
+                            </div>
                         </div>
                         <div class="col-2 text-end">
                             <span class="text-secondary btn btn-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenuHeader" aria-controls="offcanvasMenuHeader">

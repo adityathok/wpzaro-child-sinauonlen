@@ -20,7 +20,7 @@ class AdMateri {
                 'type'      => 'featured',
                 'title'     => 'Gambar',
                 'desc'      => 'Gambar Utama',
-                'required'  => true,
+                'required'  => false,
             ],
             'post_content'  => [
                 'type'      => 'textarea',

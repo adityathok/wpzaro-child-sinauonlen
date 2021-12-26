@@ -18,6 +18,7 @@
  * Load other required files
  *
  */
+require_once('inc/ajax.php');
 require_once('inc/css-wp-form.php');
 require_once('inc/class_AdFrontpost.php');
 require_once('inc/class_AdMember.php');
@@ -133,7 +134,6 @@ function register_my_session()
     session_start();
   }
 }
-
 add_action('init', 'register_my_session');
 
 function adget_url_ava($userid){
@@ -145,6 +145,34 @@ function adget_url_ava($userid){
         ) 
     );
     return $url;
+}
+
+function post_date_ago($idpost, $full = false) {
+    $datetime   = get_the_date('Y-m-d H:i:s',$idpost);
+    $now        = new DateTime;
+    $ago        = new DateTime($datetime);
+    $diff       = $now->diff($ago);
+
+    $diff->w    = floor($diff->d / 7);
+    $diff->d    -= $diff->w * 7;
+
+    $string = array(
+        'y' => 'year',
+        'm' => 'month',
+        'w' => 'week',
+        'd' => 'day',
+        'h' => 'hour',
+    );
+    foreach ($string as $k => &$v) {
+        if ($diff->$k) {
+            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+        } else {
+            unset($string[$k]);
+        }
+    }
+
+    if (!$full) $string = array_slice($string, 0, 1);
+    return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
 
 function user_has_role($user_id, $role_name) {
@@ -195,6 +223,13 @@ function listmenugroup($arraymenu) {
         ?>
     </ul>
     <?php
+}
+
+function get_thumbnail_url_resize($idpost, $width, $height) {    
+	$urlimg     = get_the_post_thumbnail_url($idpost,'full');
+    $urlresize  = aq_resize( $urlimg, $width, $height, true, true, true );
+
+    return $urlresize;
 }
 
 //[resize-thumbnail width="300" height="150" linked="true" class="w-100"]

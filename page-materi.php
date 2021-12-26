@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 
 get_header();
 $pg         = isset($_GET['pg']) ? $_GET['pg'] : '';
-$act        = isset($_GET['act']) ? $_GET['act'] : '';
+$idmateri   = isset($_GET['id']) ? $_GET['id'] : '';
 $current_id = get_current_user_id();
 $urlpage    = get_the_permalink();
 
@@ -22,6 +22,9 @@ $urlpage    = get_the_permalink();
             if(current_user_can('administrator') || current_user_can('guru')):
                 switch ($pg) {
                     case "add":
+                        require_once('inc/materi/form.php');
+                        break;
+                    case "edit":
                         require_once('inc/materi/form.php');
                         break;
                     default:

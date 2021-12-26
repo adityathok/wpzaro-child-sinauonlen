@@ -7,6 +7,29 @@ jQuery(function($) {
         $('#loginform #rememberme').attr('checked', 'checked');
         $('#loginform .login-submit').append('<a class="btn btn-outline-primary rounded-pill py-2 px-3 mt-4 text-center" href="'+themepath.homeUrl+'/register/">Register</a>');
     }
+    var lastScrollTop = 0;
+    var offset = $( ".header-navmenu" ).offset();
+    $(window).scroll(function(event){
+        var st = $(this).scrollTop();
+        if (st > lastScrollTop){
+            $('body').addClass('page-scroll-down');
+            $('body').removeClass('page-scroll-up');
+        } else {
+            $('body').removeClass('page-scroll-down');
+            $('body').addClass('page-scroll-up');
+        }
+        lastScrollTop = st;
+
+        if ( $(window).scrollTop() > offset.top){
+            $('.header-navmenu').addClass('scrolled');
+        } else {
+            $('.header-navmenu').removeClass('scrolled');
+        } 
+    });
+
+    $(document).on('click', '.back-nav-btn', function(e) {
+        history.back();
+    });
     $(document).on('change','.checkUsername', function(){
         var el = $(this).val();
         if (/\s/.test(el)) {

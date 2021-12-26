@@ -57,7 +57,12 @@ function add_offcanvas_menuheader(){
                         'title' => 'Kelas',
                         'url'   => home_url().'/admin-settings/?pg=kelas',
                         'icon'  => 'fa fa-vcard',
-                    ],                    
+                    ],                        
+                    'opt-mapel' => [
+                        'title' => 'Mata Pelajaran',
+                        'url'   => home_url().'/admin-settings/?pg=mapel',
+                        'icon'  => 'fa fa-tasks',
+                    ],                  
                     // 'opt-jurusan' => [
                     //     'title' => 'Jurusan',
                     //     'url'   => home_url().'/admin-settings/?pg=jurusan',

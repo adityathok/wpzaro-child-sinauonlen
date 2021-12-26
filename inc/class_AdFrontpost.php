@@ -246,7 +246,7 @@ class AdFrontpost {
 
             	    //show label             		    
                     if ($fields['type']!=='hidden' && empty($condition2)) {
-                        echo '<label for="'.$idmeta.'" class="font-weight-bold">'.$fields['title'].$reqstar.'</label>';
+                        echo '<label for="'.$idmeta.'" class="fw-bold">'.$fields['title'].$reqstar.'</label>';
                     }
                     
                     //show field
@@ -262,7 +262,7 @@ class AdFrontpost {
             			}
             			//type input textarea
             			if ($fields['type']=='textarea') {
-            				echo '<textarea id="'.$idmeta.'" class="form-control" name="'.$idmeta.'" '.$req.' '.$read.'>'.$value.'</textarea>';
+            				echo '<textarea id="'.$idmeta.'" class="form-control" rows="15 name="'.$idmeta.'" '.$req.' '.$read.'>'.$value.'</textarea>';
             			} 
             			//type input editor
             			if ($fields['type']=='editor') {
@@ -436,7 +436,7 @@ class AdFrontpost {
             			else if ($fields['type']=='featured') {
             			    
             				$src = ($value && wp_get_attachment_url($value))?wp_get_attachment_image_src($value, 'thumbnail')[0]:'https://dummyimage.com/200x200/d6d6d6/ffffff&text=no+image';
-            				echo '<div class="file-upload img-frame mb-2"><img class="prevg ganti-'.$idmeta.'" src="'.$src.'" width="80"/></div>';
+            				echo '<div class="file-upload img-frame mb-2"><img class="prevg ganti-'.$idmeta.'" src="'.$src.'" width="150"/></div>';
             				echo '<input type="file" id="'.$idmeta.'" class="form-control imgchange" class-target="ganti-'.$idmeta.'" name="'.$idmeta.'" '.$req.' '.$read.'>';
             			}
             			
@@ -489,7 +489,7 @@ class AdFrontpost {
         		$value = get_post_meta($idpost,$idmeta,true);
         		
     			echo '<tr class="fields-'.$idmeta.'">';	
-    				echo '<td class="font-weight-bold">'.$fields['title'].'</td>';
+    				echo '<td class="fw-bold">'.$fields['title'].'</td>';
 			
     				if ($fields['type']=='option') {
     					foreach ($fields['option'] as $option1 => $option2 ) {

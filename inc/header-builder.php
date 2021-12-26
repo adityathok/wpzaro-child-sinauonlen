@@ -15,15 +15,18 @@ if ( ! function_exists( 'wpzaro_header_nav_menu' ) ) {
         ?>            
         <div class="header-navmenu sticky-top">
             <div class="header-navmenu-inner container">
-                <div class="bg-white shadow-sm rounded">
+                <div class="bg-white shadow-sm rounded-bottom">
                     <div class="row justify-content-between align-items-center py-1">
-                        <?php if(!is_front_page()): ?>
                             <div class="col-2">
-                                <a href="<?php echo $conturl; ?>" class="back-nav-btn btn btn-link text-secondary">
-                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                                </a>
+                                <?php if(!is_front_page()): ?>
+                                    <a href="<?php echo $conturl; ?>" class="back-nav-btn d-none btn btn-link text-secondary">
+                                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    </a>
+                                    <span class="back-nav-btn btn btn-link text-secondary">
+                                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    </span>
+                                <?php endif; ?>
                             </div>
-                        <?php endif; ?>
                         <div class="col text-center">
                             <div class="title-header text-muted">
                                 <?php

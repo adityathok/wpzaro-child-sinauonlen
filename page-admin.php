@@ -34,6 +34,11 @@ $arraymenu      = [
         'url'   => $urlpage.'?pg=kelas',
         'icon'  => 'fa fa-vcard',
     ],
+    'mapel' => [
+        'title' => 'Mata Pelajaran',
+        'url'   => $urlpage.'?pg=mapel',
+        'icon'  => 'fa fa-tasks',
+    ],
     // 'jurusan' => [
     //     'title' => 'Jurusan',
     //     'url'   => $urlpage.'?pg=jurusan',
@@ -55,6 +60,9 @@ $arraymenu      = [
                     break;
                 case "kelas":
                     require_once('inc/admin/kelas.php');
+                    break;
+                case "mapel":
+                    require_once('inc/admin/mapel.php');
                     break;
                 case "jurusan":
                     require_once('inc/admin/jurusan.php');

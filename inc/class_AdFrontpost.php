@@ -136,16 +136,16 @@ class AdFrontpost {
                 //-upload-file
                 if($id=='-upload-file'){
                     foreach($value as $idfile => $val ) {
-			    if(isset($val['name'])&&$val['name']):
-			    //upload file
-			    $attachment_id = media_handle_upload( $idfile, $pid);
-			    //delete previous file 
-			    if (get_post_meta($pid, $idfile,true)) {
-				wp_delete_attachment( get_post_meta($pid, $idfile,true) );
-			    }
-		    	    //update to meta user
-			    update_post_meta( $pid, $idfile, $attachment_id);
-			    endif;
+						if(isset($val['name'])&&$val['name']):
+						//upload file
+						$attachment_id = media_handle_upload( $idfile, $pid);
+						//delete previous file 
+						if (get_post_meta($pid, $idfile,true)) {
+						wp_delete_attachment( get_post_meta($pid, $idfile,true) );
+						}
+						//update to meta user
+						update_post_meta( $pid, $idfile, $attachment_id);
+						endif;
                     }
                 }
             }
@@ -209,7 +209,7 @@ class AdFrontpost {
             echo '<div class="alert alert-danger">Please verify Antispam</div>';
         }
         
-        echo '<form name="input" method="POST" id="formPost" action="" enctype="multipart/form-data">';
+        echo '<form class="form-adfrontpost" name="input" method="POST" id="formPost" action="" enctype="multipart/form-data">';
         
             echo '<input type="hidden" id="post_author" value="'.$post_author.'" name="post_author">';
             
@@ -226,7 +226,7 @@ class AdFrontpost {
             //Loop
         	foreach ($arraymeta as $idmeta => $fields ) {
         	    
-        		echo '<div class="form-group fields-'.$idmeta.'">';	
+        		echo '<div class="form-group mb-3 fields-'.$idmeta.'">';	
         		    $reqstar = (isset($fields['required']) && $fields['required']==true)?'*':'';
 
         			if (isset($fields['required']) && $fields['required']==true) { $req = 'required'; } else { $req = ''; }
@@ -437,7 +437,7 @@ class AdFrontpost {
             			    
             				$src = ($value && wp_get_attachment_url($value))?wp_get_attachment_image_src($value, 'thumbnail')[0]:'https://dummyimage.com/200x200/d6d6d6/ffffff&text=no+image';
             				echo '<div class="file-upload img-frame mb-2"><img class="prevg ganti-'.$idmeta.'" src="'.$src.'" width="80"/></div>';
-            				echo '<input type="file" id="'.$idmeta.'" class="form-control-file imgchange" class-target="ganti-'.$idmeta.'" name="'.$idmeta.'" '.$req.' '.$read.'>';
+            				echo '<input type="file" id="'.$idmeta.'" class="form-control imgchange" class-target="ganti-'.$idmeta.'" name="'.$idmeta.'" '.$req.' '.$read.'>';
             			}
             			
 				        //type input file
@@ -447,7 +447,7 @@ class AdFrontpost {
             				    echo '<a href="'.wp_get_attachment_url($value).'" target="_blank" class="d-block my-2"><i class="fa fa-file fa-2x"></i></a>';
             				}
             				
-            				echo '<input type="file" id="'.$idmeta.'" class="form-control-file" name="'.$idmeta.'" '.$req.' '.$read.'>';
+            				echo '<input type="file" id="'.$idmeta.'" class="form-control" name="'.$idmeta.'" '.$req.' '.$read.'>';
             			}
             			
             			//type input hidden
@@ -472,7 +472,7 @@ class AdFrontpost {
         	}
         	//END Loop
         	
-    	    echo '<div class="text-right my-3"><button name="inpudata" type="submit" class="btn btn-info simpanUserbaru1"><i class="fa fa-floppy-o" aria-hidden="true"></i> Simpan</button></div>';
+    	    echo '<div class="text-right my-3"><button name="inpudata" type="submit" class="btn btn-success simpanUserbaru1"><i class="fa fa-floppy-o" aria-hidden="true"></i> Simpan</button></div>';
 	    echo '</form>';	
     }
     

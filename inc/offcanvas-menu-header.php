@@ -22,6 +22,11 @@ function add_offcanvas_menuheader(){
                     ],
                 ]
             ],
+            'materi' => [
+                'title' => 'Materi',
+                'url'   => home_url().'/materi/',
+                'icon'  => 'fa fa-pencil-square-o',
+            ],
             'notif' => [
                 'title' => 'Notifikasi',
                 'url'   => $linkprofile.'notifications/',

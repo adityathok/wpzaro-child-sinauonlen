@@ -94,12 +94,6 @@ class AdGuru {
         $form           = new AdMember();
         $result         = $form->formMember($args,$action,$this->metakey);
 
-        if($result['success']==true) {
-            echo $result['message'];
-        } else {
-            echo $result['message'];
-        }
-
     }
 
     public function view($iduser) {

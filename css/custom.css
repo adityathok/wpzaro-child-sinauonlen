@@ -160,6 +160,12 @@ body.page .entry-header {
     font-size: 1rem;
 }
 
+.float-button-bottom {
+    position: fixed;
+    bottom: 80px;
+    right: 10px;
+}
+
 @media screen and (max-width: 768px) {
     #offcanvasMenuHeader {
         width: 80%;

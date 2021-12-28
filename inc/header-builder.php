@@ -14,8 +14,8 @@ if ( ! function_exists( 'wpzaro_header_nav_menu' ) ) {
         } 
         ?>            
         <div class="header-navmenu sticky-top">
-            <div class="header-navmenu-inner container px-0">
-                <div class="bg-white shadow-sm rounded-bottom">
+            <div class="header-navmenu-inner">
+                <div class="bg-white shadow-sm rounded-bottom container">
                     <div class="row justify-content-between align-items-center py-1">
                             <div class="col-2">
                                 <?php if(!is_front_page()): ?>

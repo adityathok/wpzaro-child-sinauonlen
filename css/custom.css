@@ -184,8 +184,8 @@ body.page-scroll-down .header-navmenu.scrolled {
     border-bottom-right-radius: 3rem !important;
     border-bottom-left-radius: 3rem !important;
     overflow: hidden;
-    margin-left: -20px;
-    margin-right: -20px;
+    margin-left: -.75rem;
+    margin-right: -.75rem;
 }
 
 .single-card-custom .post-author {

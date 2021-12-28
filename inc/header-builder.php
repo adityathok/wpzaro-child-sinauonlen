@@ -14,7 +14,7 @@ if ( ! function_exists( 'wpzaro_header_nav_menu' ) ) {
         } 
         ?>            
         <div class="header-navmenu sticky-top">
-            <div class="header-navmenu-inner container">
+            <div class="header-navmenu-inner container px-0">
                 <div class="bg-white shadow-sm rounded-bottom">
                     <div class="row justify-content-between align-items-center py-1">
                             <div class="col-2">
@@ -27,13 +27,15 @@ if ( ! function_exists( 'wpzaro_header_nav_menu' ) ) {
                                     </span>
                                 <?php endif; ?>
                             </div>
-                        <div class="col text-center">
+                        <div class="col-8 text-center">
                             <div class="title-header text-muted">
                                 <?php
                                 if (bp_is_user()) {
                                     echo 'Pengaturan profile';
                                 } else if (get_post_type() === 'post' || get_post_type() === 'page') {
                                     echo get_the_title();
+                                } else if (get_post_type() === 'admateri') {
+                                    echo 'Materi | '.get_the_title();
                                 }
                                 ?>
                             </div>

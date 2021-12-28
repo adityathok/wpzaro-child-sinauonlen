@@ -107,20 +107,23 @@ class AdFrontpost {
         if($args) {
         	$my_post['post_title']      = $args['post_title'];
         	$my_post['post_content']    = $args['post_content'];
-        	$my_post['post_status']     = 'publish'; 
-        	$my_post['post_type']       = $args['post_typea'];
-        	$my_post['post_author']     = $args['post_author'];
-        	$my_post['post_slug']       = self::slugify($args['post_title']);
-        	
-        	if(isset($args['ID'])&&$args['ID']):
-        	  $my_post['ID']            = $args['ID'];  
-        	endif;
-        	
+        	        	
         	if(isset($args['post_category'])&&$args['post_category']):
         	  $my_post['post_category'] = $args['post_category'];  
         	endif;
         	
-    	    $pid = wp_insert_post( $my_post, true );
+        	if(isset($args['ID'])&&$args['ID']):
+				$my_post['ID']			= $args['ID']; 
+				$pid					= $args['ID'];
+				wp_update_post( $my_post, true );
+			else: 
+				$my_post['post_status']	= 'publish'; 
+				$my_post['post_type']	= $args['post_typea'];
+				$my_post['post_author']	= $args['post_author'];
+				$my_post['post_slug']	= self::slugify($args['post_title']);
+				$pid 					= wp_insert_post( $my_post, true );
+			endif;
+
     	    
     	    //save meta post
     	    foreach ($args as $id => $value) {
@@ -169,7 +172,7 @@ class AdFrontpost {
             $args = array(
         		'post_type'     => 'attachment',
         		'post_status'   => null,
-        		'post_parent'   => $post->ID,
+        		'post_parent'   => $id,
         		); 
         	$attachments = get_posts($args);
             if(count($attachments) > 1) {
@@ -190,6 +193,7 @@ class AdFrontpost {
         
         $post_author    = isset($args['ID'])&&!empty(get_post_field('post_author',$args['ID']))?get_post_field('post_author',$args['ID']):get_current_user_id();
         $arraymeta      = !empty($arraymeta)?$arraymeta:self::$metakey;
+		$post_id		= isset($args['ID'])?$args['ID']:'';
         
         $antispam       = true;
         
@@ -226,7 +230,7 @@ class AdFrontpost {
             //Loop
         	foreach ($arraymeta as $idmeta => $fields ) {
         	    
-        		echo '<div class="form-group mb-3 fields-'.$idmeta.'">';	
+        		echo '<div class="form-group mb-3 fields-type-'.$fields['type'].' fields-'.$idmeta.'">';	
         		    $reqstar = (isset($fields['required']) && $fields['required']==true)?'*':'';
 
         			if (isset($fields['required']) && $fields['required']==true) { $req = 'required'; } else { $req = ''; }
@@ -262,7 +266,7 @@ class AdFrontpost {
             			}
             			//type input textarea
             			if ($fields['type']=='textarea') {
-            				echo '<textarea id="'.$idmeta.'" class="form-control" rows="15 name="'.$idmeta.'" '.$req.' '.$read.'>'.$value.'</textarea>';
+            				echo '<textarea id="'.$idmeta.'" class="form-control" rows="15" name="'.$idmeta.'" '.$req.' '.$read.'>'.$value.'</textarea>';
             			} 
             			//type input editor
             			if ($fields['type']=='editor') {
@@ -444,10 +448,13 @@ class AdFrontpost {
             			if ($fields['type']=='file') {
             			    
             				if($value && wp_get_attachment_url($value)) {
-            				    echo '<a href="'.wp_get_attachment_url($value).'" target="_blank" class="d-block my-2"><i class="fa fa-file fa-2x"></i></a>';
+								echo '<div class="adfrontpost-file adfrontpost-file-'.$value.' d-flex justify-content-between alert alert-info p-2 my-2">';
+            				    	echo '<a href="'.wp_get_attachment_url($value).'" target="_blank" class="d-inline-block mr-2"><i class="fa fa-file fa-2x"></i></a>';
+									echo '<span class="btn btn-sm btn-danger btn-adfrontpost-file-delete" data-idfile="'.$value.'" data-idpost="'.$post_id.'" data-metaname="'.$idmeta.'"><i class="fa fa-times"></i></span>';
+								echo '</div>';
             				}
             				
-            				echo '<input type="file" id="'.$idmeta.'" class="form-control" name="'.$idmeta.'" '.$req.' '.$read.'>';
+            				echo '<input type="file" id="'.$idmeta.'" class="form-control form-control-file-'.$value.'" value="'.$value.'" name="'.$idmeta.'" '.$req.' '.$read.'>';
             			}
             			
             			//type input hidden
@@ -455,13 +462,13 @@ class AdFrontpost {
             				echo '<input type="hidden" id="'.$idmeta.'" value="'.$value.'" name="'.$idmeta.'">';
             			}
             		
-            		    	//type recaptcha
+						//type recaptcha
             			if ($fields['type']=='recaptcha' && !empty($fields['sitekey']) && !empty($fields['secret'])) {
             			    echo '<div class="'.$idmeta.' text-right">';
-				    echo '<div id="'.$idmeta.'" class="g-recaptcha" data-callback="checkCaptcha" data-expired-callback="expiredCaptcha" data-sitekey="'.$fields['sitekey'].'"></div>';
-				    echo '<div id="msg'.$idmeta.'"> </div>';
-        			    echo '<script src="https://www.google.com/recaptcha/api.js" async defer></script>';
-				    echo '</div>';
+							echo '<div id="'.$idmeta.'" class="g-recaptcha" data-callback="checkCaptcha" data-expired-callback="expiredCaptcha" data-sitekey="'.$fields['sitekey'].'"></div>';
+							echo '<div id="msg'.$idmeta.'"> </div>';
+								echo '<script src="https://www.google.com/recaptcha/api.js" async defer></script>';
+							echo '</div>';
             			}
             		
             			if (isset($fields['desc'])&&!empty($fields['desc'])) {

@@ -1,4 +1,4 @@
-<article class="mb-4">
+<article <?php post_class('article-card-admateri mb-4'); ?>>
 
     <?php 
     $urlpage = get_home_url().'/materi/';
@@ -41,48 +41,11 @@
                     <div class="list-group">
                         <a class="list-group-item list-group-item-action border-0 border-bottom" href="<?php echo get_the_permalink();?>">Lihat</a>
                         <a class="list-group-item list-group-item-action border-0 border-bottom" href="<?php echo $urlpage;?>?pg=edit&id=<?php echo $post->ID;?>">Edit</a>
-                        <span class="list-group-item list-group-item-action border-0 border-bottom btn-delete" data-bs-dismiss="offcanvas" data-id="<?php echo $post->ID;?>">Hapus</span>
+                        <span class="list-group-item list-group-item-action border-0 border-bottom btn-delete-post" data-bs-dismiss="offcanvas" data-id="<?php echo $post->ID;?>">Hapus</span>
                     </div>
                 </div>
             </div>
         </div>
     <?php endif; ?>
-
-    <script>
-        jQuery(function($) {
-            $(document).on('click', '.btn-delete', function(e) {
-                var id = $(this).data('id');
-                Swal.fire({
-                    title: 'Anda yakin ?',
-                    text: "anda akan menghapus materi ini!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        jQuery.ajax({
-                            type    : "POST",
-                            url     : themepath.ajaxUrl,
-                            data    : {action:'deleteadmateri', id:id },
-                            success :function(data) { 
-                                console.log(data);                               
-                                Swal.fire({
-                                    // 'Deleted!',
-                                    // 'Materi telah berhasil dihapus.',
-                                    // 'success'
-                                    title: 'Deleted!',
-                                    text: "Materi telah berhasil dihapus.",
-                                    icon: 'success',
-                                    confirmButtonColor: '#3085d6',
-                                });
-                            },
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 
 </article>

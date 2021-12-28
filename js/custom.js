@@ -54,4 +54,71 @@ jQuery(function($) {
         var target = $(this).attr('class-target');
         readURL(this,target);
     });
+
+    
+    $(document).on('click', '.btn-adfrontpost-file-delete', function(e) {
+        var idpost      = $(this).data('idpost');
+        var idfile      = $(this).data('idfile');
+        var metaname    = $(this).data('metaname');
+        Swal.fire({
+            title: 'Anda yakin ?',
+            text: "anda akan menghapus file ini!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                jQuery.ajax({
+                    type    : "POST",
+                    url     : themepath.ajaxUrl,
+                    data    : {action:'deleteadfrontpostfile', idpost:idpost, idfile:idfile, metaname:metaname },
+                    success :function(data) { 
+                        // console.log(data);  
+                        $('.fields-type-file .adfrontpost-file-'+idfile).remove();   
+                        $('.fields-type-file .form-control-file-'+idfile).val('');                         
+                        Swal.fire({
+                            title: 'Deleted !',
+                            text: "File telah berhasil dihapus.",
+                            icon: 'success',
+                            confirmButtonColor: '#3085d6',
+                        });
+                    },
+                });
+            }
+        });
+    });
+
+    $(document).on('click', '.btn-delete-post', function(e) {
+        var id = $(this).data('id');
+        Swal.fire({
+            title: 'Anda yakin ?',
+            text: "anda akan menghapus materi ini!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                jQuery.ajax({
+                    type    : "POST",
+                    url     : themepath.ajaxUrl,
+                    data    : {action:'deleteadmateri', id:id },
+                    success :function(data) { 
+                        // console.log(data);  
+                        $('article.post-'+id).remove();                             
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: "Materi telah berhasil dihapus.",
+                            icon: 'success',
+                            confirmButtonColor: '#3085d6',
+                        });
+                    },
+                });
+            }
+        });
+    });
+
 });

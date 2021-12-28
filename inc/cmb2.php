@@ -60,6 +60,22 @@ function cmb2_ad_metaboxes( array $meta_boxes ) {
                         'image/png',
                     ),
                 ),
+			),			
+			array(
+				'name' => __( 'Default Featured Image', 'wpzaro' ),
+				'desc' => __( '', 'wpzaro' ),
+				'id'   => $prefix . '_theme_default_thumb',
+				'type' => 'file',
+                'options' => array(
+                    'url' => false, // Hide the text input for the url
+                ),
+                'query_args' => array(
+                    'type' => array(
+                        'image/gif',
+                        'image/jpeg',
+                        'image/png',
+                    ),
+                ),
 			),
 		)
 	);

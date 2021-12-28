@@ -70,24 +70,13 @@ class AdMateri {
         $args['post_type']  = 'admateri';
         $action             = $action?$action:'add';
 
-        $form           = new AdFrontpost();
-        $result         = $form->formPost($args,$action,$this->metakey);
+        $form   = new AdFrontpost();
+        $result = $form->formPost($args,$action,$this->metakey);
     }
 
     public function delete($id=null) {
-        if($id) {
-            //get attachments
-            $attachments = get_posts( array(
-                'post_type'         => 'attachment',
-                'posts_per_page'    => -1,
-                'post_parent'       => $id,
-            ) );
-            foreach ($attachments as $attachment) {
-                wp_delete_attachment( $attachment->ID, 'true' );
-            }
-            //delete post
-            wp_delete_post($id);
-        }
+        $form       = new AdFrontpost();
+        return $form->hapusPost($id);
     }
 
 }

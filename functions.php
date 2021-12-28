@@ -151,10 +151,10 @@ function adget_url_ava($userid){
 
 function post_date_ago($idpost, $full = false) {
     $datetime   = get_the_date('Y-m-d H:i:s',$idpost);
-    $now        = new DateTime;
+    $now        = new DateTime(date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) ));
     $ago        = new DateTime($datetime);
     $diff       = $now->diff($ago);
-
+    
     $diff->w    = floor($diff->d / 7);
     $diff->d    -= $diff->w * 7;
 
@@ -227,9 +227,11 @@ function listmenugroup($arraymenu) {
     <?php
 }
 
-function get_thumbnail_url_resize($idpost, $width, $height) {    
+function get_thumbnail_url_resize($idpost, $width, $height) { 
+    $default    = get_option( 'wpzaro_theme_options' )['_theme_default_thumb'];
 	$urlimg     = get_the_post_thumbnail_url($idpost,'full');
-    $urlresize  = aq_resize( $urlimg, $width, $height, true, true, true );
+    $urlimg     = $urlimg?$urlimg:$default;
+    $urlresize  = $urlimg?aq_resize( $urlimg, $width, $height, true, true, true ):'';
 
     return $urlresize;
 }

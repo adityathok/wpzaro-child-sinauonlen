@@ -9,7 +9,8 @@
 defined( 'ABSPATH' ) || exit;
 
 get_header();
-$container = get_theme_mod( 'wpzaro_container_type' );
+$container      = get_theme_mod( 'wpzaro_container_type' );
+$AdAbsenPost    = new AdAbsenPost();
 ?>
 
 <div class="wrapper" id="single-wrapper">
@@ -23,6 +24,7 @@ $container = get_theme_mod( 'wpzaro_container_type' );
                 <main class="site-main" id="main">
 
                     <?php while ( have_posts() ) { the_post(); ?>
+
                         <div class="single-card-custom">
                             <div class="bg-image-content">
                                 <img src="<?php echo get_thumbnail_url_resize(get_the_ID(),500,300);?>" class="img-fluid w-100" alt="<?php echo get_the_title();?>" loading="lazy">
@@ -36,11 +38,17 @@ $container = get_theme_mod( 'wpzaro_container_type' );
                             </header><!-- .entry-header -->
 
                             
-                            <?php //if(current_user_can('siswa')): ?>
-                                <div class="alert alert-warning">
-                                    <i class="fa fa-info-circle" aria-hidden="true"></i> Anda tidak memiliki akses untuk mengakses materi ini
-                                </div>
-                            <?php //endif; ?>
+                            <?php if(current_user_can('siswa')): ?>
+                                <?php if ($AdAbsenPost->check($post->post_author,$post->ID)): ?>
+                                    <div class="alert alert-success">
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i> Anda sudah absen
+                                    </div>
+                                <?php else: ?>
+                                    <div class="alert alert-warning bg-white text-center">
+                                        <div class="btn btn-warning w-100 btn-absen-post btn-absen-post-<?php echo get_the_ID(); ?>" data-post="<?php echo get_the_ID(); ?>">Absen</div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endif; ?>
 
                             <div class="entry-content">
                                 <?php
@@ -49,6 +57,7 @@ $container = get_theme_mod( 'wpzaro_container_type' );
                                 ?>
                             </div><!-- .entry-content -->
                         </div>
+                        
                     <?php
                         // If comments are open or we have at least one comment, load up the comment template.
                         if ( comments_open() || get_comments_number() ) {

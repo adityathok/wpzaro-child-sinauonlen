@@ -12,6 +12,7 @@ $the_query = new WP_Query( $args );
         
             // require_once('inc/materi/content.php');
             get_template_part( 'inc/materi/content');
+            
         }
     } else { ?>
         <div class="alert alert-warning" role="alert">

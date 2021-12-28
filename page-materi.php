@@ -32,6 +32,9 @@ $urlpage    = get_the_permalink();
                         break;
                 }
             endif;
+            if(current_user_can('siswa')):                
+                require_once('inc/materi/daftar-materi.php');
+            endif;
         echo '</div>';
     endif;
 

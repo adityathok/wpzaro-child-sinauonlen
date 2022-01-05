@@ -24,3 +24,17 @@ function deleteadfrontpostfile_ajax() {
 
     wp_die();
 }
+
+add_action('wp_ajax_absenpost', 'absenpost_ajax');
+function absenpost_ajax() {
+    $idpost     = isset($_POST['idpost']) ? $_POST['idpost'] : '';
+    $posttype   = isset($_POST['posttype']) ? $_POST['posttype'] : '';
+    $date       = date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) );
+    
+    if($idpost):        
+        $AdAbsenPost = new AdAbsenPost();
+        $AdAbsenPost->add(get_current_user_id(),$idpost,$posttype,$date);
+    endif;
+
+    wp_die();
+}

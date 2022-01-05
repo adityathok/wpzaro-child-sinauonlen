@@ -8,7 +8,7 @@ jQuery(function($) {
         $('#loginform .login-submit').append('<a class="btn btn-outline-primary rounded-pill py-2 px-3 mt-4 text-center" href="'+themepath.homeUrl+'/register/">Register</a>');
     }
     var lastScrollTop = 0;
-    var offset = $( ".header-navmenu" ).offset();
+    var offset = $( ".header-navmenu" ).height();
     $(window).scroll(function(event){
         var st = $(this).scrollTop();
         if (st > lastScrollTop){
@@ -20,7 +20,7 @@ jQuery(function($) {
         }
         lastScrollTop = st;
 
-        if ( $(window).scrollTop() > offset.top){
+        if ( $(window).scrollTop() > offset){
             $('.header-navmenu').addClass('scrolled');
         } else {
             $('.header-navmenu').removeClass('scrolled');
@@ -54,7 +54,6 @@ jQuery(function($) {
         var target = $(this).attr('class-target');
         readURL(this,target);
     });
-
     
     $(document).on('click', '.btn-adfrontpost-file-delete', function(e) {
         var idpost      = $(this).data('idpost');
@@ -119,6 +118,24 @@ jQuery(function($) {
                 });
             }
         });
+    });
+    
+    $(document).on('click', '.btn-absen-post', function(e) {
+        var idpost = $(this).data('post');
+        var posttype = $(this).data('posttype');
+        if(idpost) {
+            $('.btn-absen-post-'+idpost).html('<i class="fa fa-spinner fa-pulse fa-fw"></i> tunggu...');
+            jQuery.ajax({
+                type    : "POST",
+                url     : themepath.ajaxUrl,
+                data    : {action:'absenpost', idpost:idpost, posttype:posttype },
+                success :function(data) { 
+                    // console.log(data);  
+                    $('.btn-absen-post-'+idpost).addClass('btn-success').removeClass('btn-danger').html('Berhasil');
+                    $('.alert-absen-'+idpost).addClass('alert-success').removeClass('alert-danger');
+                },
+            });
+        }
     });
 
 });

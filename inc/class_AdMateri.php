@@ -34,6 +34,12 @@ class AdMateri {
                 'desc'      => 'File lampiran',
                 'required'  => false,
             ],
+            'kelas'=> [
+                'type'      => 'checkbox',
+                'title'     => 'Kelas',
+                'desc'      => 'Pilih Kelas',
+                'required'  => true,
+            ],
         ];
     }
 

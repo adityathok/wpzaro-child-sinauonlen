@@ -24,7 +24,7 @@ class AdAbsenPost {
     public function create_table(){
         $sql = "CREATE TABLE IF NOT EXISTS $this->table
         (
-            id INT NOT NULL,
+            id INT UNSIGNED NOT NULL AUTO_INCREMENT,
             user_id INT NOT NULL,
             post_id INT NOT NULL,
             post_type varchar(50) NOT NULL,
@@ -45,20 +45,38 @@ class AdAbsenPost {
         }
     }
 
-    public function add($user=null,$post_id=null){
+    public function add($user=null,$post_id=null,$posttype=null,$date=null){
         if($post_id) {
             $user_id = empty($user)?$user:get_current_user_id();
             $getdata = $this->wpdb->get_results("SELECT * FROM $this->table WHERE user_id = $user_id and post_id = $post_id");
             if(empty($getdata)) {
+
+                //create detail                
+                $detail                         = [];
+                $user_info                      = get_userdata($user_id);
+                $detail['user']['display_name'] = $user_info->display_name;
+                $detail['user']['user_login']   = $user_info->user_login;
+                $detail['user']['kelas']        = $user_info->kelas;
+                $detail['post']['title']        = get_the_title($post_id);
+                $author_id                      = get_post_field( 'post_author', $post_id );
+                $detail['post']['author_id']    = $author_id;
+                $detail['post']['author_name']  = get_the_author_meta( 'display_name', $author_id );
+
                 $this->wpdb->insert($this->table, array(
                     'user_id'   => $user_id,
                     'post_id'   => $post_id,
-                    'post_type' => $post_type,
-                    'detail'    => $detail,
+                    'post_type' => $posttype,
+                    'detail'    => json_encode($detail),
                     'date'      => $date,
                 ) );
             }
         }
+    }
+
+    public function fetch($args=null){ 
+        $args       = $args?'WHERE '.$args:'';   
+        $getdata    = $this->wpdb->get_results("SELECT * FROM $this->table $args");
+        return $getdata;
     }
 
 }

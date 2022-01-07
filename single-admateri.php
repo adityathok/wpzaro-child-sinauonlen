@@ -113,7 +113,7 @@ $AdAbsenPost    = new AdAbsenPost();
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nama</th>
-                            <th scope="col">tgl</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -126,10 +126,12 @@ $AdAbsenPost    = new AdAbsenPost();
                                 <tr>
                                     <td><?php echo $key+1; ?></td>
                                     <td>
-                                        <div> <?php echo get_userdata($value->user_id)->display_name; ?> </div>
-                                        <small><?php echo get_user_meta($value->user_id,'kelas',true); ?></small>
+                                        <div> <?php echo get_userdata($value->user_id)->display_name; ?> </div>  
+                                        <span class="badge bg-danger"><?php echo $value->date; ?></span>                                      
                                     </td>
-                                    <td><?php echo $value->date; ?></td>
+                                    <td class="text-end">
+                                        <?php echo get_user_meta($value->user_id,'kelas',true); ?>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>

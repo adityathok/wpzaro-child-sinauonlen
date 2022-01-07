@@ -203,20 +203,30 @@ class AdFrontpost {
         }
         
         ///submit data
-        if(isset($_POST['inpudata']) && $antispam==true) {
-	        if(isset($_FILES)&&!empty($_FILES)) {
-                $_POST['-upload-file'] = $_FILES;
-            }
-            $result = self::submitPost($_POST);
-            echo implode(" ",$result['message']);
-        } else if(isset($_POST['inpudata']) && $antispam==false) {
-            echo '<div class="alert alert-danger">Please verify Antispam</div>';
-        }
+		if(isset($_POST['inpudata']) && $_POST['sesiform'] == $_SESSION['sesiform']) {
+			if(isset($_POST['inpudata']) && $antispam==true) {
+				if(isset($_FILES)&&!empty($_FILES)) {
+					$_POST['-upload-file'] = $_FILES;
+				}
+				$result = self::submitPost($_POST);
+				echo implode(" ",$result['message']);
+				$_SESSION['sesiform'] = uniqid();
+			} else if(isset($_POST['inpudata']) && $antispam==false) {
+				echo '<div class="alert alert-danger">Please verify Antispam</div>';
+			}
+		}
+
+		
+		if(!isset($_SESSION['sesiform']) || empty($_SESSION['sesiform'])) {
+			$_SESSION['sesiform'] = uniqid();
+		}
+		$sesiform   = $_SESSION['sesiform'];
         
         echo '<form class="form-adfrontpost" name="input" method="POST" id="formPost" action="" enctype="multipart/form-data">';
         
-            echo '<input type="hidden" id="post_author" value="'.$post_author.'" name="post_author">';
-            
+            echo '<input type="hidden" id="post_author" value="'.$post_author.'" name="post_author">';            
+            echo '<input type="hidden" id="sesiform" value="'.$sesiform.'" name="sesiform">';
+
             ///edit data
             if( $action=='edit' && $args['ID']) {
                 echo '<input type="hidden" id="id" value="'.$args['ID'].'" name="ID" readonly>';
@@ -294,6 +304,23 @@ class AdFrontpost {
             						echo '>'.$option2.'</option>';
             					}
             				echo '</select>';
+            			}
+            			//type input checkbox
+            			else if ($fields['type']=='checkbox') {
+							$val = $value?$value:[];
+							foreach ($fields['option'] as $option1 => $option2 ) {
+								$option1	= is_numeric($option1)?$option2:$option1;
+								$stringname	= str_replace(' ', '', $option2);
+								$checked	= in_array($option1, $val)?'checked':'';
+								echo '
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="'.$option1.'" name="'.$idmeta.'[]" id="Check'.$stringname.'" '.$checked.'>
+									<label class="form-check-label" for="Check'.$stringname.'">
+										'.$option2.'
+									</label>
+								</div>
+								';
+							}
             			}
             			
             			//type input category

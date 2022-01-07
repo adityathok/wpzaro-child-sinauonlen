@@ -1,7 +1,8 @@
 <article <?php post_class('article-card-admateri mb-4'); ?>>
 
     <?php 
-    $urlpage = get_home_url().'/materi/';
+    $urlpage        = get_home_url().'/materi/';
+    $AdAbsenPost    = new AdAbsenPost();
     ?>
 
     <div class="card border-0 shadow-sm card-admateri">
@@ -18,7 +19,10 @@
                 <?php endif; ?>
             </small>
         </div>
-        <a href="<?php echo get_the_permalink();?>">
+        <a href="<?php echo get_the_permalink();?>" class="d-block position-relative">
+            <?php if ($AdAbsenPost->check(get_current_user_id(),$post->ID)): ?>
+                <span class="badge bg-danger position-absolute bottom-0 end-0">Sudah absen</span>
+            <?php endif; ?>
             <img src="<?php echo get_thumbnail_url_resize(get_the_ID(),300,150);?>" class="card-img-top rounded-0" alt="<?php echo get_the_title();?>" loading="lazy">
         </a>
         <div class="card-body">

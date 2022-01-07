@@ -44,11 +44,11 @@ class AdMember {
             'desc'      => 'dapatkan lokasi, untuk lebih akurat aktifkan GPS',
             'required'  => false,
         ],
-	'bio'            => [
+		'bio'		=> [
 	     'type'      => 'textarea',
 	     'title'     => 'Bio',
 	     'required'  => false,
-	],
+		],
         'user_pass'     => [
             'type'      => 'password',
             'title'     => 'Password',

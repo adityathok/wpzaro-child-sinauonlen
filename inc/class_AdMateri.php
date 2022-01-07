@@ -7,8 +7,10 @@
 class AdMateri {
 
     public $metakey;
+    public $datakelas;
 
     public function __construct(){
+        $this->datakelas = get_option( '_data_kelas', ['Kelas'] );
         $this->metakey  = [
             'post_title'    => [
                 'type'      => 'text',
@@ -39,6 +41,7 @@ class AdMateri {
                 'title'     => 'Kelas',
                 'desc'      => 'Pilih Kelas',
                 'required'  => true,
+                'option'    => $this->datakelas,
             ],
         ];
     }

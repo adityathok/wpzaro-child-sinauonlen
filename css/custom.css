@@ -198,26 +198,50 @@ body.page-scroll-down .header-navmenu.scrolled {
     background: #fff;
 }
 
-.single-admateri .header-navmenu:not(.scrolled) {
+.single-admateri .header-navmenu:not(.scrolled),
+.page-template-page-home .header-navmenu:not(.scrolled) {
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
 }
 
-.single-admateri.admin-bar .header-navmenu:not(.scrolled) {
+.single-admateri.admin-bar .header-navmenu:not(.scrolled),
+.page-template-page-home.admin-bar .header-navmenu:not(.scrolled) {
     top: 32px;
 }
 
-.single-admateri .header-navmenu:not(.scrolled) .header-navmenu-inner>div {
+.single-admateri .header-navmenu:not(.scrolled) .header-navmenu-inner>div,
+.page-template-page-home .header-navmenu:not(.scrolled) .header-navmenu-inner>div {
     background: rgb(0, 0, 0) !important;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.7707457983193278) 0%, rgba(0, 0, 0, 0.08727240896358546) 100%) !important;
 }
 
 .single-admateri .header-navmenu:not(.scrolled) a,
 .single-admateri .header-navmenu:not(.scrolled) .btn,
-.single-admateri .header-navmenu:not(.scrolled) .title-header {
+.single-admateri .header-navmenu:not(.scrolled) .title-header,
+.page-template-page-home .header-navmenu:not(.scrolled) a,
+.page-template-page-home .header-navmenu:not(.scrolled) .btn,
+.page-template-page-home .header-navmenu:not(.scrolled) .title-header {
     color: #fff !important;
+}
+
+.bg-head-svg {
+    background-color: #e7008a;
+    margin-top: -70px;
+    height: 150px;
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    position: relative;
+}
+
+.bg-head-svg svg {
+    margin-bottom: -350px;
+}
+
+.content-profile-homepage {
+    position: relative;
+    margin-top: -30px;
 }
 
 @media screen and (max-width: 768px) {

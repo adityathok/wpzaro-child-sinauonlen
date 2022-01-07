@@ -87,6 +87,27 @@ class AdMateri {
         $form       = new AdFrontpost();
         return $form->hapusPost($id);
     }
+    
+    public function uservisit($user_id=null,$post_id=null) {
+        if(!$user_id || !$post_id) return false;
+
+        $getdata = get_user_meta($user_id,'_visit_materi',true);
+        $getdata = $getdata?$getdata:[];
+
+        $newdata    = [$post_id];
+        if($getdata):
+            foreach(array_slice($getdata, 0, 10) as $key => $value) {
+                if($value!=$post_id) {
+                    $newdata[] = $value;
+                }
+            }
+        endif;
+
+        update_user_meta( $user_id, '_visit_materi', $newdata );
+
+        return get_user_meta($user_id,'_visit_materi',true);
+
+    }
 
 }
 

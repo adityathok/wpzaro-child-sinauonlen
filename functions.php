@@ -139,11 +139,11 @@ function register_my_session()
 }
 add_action('init', 'register_my_session');
 
-function adget_url_ava($userid){
+function adget_url_ava($userid,$size='thumb'){
     $url = bp_core_fetch_avatar ( 
         array(
             'item_id' => $userid, 
-            'type'    => 'thumb',
+            'type'    => $size,
             'html'   => FALSE
         ) 
     );

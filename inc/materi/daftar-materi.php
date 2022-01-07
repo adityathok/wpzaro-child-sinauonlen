@@ -53,10 +53,12 @@ $the_query = new WP_Query( $args );
 wp_reset_postdata();
 ?>
 
-<div class="float-button-bottom">
-    <div class="container text-end">
-        <a href="<?php echo $urlpage;?>?pg=add" class="btn btn-success rounded-circle shadow">
-            <i class="fa fa-plus"></i>
-        </a>
+<?php if(!current_user_can('siswa')): ?>
+    <div class="float-button-bottom">
+        <div class="container text-end">
+            <a href="<?php echo $urlpage;?>?pg=add" class="btn btn-success rounded-circle shadow">
+                <i class="fa fa-plus"></i>
+            </a>
+        </div>
     </div>
-</div>
+<?php endif; ?>

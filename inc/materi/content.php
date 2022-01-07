@@ -21,7 +21,7 @@
         </div>
         <a href="<?php echo get_the_permalink();?>" class="d-block position-relative">
             <?php if ($AdAbsenPost->check(get_current_user_id(),$post->ID)): ?>
-                <span class="badge bg-danger position-absolute bottom-0 end-0">Sudah absen</span>
+                <span class="badge bg-success position-absolute bottom-0 end-0">Sudah absen</span>
             <?php endif; ?>
             <img src="<?php echo get_thumbnail_url_resize(get_the_ID(),300,150);?>" class="card-img-top rounded-0" alt="<?php echo get_the_title();?>" loading="lazy">
         </a>

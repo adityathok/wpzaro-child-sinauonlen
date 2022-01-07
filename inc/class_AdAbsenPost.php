@@ -38,11 +38,7 @@ class AdAbsenPost {
         
     public function check($user_id=null,$post_id=null){
         $getdata = $this->wpdb->get_results("SELECT * FROM $this->table WHERE user_id = $user_id and post_id = $post_id");
-        if($getdata) {
-            return true;
-        } else {
-            return false;
-        }
+        return $getdata;
     }
 
     public function add($user=null,$post_id=null,$posttype=null,$date=null){

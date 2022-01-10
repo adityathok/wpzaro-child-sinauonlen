@@ -244,8 +244,21 @@ body.page-scroll-down .header-navmenu.scrolled {
     margin-top: -30px;
 }
 
+.admin-bar .modal .modal-dialog {
+    padding-top: 1rem;
+}
+
 @media screen and (max-width: 768px) {
     #offcanvasMenuHeader {
         width: 80%;
+    }
+
+    .admin-bar .modal .modal-dialog {
+        padding-top: 3rem;
+    }
+
+    .table-lihatMember tr td {
+        display: block;
+        width: 100%;
     }
 }

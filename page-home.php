@@ -34,38 +34,32 @@ $visit_materi   = get_user_meta($current_id,'_visit_materi',true);
                         <h4 class="fw-bold"><?php echo $currentdata->display_name; ?></h4>                    
                     </div> 
 
-                    <div class="list-materi-last my-4">
-                        <div class="fw-bold text-muted mb-2">Kunjungan terakhir</div>
+                    <div class="list-materi-last my-4">                        
                         <?php 
                         if($visit_materi):
-                            // The Query
-                            $args = array(
-                                'post_type'         => 'admateri',
-                                'post__in'          => $visit_materi,
-                                'posts_per_page'    => 12
-                            );                         
-                            $the_query = new WP_Query( $args );
-                            if ( $the_query->have_posts() ) {
-                                while ( $the_query->have_posts() ) { 
-                                    $the_query->the_post();
-                                    ?>
-                                    <div class="card shadow-sm mb-3">
-                                        <div class="row g-0">
-                                            <div class="col-4">
-                                                <img src="<?php echo get_thumbnail_url_resize(get_the_ID(),150,150);?>" class="img-fluid rounded-start" alt="...">
-                                            </div>
-                                            <div class="col-8">
-                                                <div class="card-body">
-                                                    <a href="<?php echo get_the_permalink();?>" class="card-title text-dark"><?php echo get_the_title();?></a>
-                                                    <p class="card-text"><small class="text-muted">by : <?php echo get_the_author();?></small></p>
-                                                    <p class="card-text"><small class="text-muted"><?php echo post_date_ago(get_the_ID());?></small></p>
-                                                </div>
+                            echo '<div class="fw-bold text-muted mb-2">Kunjungan terakhir</div>';
+                            echo '<div class="mb-2">';
+                            foreach ( $visit_materi as $idmateri ) { 
+                                $author_id      = get_post_field ('post_author', $idmateri);
+                                $display_name   = get_the_author_meta( 'display_name' , $author_id ); 
+                                ?>
+                                <div class="card shadow-sm mb-3">
+                                    <div class="row g-0">
+                                        <div class="col-4">
+                                            <img src="<?php echo get_thumbnail_url_resize($idmateri,150,150);?>" class="img-fluid rounded-start" alt="...">
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body">
+                                                <a href="<?php echo get_the_permalink($idmateri);?>" class="card-title text-dark mb-2"><?php echo get_the_title($idmateri);?></a>
+                                                <div class="card-text"><small class="text-muted"><i class="fa fa-user-o"></i> <?php echo $display_name;?></small></div>
+                                                <div class="card-text"><small class="text-muted"><i class="fa fa-clock-o"></i> <?php echo post_date_ago($idmateri);?></small></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
-                                }
+                                </div>
+                                <?php
                             }
+                            echo '</div>';
                         endif;
                         ?>
                     </div>

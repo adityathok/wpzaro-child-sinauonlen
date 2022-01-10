@@ -161,6 +161,7 @@ class AdFrontpost {
         $result             = [];
         $result['message']  = $message;
         $result['success']  = $success;
+        $result['ID']		= $pid;
         
         return $result;
 		
@@ -231,6 +232,10 @@ class AdFrontpost {
             if( $action=='edit' && $args['ID']) {
                 echo '<input type="hidden" id="id" value="'.$args['ID'].'" name="ID" readonly>';
             }
+
+			//action
+			$action = ( $action=='edit' && $args['ID'])?'edit':'add';
+			echo '<input type="hidden" id="action" value="'.$action.'" name="action" readonly>';
             
             ///post type
             if( isset($args['post_type']) && $args['post_type']) {
@@ -298,7 +303,8 @@ class AdFrontpost {
             			else if ($fields['type']=='option') {
             				echo '<select id="'.$idmeta.'" class="form-control" name="'.$idmeta.'" '.$req.'>';
             					foreach ($fields['option'] as $option1 => $option2 ) {
-            					    $option1 = is_numeric($option1)?$option2:$option1;
+            					    // $option1 = is_numeric($option1)?$option2:$option1;
+            					    $option1 = isset($fields['option'][0])&&is_array($fields['option'][0])?$option2:$option1;
             						echo '<option value="'.$option1.'"';
             						if ($value==$option1) { echo 'selected';}
             						echo '>'.$option2.'</option>';

@@ -37,10 +37,6 @@ $AdAbsenPost    = new AdAbsenPost();
                             <header class="entry-header text-center">
                                 <?php the_title( '<h1 class="entry-title h4 mt-4 mb-3">', '</h1>' ); ?>                            
                             </header><!-- .entry-header -->
-                            <div class="text-center mb-3">
-                                <span class="badge bg-secondary"><?php echo get_the_date('d M Y H:i:s'); ?></span>
-                            </div>
-
                             
                             <?php if(current_user_can('siswa')): ?>
                                 <?php $check = $AdAbsenPost->check(get_current_user_id(),$post->ID); ?>
@@ -88,13 +84,15 @@ $AdAbsenPost    = new AdAbsenPost();
                                 $kls = get_post_meta(get_the_ID(),'kelas',true);
                                 echo $kls?'<span class="badge bg-secondary me-1 mb-1">'.implode('</span><span class="badge bg-secondary me-1 mb-1">',$kls).'</span>':'';
                                 ?>
+                                <div class="mb-3">
+                                    <span class="badge bg-dark"><?php echo get_the_date('d M Y H:i:s'); ?></span>
+                                </div>
                             </div>
 
                         </div>
                         
                         <?php 
                         $uservisit = $AdMateri->uservisit(get_current_user_id(),get_the_ID());
-                        echo implode(' | ',$uservisit);
                         ?>
                         
                     <?php

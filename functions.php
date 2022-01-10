@@ -26,6 +26,7 @@ require_once('inc/class_AdGuru.php');
 require_once('inc/class_AdSiswa.php');
 require_once('inc/class_AdMateri.php');
 require_once('inc/class_AdAbsenPost.php');
+require_once('inc/class_AdNilaiSiswa.php');
 require_once('inc/login-form.php');
 require_once('inc/header-builder.php');
 require_once('inc/footer-builder.php');

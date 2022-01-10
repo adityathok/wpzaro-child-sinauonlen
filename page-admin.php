@@ -67,6 +67,9 @@ $arraymenu      = [
                 case "jurusan":
                     require_once('inc/admin/jurusan.php');
                     break;
+                case "nilai":
+                    require_once('inc/admin/nilai.php');
+                    break;
                 default:
                 ?>
                     <div class="card shadow-sm border-0">

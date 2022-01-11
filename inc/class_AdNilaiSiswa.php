@@ -85,22 +85,3 @@ class AdNilaiSiswa {
 
 $AdNilaiSiswa = new AdNilaiSiswa();
 $AdNilaiSiswa->register_post_type();
-
-
-function adnilaisiswa_published_notification( $post_id, $post ) {
-    $author_id  = $post->post_author;
-    $siswaid    = get_post_meta($post_id,'siswa',true);
-    if ( bp_is_active( 'notifications' ) ) {
-        bp_notifications_add_notification(
-            array(
-                'user_id'          => $siswaid,
-                'item_id'          => $post_id,
-                'component_name'   => 'custom',
-                'component_action' => 'custom_action',
-                'date_notified'    => bp_core_current_time(),
-                'is_new'           => 1,
-            )
-        );
-    }
-}
-add_action( 'publish_adnilaisiswa', 'adnilaisiswa_published_notification', 10, 2 );

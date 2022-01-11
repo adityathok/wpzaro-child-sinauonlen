@@ -19,6 +19,7 @@
  *
  */
 require_once('inc/ajax.php');
+require_once('inc/bp-notifications.php');
 require_once('inc/css-wp-form.php');
 require_once('inc/class_AdFrontpost.php');
 require_once('inc/class_AdMember.php');

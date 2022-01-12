@@ -38,3 +38,48 @@ function absenpost_ajax() {
 
     wp_die();
 }
+
+add_action('wp_ajax_listnilaisiswa', 'listnilaisiswa_ajax');
+function listnilaisiswa_ajax() {
+    $iduser = isset($_POST['iduser']) ? $_POST['iduser'] : '';
+    $urlpage = get_home_url().'/admin-settings/';
+
+    // The Query
+    $args = array(
+        'post_type'         => 'adnilaisiswa',
+        'posts_per_page'    =>-1,
+        'meta_query'        => array(
+            array(
+                'key'     => 'siswa',
+                'value'   => $iduser,
+                'compare' => '=',
+            ),
+        ),
+    );
+    $the_query = new WP_Query( $args );
+
+    echo '<div class="list-nilai-'.$iduser.'">';
+        // The Loop
+        if ( $the_query->have_posts() ) {
+            echo '<div class="list-group list-group-numbered">';
+            while ( $the_query->have_posts() ) {
+                $the_query->the_post();
+                ?>
+                <div class="list-group-item d-flex justify-content-between align-items-start">
+                    <div>
+                        <a href="<?php echo get_the_permalink();?>">
+                            <?php echo get_the_title();?>
+                        </a>
+                    </div>
+                    <a class="badge bg-info rounded-pill" href="<?php echo $urlpage;?>?pg=nilai&id=<?php echo $iduser;?>&idpost=<?php echo get_the_ID();?>&act=edit">edit</a>
+                </div>
+                <?php
+            }
+            echo '</div>';
+        } else {
+            echo '<div class="alert alert-warning">belum ada nilai</div>';
+        }
+    echo '</div>';
+
+    wp_die();
+}

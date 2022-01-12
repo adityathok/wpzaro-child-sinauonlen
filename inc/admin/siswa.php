@@ -61,7 +61,7 @@
                 <div class="list-users">
                     <?php foreach( $getusers as $user): ?>
                         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-                            <span data-bs-toggle="modal" data-bs-target="#UserModal-<?php echo $user->ID; ?>" class="d-flex">
+                            <span data-bs-toggle="modal" data-bs-target="#UserModal-<?php echo $user->ID; ?>" data-id="<?php echo $user->ID; ?>" class="openmodaluser d-flex">
                                 <div class="user-avatar me-2">
                                     <img src="<?php echo adget_url_ava($user->ID); ?>" class="img-fluid rounded-circle" alt="">
                                 </div>
@@ -114,12 +114,27 @@
                                     <div class="user-avatar mx-auto text-center mb-3">
                                         <img src="<?php echo adget_url_ava($user->ID,'full'); ?>" class="img-fluid rounded-circle" alt="">
                                     </div>
-                                    <div id="profile-<?php echo $user->ID; ?>" class="py-3">                                        
-                                        <?php echo $adsiswa->view($user->ID); ?>
+
+                                    <ul class="nav nav-tabs tabs-collapse" data-id="<?php echo $user->ID; ?>">
+                                        <li class="nav-item flex-fill">
+                                            <span class="nav-link active" data-target="profile-<?php echo $user->ID; ?>">Profil</span>
+                                        </li>
+                                        <li class="nav-item flex-fill">
+                                            <span class="nav-link" data-target="nilai-<?php echo $user->ID; ?>">Nilai</span>
+                                        </li>
+                                    </ul>
+                                    <div class="data-tabs-collapse" data-id="<?php echo $user->ID; ?>">
+                                        <div id="profile-<?php echo $user->ID; ?>" class="collapse show py-3">                                        
+                                            <?php echo $adsiswa->view($user->ID); ?>
+                                        </div>
+                                        <div id="nilai-<?php echo $user->ID; ?>" class="collapse py-3">                                        
+                                            Nilai
+                                        </div>
                                     </div>
+
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="<?php echo $urlpage;?>?pg=nilai&id=<?php echo $user->ID;?>" class="btn btn-danger">Nilai</a>
+                                    <a href="<?php echo $urlpage;?>?pg=nilai&id=<?php echo $user->ID;?>" class="btn btn-danger"> <i class="fa fa-plus"></i> Nilai</a>
                                     <a href="<?php echo bp_core_get_user_domain($user->ID);?>" class="btn btn-secondary">Edit</a>
                                 </div>
                             </div>
@@ -169,6 +184,20 @@
             $(this).addClass('active');
             $('.data-tabs-collapse[data-id="'+id+'"]').find('.collapse').removeClass('show');
             $('.data-tabs-collapse[data-id="'+id+'"]').find('#'+$(this).data('target')).addClass('show');
+        });
+        $('.openmodaluser').on('click', function() {
+            var id = $(this).data('id');
+            if($('#nilai-'+id+' .list-nilai-'+id).length === 0) {
+                $('#nilai-'+id).html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
+                jQuery.ajax({
+                    type    : "POST",
+                    url     : themepath.ajaxUrl,
+                    data    : {action:'listnilaisiswa', iduser:id },
+                    success :function(data) {  
+                        $('#nilai-'+id).html(data);
+                    },
+                });
+            }
         });
     });
 </script>

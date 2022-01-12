@@ -27,6 +27,12 @@ function add_offcanvas_menuheader(){
                 'url'   => home_url().'/materi/',
                 'icon'  => 'fa fa-pencil-square-o',
             ],
+            'nilai' => [
+                'title' => 'Nilai',
+                'url'   => home_url().'/nilaisiswa/',
+                'icon'  => 'fa fa-pencil-square-o',
+                'role'  => 'siswa',
+            ],
             'notif' => [
                 'title' => 'Notifikasi',
                 'url'   => $linkprofile.'notifications/',

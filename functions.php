@@ -152,9 +152,9 @@ function adget_url_ava($userid,$size='thumb'){
     return $url;
 }
 
-function post_date_ago($idpost) {
-    $datetime   = get_the_date('Y-m-d H:i:s',$idpost);
-    $datenow    = date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) );
+function get_date_ago($datetime){
+
+    $datenow            = date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) );
     
     $time_ago           = strtotime($datetime);  
     $current_time       = strtotime($datenow);
@@ -206,6 +206,11 @@ function post_date_ago($idpost) {
             return "$years years ago";  
         }  
     }  
+}
+
+function post_date_ago($idpost) {
+    $datetime   = get_the_date('Y-m-d H:i:s',$idpost);
+    return get_date_ago($datetime);
 }
 
 function user_has_role($user_id, $role_name) {

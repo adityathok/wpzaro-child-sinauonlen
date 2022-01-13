@@ -39,7 +39,8 @@ $visit_materi   = get_user_meta($current_id,'_visit_materi',true);
                         if($visit_materi):
                             echo '<div class="fw-bold text-muted mb-2">Kunjungan terakhir</div>';
                             echo '<div class="mb-2">';
-                            foreach ( $visit_materi as $idmateri ) { 
+                            foreach ( array_slice($visit_materi, 0, 10) as $valmateri ) { 
+                                $idmateri       = $valmateri['id'];
                                 $author_id      = get_post_field ('post_author', $idmateri);
                                 $display_name   = get_the_author_meta( 'display_name' , $author_id ); 
                                 ?>
@@ -52,7 +53,7 @@ $visit_materi   = get_user_meta($current_id,'_visit_materi',true);
                                             <div class="card-body">
                                                 <a href="<?php echo get_the_permalink($idmateri);?>" class="card-title text-dark mb-2"><?php echo get_the_title($idmateri);?></a>
                                                 <div class="card-text"><small class="text-muted"><i class="fa fa-user-o"></i> <?php echo $display_name;?></small></div>
-                                                <div class="card-text"><small class="text-muted"><i class="fa fa-clock-o"></i> <?php echo post_date_ago($idmateri);?></small></div>
+                                                <div class="card-text"><small class="text-muted"><i class="fa fa-clock-o"></i> <?php echo get_date_ago($valmateri['date']);?></small></div>
                                             </div>
                                         </div>
                                     </div>

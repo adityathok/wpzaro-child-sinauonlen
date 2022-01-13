@@ -43,8 +43,9 @@ class AdAbsenPost {
 
     public function add($user=null,$post_id=null,$posttype=null,$date=null){
         if($post_id) {
-            $user_id = empty($user)?$user:get_current_user_id();
-            $getdata = $this->wpdb->get_results("SELECT * FROM $this->table WHERE user_id = $user_id and post_id = $post_id");
+            $user_id    = empty($user)?$user:get_current_user_id();
+            $date       = $date?$date:date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) );
+            $getdata    = $this->wpdb->get_results("SELECT * FROM $this->table WHERE user_id = $user_id and post_id = $post_id");
             if(empty($getdata)) {
 
                 //create detail                

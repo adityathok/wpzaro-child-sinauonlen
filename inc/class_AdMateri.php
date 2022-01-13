@@ -94,10 +94,14 @@ class AdMateri {
         $getdata = get_user_meta($user_id,'_visit_materi',true);
         $getdata = $getdata?$getdata:[];
 
-        $newdata    = [$post_id];
+        $newdata    = [];
+        $newdata[0] = [
+            'id'    => $post_id,
+            'date'  => date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) ),
+        ];
         if($getdata):
-            foreach(array_slice($getdata, 0, 10) as $key => $value) {
-                if($value!=$post_id) {
+            foreach(array_slice($getdata, 0, 20) as $key => $value) {
+                if(isset($value['id'])&&$value['id']!=$post_id) {
                     $newdata[] = $value;
                 }
             }

@@ -83,3 +83,57 @@ function listnilaisiswa_ajax() {
 
     wp_die();
 }
+
+add_action('wp_ajax_datacardhome', 'datacardhome_ajax');
+function datacardhome_ajax() {
+    $AdAbsenPost    = new AdAbsenPost();
+    $date           = date( 'Y-m-d', current_time( 'timestamp', 0 ) );
+    $result         = [];
+
+    if(current_user_can('siswa')) {
+        $countabsen     = $AdAbsenPost->count_byuser(get_current_user_id(),$date);
+    } else {
+        $countabsen     = $AdAbsenPost->count_byauthor(get_current_user_id(),$date);
+    }
+
+    $result[] = [
+        'id'    => 'card-absen',
+        'data'  => $countabsen,
+    ];
+
+    // The Query
+    $args = array(
+        'post_type'         => 'admateri',
+        'posts_per_page'    => -1,
+        'date_query' => array(
+            array(
+                'year'  => date( 'Y', current_time( 'timestamp', 0 ) ),
+                'month' => date( 'm', current_time( 'timestamp', 0 ) ),
+                'day'   => date( 'd', current_time( 'timestamp', 0 ) ),
+            ),
+        ),
+    );
+
+    if(current_user_can('guru')) {
+        $args['author'] = get_current_user_id();
+    }
+
+    if(current_user_can('siswa')) {
+        $args['meta_query'] = array(
+            array(
+                'key'       => 'kelas',
+                'value'     => get_user_meta(get_current_user_id(), 'kelas', true),
+                'compare'   => 'like'
+            )
+        );
+    }
+    $the_query = new WP_Query( $args );
+    $result[] = [
+        'id'    => 'card-materi',
+        'data'  => $the_query->found_posts,
+    ];
+
+    echo json_encode($result);
+
+    wp_die();
+}

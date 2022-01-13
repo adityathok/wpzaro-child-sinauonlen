@@ -15,6 +15,7 @@ get_header();
 $current_id     = get_current_user_id();
 $currentdata    = get_userdata( $current_id );
 $visit_materi   = get_user_meta($current_id,'_visit_materi',true);
+$AdAbsenPost    = new AdAbsenPost();
 ?>
 
     <div class="container">
@@ -33,6 +34,14 @@ $visit_materi   = get_user_meta($current_id,'_visit_materi',true);
                     <div class="text-center mb-5">
                         <h4 class="fw-bold"><?php echo $currentdata->display_name; ?></h4>                    
                     </div> 
+
+                    <?php
+                    if(current_user_can('administrator') || current_user_can('guru')):
+                        require_once('inc/guru/card-home.php');
+                    else:
+                        require_once('inc/siswa/card-home.php');
+                    endif;
+                    ?>
 
                     <div class="list-materi-last my-4">                        
                         <?php 
@@ -54,6 +63,15 @@ $visit_materi   = get_user_meta($current_id,'_visit_materi',true);
                                                 <a href="<?php echo get_the_permalink($idmateri);?>" class="card-title text-dark mb-2"><?php echo get_the_title($idmateri);?></a>
                                                 <div class="card-text"><small class="text-muted"><i class="fa fa-user-o"></i> <?php echo $display_name;?></small></div>
                                                 <div class="card-text"><small class="text-muted"><i class="fa fa-clock-o"></i> <?php echo get_date_ago($valmateri['date']);?></small></div>
+                                           
+                                                <?php if ($AdAbsenPost->check($current_id,$idmateri)): ?>
+                                                    <div class="card-text">
+                                                        <small class="text-success">
+                                                            <i class="fa fa-check"></i> Sudah absen
+                                                        </small>
+                                                    </div>
+                                                <?php endif; ?>
+
                                             </div>
                                         </div>
                                     </div>

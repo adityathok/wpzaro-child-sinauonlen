@@ -36,6 +36,12 @@ class AdMateri {
                 'desc'      => 'File lampiran',
                 'required'  => false,
             ],
+            'mapel' => [
+                'type'      => 'taxonomy',
+                'title'     => 'Mata Pelajaran',
+                'desc'      => '',
+                'required'  => false,
+            ],
             'kelas'=> [
                 'type'      => 'checkbox',
                 'title'     => 'Kelas',

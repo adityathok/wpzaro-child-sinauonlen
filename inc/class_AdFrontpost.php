@@ -372,7 +372,7 @@ class AdFrontpost {
                                 $val              = $taxonomy_ids;
                             endif;
             			    
-            				echo '<select id="'.$idmeta.'" class="form-control" name="taxonomy['.$idmeta.'][]" '.$req.'>';
+            				echo '<select id="'.$idmeta.'" class="form-control" name="taxonomy['.$idmeta.'][]" multiple '.$req.'>';
             						//taxonomy
             						$categories = get_categories( array('taxonomy' => $idmeta,'hide_empty'=> false,));
             						if (sizeof($categories)>0){

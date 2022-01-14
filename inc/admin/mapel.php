@@ -1,17 +1,24 @@
 <?php 
-$keymeta = '_data_mapel';
-
 if(isset($_POST['mapel']) && isset($_POST['sesiform']) && $_POST['sesiform'] == $_SESSION['sesiform']) {
-    $datamapel = [];
     foreach ($_POST['mapel'] as $key => $value) {
-        $datamapel[] = $value;
+        if(!empty($_POST['id'][$key])) {
+            if(isset($_POST['remove'][$key]) && !empty($_POST['remove'][$key])) {
+                wp_delete_term( $_POST['id'][$key], 'mapel' );
+            } else {
+                wp_update_term($_POST['id'][$key], 'mapel', ['name' => $value]);
+            }
+        } else {
+            $term = wp_insert_term($value,'mapel');
+        }
     }
-    update_option( $keymeta, $datamapel ); 
     $_SESSION['sesiform'] = uniqid();
     echo '<div class="alert alert-success" role="alert"> Data berhasil disimpan ! </div>';
 }
 
-$datamapel  = get_option( $keymeta, ['mapel'] );
+$datamapel = get_terms( array(
+    'taxonomy' => 'mapel',
+    'hide_empty' => false
+) );
 
 if(!isset($_SESSION['sesiform']) || empty($_SESSION['sesiform'])) {
     $_SESSION['sesiform'] = uniqid();
@@ -26,11 +33,18 @@ $sesiform   = $_SESSION['sesiform'];
     <div class="card-body">
         <form action="" method="post" class="form-mapel-opt">
             <div class="list-mapel-opt">
-                <?php foreach( $datamapel as $key => $value): ?>
-                    <div class="input-group mb-2" id="datamapel-<?php echo $key; ?>">
-                        <input type="text" class="form-control" placeholder="Nama mapel" name="mapel[<?php echo $key; ?>]" value="<?php echo $value; ?>">
+                <?php $nm = 0; ?>
+                <?php foreach( $datamapel as $term): ?>
+                    <?php 
+                        $term_id    = $term->term_id;
+                        $term_name  = $term->name;
+                    ?>
+                    <div class="input-group mb-2 listmapel-<?php echo $nm; ?>" id="datamapel-<?php echo $term_id; ?>" data-id="<?php echo $term_id; ?>">
+                        <input type="text" class="form-control input-mapel" placeholder="Nama mapel" name="mapel[<?php echo $term_id; ?>]" value="<?php echo $term_name; ?>">
                         <span class="input-group-text text-danger btn-delete"> <i class="fa fa-times"></i> </span>
+                        <input class="input-id-mapel" type="hidden" name="id[<?php echo $term_id; ?>]" value="<?php echo $term_id; ?>">
                     </div>
+                    <?php $nm++; ?>
                 <?php endforeach; ?>
             </div>
             <input type="hidden" name="sesiform" value="<?php echo $sesiform; ?>">
@@ -46,14 +60,21 @@ $sesiform   = $_SESSION['sesiform'];
     jQuery(document).ready(function($){
         $(document).on('click','.btn-delete',function() {
             var id = $(this).parent().attr('id');
-            $('#'+id).remove();
+            var dataid = $(this).parent().data('id');
+            $('#'+id).hide(500);
+            $('#'+id).append('<input class="remove-id-mapel" type="hidden" name="remove['+dataid+']" value="'+dataid+'">');
         });
         $('.btn-add').click(function(){
-            var clone = $('#datamapel-0').clone();
-            var number = Math.floor(Math.random()*1000);
+            var clone = $('.listmapel-0').clone();
+            var number = Math.floor(Math.random()*100000);
             clone.attr('id', 'datamapel-'+number);
-            clone.find('input').val('').attr('name', 'mapel['+number+']');
+            clone.attr('data-id', 'datamapel-'+number);
+            clone.find('.input-mapel').val('').attr('name', 'mapel['+number+']');
+            clone.find('.input-id-mapel').val('').attr('name', 'id['+number+']');
+            clone.find('.remove-id-mapel').remove();
+            clone.removeClass('listmapel-0').addClass('listmapel-'+number);
             clone.appendTo('.list-mapel-opt');
+            $('#datamapel-'+number).show(500);
         });
     });
 </script>

@@ -141,6 +141,22 @@ function register_my_session()
 }
 add_action('init', 'register_my_session');
 
+/**
+ * Register a private 'Mapel' taxonomy for post type 'admateri'.
+ *
+ * @see register_post_type() for registering post types.
+ */
+function wpdocs_register_private_taxonomy() {
+    $args = array(
+        'label'        => __( 'Mata Pelajaran', 'wpzaro' ),
+        'public'       => true,
+        'rewrite'      => true,
+        'hierarchical' => true
+    );     
+    register_taxonomy( 'mapel', 'admateri', $args );
+}
+add_action( 'init', 'wpdocs_register_private_taxonomy', 0 );
+
 function adget_url_ava($userid,$size='thumb'){
     $url = bp_core_fetch_avatar ( 
         array(

@@ -11,6 +11,11 @@ body {
     background-color: #f7f7f7;
 }
 
+.buddypress-wrap {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+}
+
 #page-content {
     min-height: 80vh;
     padding-bottom: 80px;

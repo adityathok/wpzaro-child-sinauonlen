@@ -112,7 +112,7 @@ class AdMember {
 			$uname = $first_name?$first_name:$username;
 			
             $message = '<div class="alert alert-success">';
-            $message .= isset($opt['message-success'])&&!empty($opt['message-success'])?$opt['message-success']:''.$uname.'</strong> Berhasil ditambahkan</div>';
+            $message .= isset($opt['message-success'])&&!empty($opt['message-success'])?$opt['message-success']:''.$uname.'</strong> Berhasil ditambahkan';
             $message .= '</div>';
             
         endif;

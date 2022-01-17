@@ -253,6 +253,10 @@ body.page-scroll-down .header-navmenu.scrolled {
     padding-top: 1rem;
 }
 
+.bbp-body ul>li:not(.bbp-forum-info) {
+    width: 33.33%;
+}
+
 @media screen and (max-width: 768px) {
     #offcanvasMenuHeader {
         width: 80%;

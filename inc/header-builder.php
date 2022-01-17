@@ -36,6 +36,8 @@ if ( ! function_exists( 'wpzaro_header_nav_menu' ) ) {
                                     echo get_the_title();
                                 } else if (get_post_type() === 'admateri') {
                                     echo 'Materi | '.get_the_title();
+                                } else if(is_bbpress()) {
+                                    echo 'Forums';
                                 }
                                 ?>
                             </div>

@@ -15,10 +15,24 @@ if(isset($_POST['mapel']) && isset($_POST['sesiform']) && $_POST['sesiform'] == 
     echo '<div class="alert alert-success" role="alert"> Data berhasil disimpan ! </div>';
 }
 
-$datamapel = get_terms( array(
+$getdatamapel = get_terms( array(
     'taxonomy' => 'mapel',
     'hide_empty' => false
 ) );
+$datamapel = $getdatamapel?$getdatamapel:[
+    (object) [
+        'term_id' => '0',
+        'name' => '',
+        'slug' => '',
+        'term_group' => '',
+        'term_taxonomy_id' => '',
+        'taxonomy' => '',
+        'description' => '',
+        'parent' => '',
+        'count' => '',
+        'filter' => 'raw'
+    ]
+];
 
 if(!isset($_SESSION['sesiform']) || empty($_SESSION['sesiform'])) {
     $_SESSION['sesiform'] = uniqid();

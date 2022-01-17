@@ -445,13 +445,16 @@ class AdMember {
         			echo '<tr class="fields-'.$idmeta.'">';	
         				echo '<td class="fw-bold">'.$fields['title'].'</td>';
 				
-        				if ($fields['type']=='option') {
-        				    echo '<td>';
-        					foreach ($fields['option'] as $option1 => $option2 ) {
-								echo $value==$option1?$option2:'';
-        					}
-        				    echo '</td>';
-						
+					if ($fields['type']=='option') {
+						echo '<td>';
+						foreach ($fields['option'] as $option1 => $option2 ) {
+							echo $value==$option1?$option2:'';
+						}
+						echo '</td>';
+					} else if($fields['type']=='checkbox')  {
+						echo '<td>';
+						echo $value?implode(', ',$value):'';
+						echo '</td>';
 					} else if($fields['type']=='geolocation')  {
 					    $latitude   = isset($value[0])?$value[0]:'';
 					    $longitude  = isset($value[1])?$value[1]:'';

@@ -12,7 +12,7 @@
                     <img src="<?php echo adget_url_ava($post->post_author); ?>" class="img-fluid rounded-circle me-1" width="20" alt="">
                     <?php echo get_the_author();?>
                 </span>
-                <?php if(current_user_can('administrator') || $post->post_author==$current_id): ?>
+                <?php if(current_user_can('administrator') || $post->post_author==get_current_user_id()): ?>
                     <button class="btn btn-sm btn-link py-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas<?php echo $post->ID;?>" aria-controls="offcanvas<?php echo $post->ID;?>">
                         <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                     </button>
@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <?php if(current_user_can('administrator') || $post->post_author==$current_id): ?>
+    <?php if(current_user_can('administrator') || $post->post_author==get_current_user_id()): ?>
         <!-- Off canvas -->
         <div class="offcanvas offcanvas-bottom bg-transparent h-auto border-0" tabindex="-1" id="offcanvas<?php echo $post->ID;?>" aria-labelledby="offcanvas<?php echo $post->ID;?>Label">
             <div class="offcanvas-body p-0">

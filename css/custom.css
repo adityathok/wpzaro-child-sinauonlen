@@ -177,10 +177,6 @@ body.page .entry-header {
     transition: all .5s;
 }
 
-body.admin-bar .header-navmenu.scrolled {
-    top: 32px;
-}
-
 body.page-scroll-down .header-navmenu.scrolled {
     top: -100%;
 }
@@ -233,7 +229,7 @@ body.page-scroll-down .header-navmenu.scrolled {
 
 .bg-head-svg {
     background-color: #6D01B7;
-    margin-top: -70px;
+    margin-top: -10px;
     height: 150px;
     margin-left: -0.75rem;
     margin-right: -0.75rem;
@@ -258,6 +254,17 @@ body.page-scroll-down .header-navmenu.scrolled {
 
 .bbp-body ul>li:not(.bbp-forum-info) {
     width: 33.33%;
+}
+
+.list-group-offcanvas-header .list-group-item {
+    border: 0;
+    border-bottom: 1px solid #dddddd;
+}
+
+@media screen and (min-width: 768px) {
+    body.admin-bar .header-navmenu.scrolled {
+        top: 32px;
+    }
 }
 
 @media screen and (max-width: 768px) {

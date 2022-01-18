@@ -168,6 +168,27 @@ function adget_url_ava($userid,$size='thumb'){
     return $url;
 }
 
+function adget_name($userid){
+    $datauser = get_userdata( $userid );
+    return $datauser->display_name;
+}
+function adget_roles($userid){
+    $datauser   = get_userdata( $userid );
+    $getroles   = $datauser->roles;
+
+    if (in_array("administrator", $getroles)){
+        $result = 'Administrator';
+    } elseif(in_array("guru", $getroles)) {
+        $result = 'Guru';
+    } elseif(in_array("siswa", $getroles)) {
+        $result = 'Siswa';
+    } else {
+        $result = implode(', ', $getroles);
+    }
+
+    return $result;
+}
+
 function get_date_ago($datetime){
 
     $datenow            = date( 'Y-m-d H:i:s', current_time( 'timestamp', 0 ) );
@@ -248,7 +269,7 @@ function listmenugroup($arraymenu) {
                 continue;
             }
             ?>
-            <li class="list-group-item d-flex justify-content-between align-items-start">
+            <li class="list-group-item py-3 d-flex justify-content-between align-items-center">
                 <a href="<?php echo $value['url']; ?>" class="d-block">
                     <i class="<?php echo $value['icon']; ?>" aria-hidden="true"></i>
                     <?php echo $value['title']; ?>
@@ -263,7 +284,7 @@ function listmenugroup($arraymenu) {
             <?php if($submenu): ?>
                 <ul class="collapse p-0" id="collapse<?php echo $key; ?>">
                 <?php foreach ($submenu as $skey => $svalue) { ?>
-                    <li class="list-group-item d-flex bg-light ps-4" data-parent="<?php echo $key; ?>">
+                    <li class="list-group-item py-3 d-flex bg-light ps-4" data-parent="<?php echo $key; ?>">
                         <a href="<?php echo $svalue['url']; ?>" class="d-block">
                             <i class="<?php echo $svalue['icon']; ?>" aria-hidden="true"></i>
                             <?php echo $svalue['title']; ?>

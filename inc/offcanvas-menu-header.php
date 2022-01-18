@@ -13,7 +13,7 @@ function add_offcanvas_menuheader(){
                     'editprofile' => [
                         'title' => 'Edit',
                         'url'   => $linkprofile.'profile/edit/',
-                        'icon'  => 'fa fa-pencil-square-o',
+                        'icon'  => 'fa fa-pencil',
                     ],
                     'setting' => [
                         'title' => 'Settings',
@@ -99,10 +99,18 @@ function add_offcanvas_menuheader(){
     endif;
     ?>
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenuHeader" aria-labelledby="offcanvasMenuHeaderlabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasMenuHeaderlabel">
-            <?php bp_displayed_user_username(); ?>
-        </h5>
+    <div class="offcanvas-header border-bottom mb-2">
+        <div class="offcanvas-title" id="offcanvasMenuHeaderlabel">
+            <div class="row">
+                <div class="col-4">
+                    <img src="<?php echo adget_url_ava($current_id); ?>" class="img-fluid rounded-circle" width="150" alt="">
+                </div>
+                <div class="col-8">
+                    <h5><?php echo adget_name($current_id); ?></h5>
+                    <small class="text-muted"> <?php echo adget_roles($current_id); ?> </small>
+                </div>
+            </div>
+        </div>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body p-0 list-group-offcanvas-header">

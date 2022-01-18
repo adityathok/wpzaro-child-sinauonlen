@@ -8,10 +8,10 @@
     <div class="card border-0 shadow-sm card-admateri">
         <div class="card-header pe-1 bg-white">
             <small class="d-flex justify-content-between align-items-center text-muted">
-                <span>
+                <a href="<?php echo bp_core_get_user_domain( $post->post_author );?>" class="text-muted">
                     <img src="<?php echo adget_url_ava($post->post_author); ?>" class="img-fluid rounded-circle me-1" width="20" alt="">
                     <?php echo get_the_author();?>
-                </span>
+                </a>
                 <?php if(current_user_can('administrator') || $post->post_author==get_current_user_id()): ?>
                     <button class="btn btn-sm btn-link py-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvas<?php echo $post->ID;?>" aria-controls="offcanvas<?php echo $post->ID;?>">
                         <i class="fa fa-ellipsis-v" aria-hidden="true"></i>

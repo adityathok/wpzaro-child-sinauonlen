@@ -232,7 +232,7 @@ body.page-scroll-down .header-navmenu.scrolled {
 }
 
 .bg-head-svg {
-    background-color: #932295;
+    background-color: #6D01B7;
     margin-top: -70px;
     height: 150px;
     margin-left: -0.75rem;
@@ -242,6 +242,9 @@ body.page-scroll-down .header-navmenu.scrolled {
 
 .bg-head-svg svg {
     margin-bottom: -350px;
+    width: 100%;
+    border-bottom-right-radius: 3rem !important;
+    border-bottom-left-radius: 3rem !important;
 }
 
 .content-profile-homepage {

@@ -92,8 +92,10 @@ function datacardhome_ajax() {
 
     if(current_user_can('siswa')) {
         $countabsen     = $AdAbsenPost->count_byuser(get_current_user_id(),$date);
-    } else {
+    } elseif(current_user_can('guru')) {
         $countabsen     = $AdAbsenPost->count_byauthor(get_current_user_id(),$date);
+    } else {
+        $countabsen     = $AdAbsenPost->count_bydate($date);
     }
 
     $result[] = [

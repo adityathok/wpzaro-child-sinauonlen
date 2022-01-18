@@ -83,7 +83,12 @@ class AdAbsenPost {
 
     public function count_byauthor($user_id,$date){ 
         $dataar     = '"author_id":"'.$user_id.'"';
-        $getdata    = $this->wpdb->get_var("SELECT COUNT(*) FROM $this->table WHERE detail like '%$dataar%'");
+        $getdata    = $this->wpdb->get_var("SELECT COUNT(*) FROM $this->table WHERE detail like '%$dataar%' and date like '%$date%'");
+        return $getdata;
+    }
+
+    public function count_bydate($date){ 
+        $getdata    = $this->wpdb->get_var("SELECT COUNT(*) FROM $this->table WHERE date like '%$date%'");
         return $getdata;
     }
 

@@ -6,6 +6,7 @@
  * @version 3.1.0
  */
 
+$current_id = get_current_user_id();
 global $bp;
 $id_displayed_user = $bp->displayed_user->id;
 ?>
@@ -22,8 +23,8 @@ $id_displayed_user = $bp->displayed_user->id;
 			echo $adguru->view($id_displayed_user);
 		}
 		if(user_has_role($id_displayed_user,'siswa')) {		
-			$adsiswa = new AdSiswa;	
-			echo $adsiswa->form($args,'edit');
+			$adsiswa = new AdSiswa;
+			echo $adsiswa->view($id_displayed_user);
 		}
 		?>
 	</div>

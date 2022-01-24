@@ -251,6 +251,10 @@ body.page-scroll-down .header-navmenu.scrolled {
     border-bottom: 1px solid #dddddd;
 }
 
+.entry-content iframe {
+    max-width: 100%;
+}
+
 @media screen and (min-width: 768px) {
     body.admin-bar .header-navmenu.scrolled {
         top: 32px;

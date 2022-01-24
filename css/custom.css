@@ -30,7 +30,7 @@ body {
 }
 
 #navMenuBottom a.nav-link {
-    font-size: .75rem;
+    font-size: .55rem;
     border-radius: 10rem;
     position: relative;
 }
@@ -38,21 +38,11 @@ body {
 #navMenuBottom a.nav-link .fa {
     display: block;
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.25rem;
 }
 
 #navMenuBottom .current-menu-item>a .fa {
     color: #333333;
-}
-
-#navMenuBottom .current-menu-item>a.nav-link:after {
-    content: "\f111";
-    font-family: 'fontawesome';
-    position: absolute;
-    top: 0;
-    right: 0;
-    font-size: .5rem;
-    color: #000;
 }
 
 .row>.content-area,

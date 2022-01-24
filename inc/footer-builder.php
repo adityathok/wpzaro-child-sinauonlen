@@ -9,8 +9,8 @@ if ( ! function_exists( 'wpzaro_footer_bottom_menu' ) ) {
             ?>
             
             <div class="bottom-navmenu">
-                <div class="bottom-navmenu-inner container pb-1">
-                    <nav class="navbar navbar-expand navbar-light bg-white shadow-sm p-2 rounded-pill">
+                <div class="bottom-navmenu-inner container px-1">
+                    <nav class="navbar navbar-expand navbar-light bg-white shadow-sm px-2 py-0 rounded">
                         <!-- The WordPress Menu goes here -->
                         <?php
                         wp_nav_menu(

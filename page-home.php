@@ -64,33 +64,35 @@ $AdAbsenPost    = new AdAbsenPost();
                                     echo '<div class="mb-2">';
                                     foreach ( array_slice($visit_materi, 0, 10) as $valmateri ) { 
                                         $idmateri       = $valmateri['id'];
-                                        $author_id      = get_post_field ('post_author', $idmateri);
-                                        $display_name   = get_the_author_meta( 'display_name' , $author_id ); 
-                                        ?>
-                                        <div class="card shadow-sm mb-3">
-                                            <div class="row g-0">
-                                                <div class="col-4">
-                                                    <img src="<?php echo get_thumbnail_url_resize($idmateri,150,150);?>" class="img-fluid rounded-start" alt="...">
-                                                </div>
-                                                <div class="col-8">
-                                                    <div class="card-body">
-                                                        <a href="<?php echo get_the_permalink($idmateri);?>" class="card-title text-dark mb-2"><?php echo get_the_title($idmateri);?></a>
-                                                        <div class="card-text"><small class="text-muted"><i class="fa fa-user-o"></i> <?php echo $display_name;?></small></div>
-                                                        <div class="card-text"><small class="text-muted"><i class="fa fa-clock-o"></i> <?php echo get_date_ago($valmateri['date']);?></small></div>
-                                                
-                                                        <?php if ($AdAbsenPost->check($current_id,$idmateri)): ?>
-                                                            <div class="card-text">
-                                                                <small class="text-success">
-                                                                    <i class="fa fa-check"></i> Sudah absen
-                                                                </small>
-                                                            </div>
-                                                        <?php endif; ?>
+                                        $author_id      = get_post_field('post_author', $idmateri);
+                                        if($author_id) {
+                                            $display_name   = get_the_author_meta( 'display_name' , $author_id ); 
+                                            ?>
+                                            <div class="card shadow-sm mb-3">
+                                                <div class="row g-0">
+                                                    <div class="col-4">
+                                                        <img src="<?php echo get_thumbnail_url_resize($idmateri,150,150);?>" class="img-fluid rounded-start" alt="...">
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="card-body">
+                                                            <a href="<?php echo get_the_permalink($idmateri);?>" class="card-title text-dark mb-2"><?php echo get_the_title($idmateri);?></a>
+                                                            <div class="card-text"><small class="text-muted"><i class="fa fa-user-o"></i> <?php echo $display_name;?></small></div>
+                                                            <div class="card-text"><small class="text-muted"><i class="fa fa-clock-o"></i> <?php echo get_date_ago($valmateri['date']);?></small></div>
+                                                    
+                                                            <?php if ($AdAbsenPost->check($current_id,$idmateri)): ?>
+                                                                <div class="card-text">
+                                                                    <small class="text-success">
+                                                                        <i class="fa fa-check"></i> Sudah absen
+                                                                    </small>
+                                                                </div>
+                                                            <?php endif; ?>
 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <?php
+                                            <?php
+                                        }
                                     }
                                     echo '</div>';
                                 endif;

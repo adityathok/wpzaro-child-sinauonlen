@@ -1,5 +1,6 @@
 <?php
-$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+$setmapel   = isset($_GET['setmapel'])?$_GET['setmapel']:'';
+$paged      = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 // The Query
 $args = array(
     'post_type'         => 'admateri',
@@ -18,6 +19,16 @@ if(current_user_can('siswa')) {
             'value'     => get_user_meta(get_current_user_id(), 'kelas', true),
             'compare'   => 'like'
         )
+    );
+}
+
+if($setmapel) {
+    $args['tax_query'] = array(
+        array(
+            'taxonomy' => 'mapel',
+            'field'    => 'term_id',
+            'terms'    => $setmapel,
+        ),
     );
 }
 

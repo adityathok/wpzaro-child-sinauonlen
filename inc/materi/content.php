@@ -30,10 +30,22 @@
                 <?php echo get_the_title();?>
             </a>
         </div>
-        <div class="card-footer border-0 text-muted">
+        <div class="card-footer border-0 text-muted d-flex justify-content-between">
             <small>
                 <?php echo post_date_ago(get_the_ID());?>
             </small>
+            
+                <?php
+                $termsmapel = get_the_terms( get_the_ID(), 'mapel' );
+                if ( $termsmapel && ! is_wp_error( $termsmapel ) ) : 
+                    echo '<small>';
+                        foreach ( $termsmapel as $term ) {
+                            echo '| <a href="?setmapel='.$term->term_id.'">'.$term->name.'</a> ';
+                        }
+                    echo '</small>';
+                endif;
+                ?>
+                
         </div>
     </div>
 

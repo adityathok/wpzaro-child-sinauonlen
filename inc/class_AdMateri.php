@@ -107,7 +107,7 @@ class AdMateri {
         ];
         if($getdata):
             foreach(array_slice($getdata, 0, 20) as $key => $value) {
-                if(isset($value['id'])&&$value['id']!=$post_id) {
+                if(isset($value['id'])&&$value['id']!=$post_id&&get_post_status($post_id)) {
                     $newdata[] = $value;
                 }
             }

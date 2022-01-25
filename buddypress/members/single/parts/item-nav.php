@@ -5,6 +5,14 @@
  * @since 3.0.0
  * @version 3.1.0
  */
+
+$current_id			= get_current_user_id();
+global $bp;
+$id_displayed_user = $bp->displayed_user->id;
+
+$menuex = [
+	'notifications-personal-li','messages-personal-li','forums-personal-li',
+];
 ?>
 
 <nav class="<?php bp_nouveau_single_item_nav_classes(); ?>" id="object-nav" role="navigation" aria-label="<?php esc_attr_e( 'Member menu', 'buddypress' ); ?>">
@@ -16,6 +24,10 @@
 			<?php
 			while ( bp_nouveau_nav_items() ) :
 				bp_nouveau_nav_item();
+				// echo bp_nouveau_get_nav_id();
+				if ($id_displayed_user != $current_id && in_array(bp_nouveau_get_nav_id(), $menuex)) { 
+					continue;
+				}
 			?>
 
 				<li id="<?php bp_nouveau_nav_id(); ?>" class="<?php bp_nouveau_nav_classes(); ?>">
@@ -26,6 +38,7 @@
 						<?php if ( bp_nouveau_nav_has_count() ) : ?>
 							<span class="count"><?php bp_nouveau_nav_count(); ?></span>
 						<?php endif; ?>
+
 					</a>
 				</li>
 

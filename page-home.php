@@ -70,10 +70,12 @@ $AdAbsenPost    = new AdAbsenPost();
                                             ?>
                                             <div class="card shadow-sm mb-3">
                                                 <div class="row g-0">
-                                                    <div class="col-4">
-                                                        <img src="<?php echo get_thumbnail_url_resize($idmateri,150,150);?>" class="img-fluid rounded-start" alt="...">
+                                                    <div class="col-4 col-md-3">
+                                                        <a href="<?php echo get_the_permalink($idmateri);?>">
+                                                            <img src="<?php echo get_thumbnail_url_resize($idmateri,150,150);?>" class="img-fluid rounded-start" alt="...">
+                                                        </a>
                                                     </div>
-                                                    <div class="col-8">
+                                                    <div class="col-8 col-md-9">
                                                         <div class="card-body">
                                                             <a href="<?php echo get_the_permalink($idmateri);?>" class="card-title text-dark mb-2"><?php echo get_the_title($idmateri);?></a>
                                                             <div class="card-text"><small class="text-muted"><i class="fa fa-user-o"></i> <?php echo $display_name;?></small></div>

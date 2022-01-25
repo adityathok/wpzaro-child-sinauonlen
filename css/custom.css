@@ -41,8 +41,9 @@ body {
     font-size: 1.25rem;
 }
 
+#navMenuBottom .current-menu-item>a,
 #navMenuBottom .current-menu-item>a .fa {
-    color: #333333;
+    color: #da1c5c;
 }
 
 .row>.content-area,

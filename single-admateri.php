@@ -42,18 +42,18 @@ $AdAbsenPost    = new AdAbsenPost();
                                 <?php $check = $AdAbsenPost->check(get_current_user_id(),$post->ID); ?>
                                 <?php if ($check): ?>
                                     <div class="alert alert-success text-center">
-                                        <i class="fa fa-info-circle" aria-hidden="true"></i> Anda sudah absen <br>
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i> Anda sudah presensi <br>
                                         <span class="badge bg-success"><?php echo $check[0]->date; ?></span>
                                     </div>
                                 <?php else: ?>
                                     <div class="alert alert-danger alert-absen-<?php echo get_the_ID(); ?> bg-white text-center shadow-sm my-4">
-                                        <div class="btn btn-danger w-100 btn-absen-post btn-absen-post-<?php echo get_the_ID(); ?>" data-posttype="admateri" data-post="<?php echo get_the_ID(); ?>">Absen</div>
+                                        <div class="btn btn-danger w-100 btn-absen-post btn-absen-post-<?php echo get_the_ID(); ?>" data-posttype="admateri" data-post="<?php echo get_the_ID(); ?>">Presensi</div>
                                     </div>
                                 <?php endif; ?>
                             <?php else: ?>
                                 <div class="alert alert-secondary bg-white shadow-sm my-4">
                                     <div class="btn-group w-100" role="group">
-                                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#dataAbsenModal">Cek Absensi</button>
+                                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#dataAbsenModal">Cek Presensi</button>
                                         <a href="<?php echo get_home_url();?>/materi/?pg=edit&id=<?php echo get_the_ID(); ?>" class="btn btn-secondary">Edit Materi</a>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@ $AdAbsenPost    = new AdAbsenPost();
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="dataAbsenModalLabel">Data Absen</h5>
+            <h5 class="modal-title" id="dataAbsenModalLabel">Data Presensi</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

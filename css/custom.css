@@ -258,6 +258,10 @@ body.page-scroll-down .header-navmenu.scrolled {
     max-width: 100%;
 }
 
+.subnav-filters.filters.user-subnav.bp-messages-filters#subsubnav {
+    display: none;
+}
+
 @media screen and (min-width: 768px) {
     body.admin-bar .header-navmenu.scrolled {
         top: 32px;

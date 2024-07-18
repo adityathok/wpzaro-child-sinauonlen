@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                             </span>
-                            <a href="<?php echo bp_core_get_user_domain($current_id);?>messages/compose/?r=<?php echo $user->user_login; ?>">
+                            <a href="<?php echo bp_members_get_user_url($current_id);?>messages/compose/?r=<?php echo $user->user_login; ?>">
                                 <i class="fa fa-commenting-o"></i>
                             </a>
                         </div>
@@ -135,7 +135,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <a href="<?php echo $urlpage;?>?pg=nilai&id=<?php echo $user->ID;?>" class="btn btn-danger"> <i class="fa fa-plus"></i> Nilai</a>
-                                    <a href="<?php echo bp_core_get_user_domain($user->ID);?>" class="btn btn-secondary">Edit</a>
+                                    <a href="<?php echo bp_members_get_user_url($user->ID);?>" class="btn btn-secondary">Edit</a>
                                 </div>
                             </div>
                         </div>

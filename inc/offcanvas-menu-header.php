@@ -3,7 +3,7 @@ add_action('wp_footer','add_offcanvas_menuheader');
 function add_offcanvas_menuheader(){
     if(is_user_logged_in()):
         $current_id     = get_current_user_id();
-        $linkprofile    = bp_core_get_user_domain( $current_id );
+        $linkprofile    = bp_members_get_user_url( $current_id );
         $arraymenu      = [
             'profile' => [
                 'title' => 'Profile',

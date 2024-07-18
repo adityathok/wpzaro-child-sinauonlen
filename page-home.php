@@ -22,15 +22,14 @@ $AdAbsenPost    = new AdAbsenPost();
     <div class="container">
 
         <div class="profile-homepage">
+
             <div class="bg-head-svg">
             
             <svg xmlns="http://www.w3.org/2000/svg" height="150px" >
                 <defs>
                 <linearGradient id="lgrad" x1="50%" y1="100%" x2="50%" y2="0%" >
-
                     <stop offset="0%" style="stop-color:rgb(102,139,230);stop-opacity:1.00" />
                     <stop offset="100%" style="stop-color:rgb(110,0,183);stop-opacity:1.00" />
-
                 </linearGradient>
                 </defs>
                 <rect x="0" y="0" width="100%" height="100%" fill="url(#lgrad)"/>
@@ -103,7 +102,7 @@ $AdAbsenPost    = new AdAbsenPost();
                 <?php else: ?>
 
                     <div class="card mt-4 mb-2 my-5">
-                        <img src="<?php echo $themeoption['_theme_logo']; ?>" class="card-img-top" alt="...">
+                        <img src="<?php echo $themeoption['_theme_logo']; ?>" class="card-img-top mx-auto my-2" alt="..." style="max-width: 12rem;">
                         <div class="card-body py-5">
                             <?php echo ad_login_form(); ?>
                         </div>

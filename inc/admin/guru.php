@@ -41,7 +41,7 @@
                 <div class="list-users">
                     <?php foreach( $user_query->get_results() as $user): ?>
                         <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
-                            <a href="<?php echo bp_core_get_user_domain($user->ID);?>" class="d-flex">
+                            <a href="<?php echo bp_members_get_user_url($user->ID);?>" class="d-flex">
                                 <div class="user-avatar me-2">
                                     <img src="<?php echo adget_url_ava($user->ID); ?>" class="img-fluid rounded-circle" alt="">
                                 </div>
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="<?php echo bp_core_get_user_domain($current_id);?>messages/compose/?r=<?php echo $user->user_login; ?>">
+                            <a href="<?php echo bp_members_get_user_url($current_id);?>messages/compose/?r=<?php echo $user->user_login; ?>">
                                 <i class="fa fa-commenting-o"></i>
                             </a>
                         </div>

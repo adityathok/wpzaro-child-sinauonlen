@@ -8,7 +8,7 @@
     <div class="card border-0 shadow-sm card-admateri">
         <div class="card-header pe-1 bg-white">
             <small class="d-flex justify-content-between align-items-center text-muted">
-                <a href="<?php echo bp_core_get_user_domain( $post->post_author );?>" class="text-muted">
+                <a href="<?php echo bp_members_get_user_url( $post->post_author );?>" class="text-muted">
                     <img src="<?php echo adget_url_ava($post->post_author); ?>" class="img-fluid rounded-circle me-1" width="20" alt="">
                     <?php echo get_the_author();?>
                 </a>

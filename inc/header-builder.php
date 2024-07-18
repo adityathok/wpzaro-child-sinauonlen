@@ -2,6 +2,10 @@
 if ( ! function_exists( 'wpzaro_header_nav_menu' ) ) {
     add_action('wpzaro_header','wpzaro_header_nav_menu',20);
     function wpzaro_header_nav_menu() {
+
+        if(!is_user_logged_in())
+        return false;
+
         $urlpage    = get_the_permalink();
         $pg         = isset($_GET['pg']) ? $_GET['pg'] : '';
         $backurl    = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
@@ -28,19 +32,19 @@ if ( ! function_exists( 'wpzaro_header_nav_menu' ) ) {
                                 <?php endif; ?>
                             </div>
                         <div class="col-8 text-center">
-                            <div class="title-header text-muted">
-                                <?php
-                                if (bp_is_user()) {
-                                    echo 'Pengaturan profile';
-                                } else if (get_post_type() === 'post' || get_post_type() === 'page') {
-                                    echo get_the_title();
-                                } else if (get_post_type() === 'admateri') {
-                                    echo 'Materi | '.get_the_title();
-                                } else if(is_bbpress()) {
-                                    echo 'Forums';
-                                }
-                                ?>
-                            </div>
+                                <div class="title-header text-muted">
+                                    <?php
+                                    if (bp_is_user()) {
+                                        echo 'Pengaturan profile';
+                                    } else if (get_post_type() === 'post' || get_post_type() === 'page') {
+                                        echo get_the_title();
+                                    } else if (get_post_type() === 'admateri') {
+                                        echo 'Materi | '.get_the_title();
+                                    } else if(is_bbpress()) {
+                                        echo 'Forums';
+                                    }
+                                    ?>
+                                </div>
                         </div>
                         <div class="col-2 text-end">
                             <span class="text-secondary btn btn-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenuHeader" aria-controls="offcanvasMenuHeader">

@@ -6,7 +6,9 @@
 .container-xxl {
     max-width: 500px;
 }
-
+:root :where(a:where(:not(.wp-element-button))) {
+    text-decoration: unset;
+}
 body {
     background-color: #f7f7f7;
 }

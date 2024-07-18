@@ -94,10 +94,16 @@ function wpzarochild_theme_setup() {
 //remove action in parent theme
 add_action( 'init', 'mytheme_remove_parent_function');
 function mytheme_remove_parent_function() {
-    remove_action('wpzaro_header','wpzaro_header_layout_content',20);
-    remove_action('wpzaro_header_before','wpzaro_header_layout_open',20);
-    remove_action('wpzaro_footer','wpzaro_footer_layout_content',20);
-    remove_action('wpzaro_header_after','wpzaro_header_layout_close',20);
+    remove_action('wpzaro_header','wpzaro_header_navbar');
+    remove_action('wpzaro_header_open','wpzaro_header_navigation_open');
+    remove_action('wpzaro_header_close','wpzaro_header_navigation_close');
+    remove_action('wpzaro_header_open', 'wpzaro_header_layout_open');
+    remove_action('wpzaro_header_close', 'wpzaro_header_layout_close');
+    remove_action('wpzaro_footer', 'wpzaro_footer_content');
+    // remove_action('wpzaro_header','wpzaro_header_layout_content',20);
+    // remove_action('wpzaro_header_before','wpzaro_header_layout_open',20);
+    // remove_action('wpzaro_footer','wpzaro_footer_layout_content',20);
+    // remove_action('wpzaro_header_after','wpzaro_header_layout_close',20);
 }
 
 //hide bar
@@ -304,9 +310,11 @@ function get_thumbnail_url_resize($idpost, $width, $height) {
     $default    = get_option( 'wpzaro_theme_options' )['_theme_default_thumb'];
 	$urlimg     = get_the_post_thumbnail_url($idpost,'full');
     $urlimg     = $urlimg?$urlimg:$default;
-    $urlresize  = $urlimg?aq_resize( $urlimg, $width, $height, true, true, true ):'';
 
-    return $urlresize;
+    // $urlresize  = $urlimg?aq_resize( $urlimg, $width, $height, true, true, true ):'';
+    // return $urlresize;
+
+    return $urlimg;
 }
 
 //[resize-thumbnail width="300" height="150" linked="true" class="w-100"]
@@ -334,7 +342,8 @@ function resize_thumbnail($atts) {
 	$urlimg			= get_the_post_thumbnail_url($post->ID,'full');
 
 	if($urlimg):
-		$urlresize      = aq_resize( $urlimg, $width, $height, $crop, true, $upscale );
+		// $urlresize = aq_resize( $urlimg, $width, $height, $crop, true, $upscale );
+		$urlresize = get_the_post_thumbnail_url( $post->ID, [$width, $height] );
 		if($output=='image'):
 			if($linked=='true'):
 				echo '<a href="'.get_the_permalink($post->ID).'" title="'.get_the_title($post->ID).'">';

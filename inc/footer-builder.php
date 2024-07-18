@@ -1,7 +1,7 @@
 <?php 
-if ( ! function_exists( 'wpzaro_footer_bottom_menu' ) ) {
-    add_action('wpzaro_footer','wpzaro_footer_bottom_menu',20);
-    function wpzaro_footer_bottom_menu() {
+if ( ! function_exists( 'sinauonlen_footer_bottom_menu' ) ) {
+    add_action('wpzaro_footer','sinauonlen_footer_bottom_menu',30);
+    function sinauonlen_footer_bottom_menu() {
 
         //if login show navigation menu
         if(is_user_logged_in() || !is_user_logged_in() && is_home()){

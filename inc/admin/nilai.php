@@ -28,7 +28,7 @@ $AdNilaiSiswa   = new AdNilaiSiswa([$iduser => $username]);
                         bp_notifications_add_notification(
                             array(
                                 'user_id'          => $iduser,
-                                'item_id'          => $post_id,
+                                'item_id'          => $idpost,
                                 'component_name'   => 'custom',
                                 'component_action' => 'custom_action',
                                 'date_notified'    => bp_core_current_time(),

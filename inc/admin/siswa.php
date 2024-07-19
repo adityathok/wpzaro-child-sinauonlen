@@ -1,4 +1,6 @@
-<?php $adsiswa = new AdSiswa(); ?>
+<?php
+$adsiswa = new AdSiswa();
+$current_id = get_current_user_id(); ?>
 
 <div class="card shadow-sm border-0">
     <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-start">

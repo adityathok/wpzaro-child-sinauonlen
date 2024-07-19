@@ -10,7 +10,7 @@ class AdNilaiSiswa {
     public $siswa;
 
     public function __construct($siswa=null){
-        $this->name     = $siswa;
+        $this->siswa    = $siswa;
         $this->metakey  = [
             'siswa'=> [
                 'type'      => 'option',

@@ -258,7 +258,8 @@ body.page-scroll-down .header-navmenu.scrolled {
     max-width: 100%;
 }
 
-.subnav-filters.filters.user-subnav.bp-messages-filters#subsubnav {
+.subnav-filters.filters.user-subnav.bp-messages-filters#subsubnav,
+body > .bp-messages-contents {
     display: none;
 }
 

@@ -4,68 +4,44 @@
  *
  * @since 3.0.0
  * @version 3.1.0
+ * 
+ * Edit by Adityathok
  */
 
-bp_nouveau_xprofile_hook( 'before', 'edit_content' ); ?>
+bp_nouveau_xprofile_hook( 'before', 'edit_content' );
+$current_id = get_current_user_id();
+global $bp;
+$id_displayed_user = $bp->displayed_user->id;
+?>
 
 <h2 class="screen-heading edit-profile-screen"><?php esc_html_e( 'Edit Profile', 'buddypress' ); ?></h2>
 
-<?php if ( bp_has_profile( 'profile_group_id=' . bp_get_current_profile_group_id() ) ) :
-	while ( bp_profile_groups() ) :
-		bp_the_profile_group();
-	?>
+<?php if ( bp_has_profile( 'profile_group_id=' . bp_get_current_profile_group_id() ) ) : ?>
 
-		<form action="<?php bp_the_profile_group_edit_form_action(); ?>" method="post" id="profile-edit-form" class="standard-form profile-edit <?php bp_the_profile_group_slug(); ?>">
-
-			<?php bp_nouveau_xprofile_hook( 'before', 'field_content' ); ?>
-
-				<?php if ( bp_profile_has_multiple_groups() ) : ?>
-					<ul class="button-tabs button-nav">
-
-						<?php bp_profile_group_tabs(); ?>
-
-					</ul>
-				<?php endif; ?>
-
-				<h3 class="screen-heading profile-group-title edit">
-					<?php
-					printf(
-						/* translators: %s = profile field group name */
-						esc_html__( 'Editing "%s" Profile Group', 'buddypress' ),
-						esc_html( bp_get_the_profile_group_name() )
-					);
-					?>
-				</h3>
-
-				<?php
-				while ( bp_profile_fields() ) :
-					bp_the_profile_field();
-				?>
-
-					<div<?php bp_field_css_class( 'editfield' ); ?>>
-						<fieldset>
-
-						<?php
-						$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
-						$field_type->edit_field_html();
-						?>
-
-						<?php bp_nouveau_xprofile_edit_visibilty(); ?>
-
-						</fieldset>
-					</div>
-
-				<?php endwhile; ?>
-
-			<?php bp_nouveau_xprofile_hook( 'after', 'field_content' ); ?>
-
-			<input type="hidden" name="field_ids" id="field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
-
-			<?php bp_nouveau_submit_button( 'member-profile-edit' ); ?>
-
-		</form>
-
-	<?php endwhile; ?>
+	
+	<div class="card shadow-sm p-4 rounded border-0">
+		<?php		
+		$args = [
+			'ID' 	=> $id_displayed_user,
+		];
+		if(user_has_role($id_displayed_user,'guru')) {		
+			$adguru = new AdGuru;	
+			if(current_user_can('administrator') || $id_displayed_user == $current_id) {
+				echo $adguru->form($args,'edit');
+			} else {
+				echo $adguru->view($id_displayed_user);
+			}
+		}
+		if(user_has_role($id_displayed_user,'siswa')) {		
+			$adsiswa = new AdSiswa;	
+			if(current_user_can('administrator') || $id_displayed_user == $current_id) {
+				echo $adsiswa->form($args,'edit');
+			} else {
+				echo $adsiswa->view($id_displayed_user);
+			}
+		}
+		?>
+	</div>
 
 <?php endif; ?>
 

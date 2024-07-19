@@ -66,6 +66,12 @@ if(is_user_logged_in()):
             require_once('inc/admin/siswa.php');
         endif;
     echo '</div>';
+else:
+    echo '<div class="container py-3 text-center">';
+        echo '<div class="card p-3 text-start">';
+        echo ad_login_form(); 
+        echo '</div>';
+    echo '</div>';
 endif;
 
 get_footer();

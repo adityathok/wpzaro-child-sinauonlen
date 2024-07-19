@@ -36,6 +36,12 @@ $urlpage    = get_the_permalink();
                 require_once('inc/materi/daftar-materi.php');
             endif;
         echo '</div>';
+    else:
+        echo '<div class="container py-3 text-center">';
+            echo '<div class="card p-3 text-start">';
+            echo ad_login_form(); 
+            echo '</div>';
+        echo '</div>';
     endif;
 
 get_footer();

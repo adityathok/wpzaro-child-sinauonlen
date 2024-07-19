@@ -230,7 +230,7 @@ body.page-scroll-down .header-navmenu.scrolled {
 }
 
 .bg-head-svg svg {
-    margin-bottom: -350px;
+    margin-bottom: -300px;
     width: 100%;
     border-bottom-right-radius: 3rem !important;
     border-bottom-left-radius: 3rem !important;
@@ -281,5 +281,11 @@ body > .bp-messages-contents {
     .table-lihatMember tr td {
         display: block;
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .bg-head-svg svg {
+        height: 50px;
     }
 }

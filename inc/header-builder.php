@@ -3,7 +3,7 @@ if ( ! function_exists( 'wpzaro_header_nav_menu' ) ) {
     add_action('wpzaro_header','wpzaro_header_nav_menu',20);
     function wpzaro_header_nav_menu() {
 
-        if(!is_user_logged_in())
+        if(!is_user_logged_in() && is_front_page())
         return false;
 
         $urlpage    = get_the_permalink();

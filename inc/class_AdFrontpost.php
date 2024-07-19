@@ -377,7 +377,13 @@ class AdFrontpost {
             						$categories = get_categories( array('taxonomy' => $idmeta,'hide_empty'=> false,));
             						if (sizeof($categories)>0){
                             			foreach ( $categories as $category ) {
-                            			    $seletc = in_array($category->term_id,$val)?'selected':'';
+
+											if($val && $category->term_id){
+                            			    	$seletc = in_array($category->term_id,$val)?'selected':'';
+											} else {
+                            			    	$seletc = '';
+											}
+
                             			    echo '<option value="'.$category->term_id.'" '.$seletc.'>'.$category->name.'</option>';
                     						//child
                     						$taxonomies         = array('taxonomy'=>$idmeta);

@@ -39,14 +39,17 @@ $AdAbsenPost    = new AdAbsenPost();
 
                 <?php if(is_user_logged_in()): ?>
                         <div class="content-profile-homepage">
-                            <div class="pp-ava text-center my-4">
-                                <span class="rounded-circle mx-auto d-inline-block overflow-hidden shadow bg-white p-2">
-                                    <img src="<?php echo adget_url_ava($current_id,'full'); ?>" class="img-fluid rounded-circle" width="150" alt="">
-                                </span>
+
+                            <div class="row align-items-center mt-5 mb-3">
+                                <div class="col-4">                                    
+                                    <span class="rounded-circle mx-auto d-inline-block overflow-hidden shadow bg-white p-2">
+                                        <img src="<?php echo adget_url_ava($current_id,'full'); ?>" class="img-fluid rounded-circle" width="150" alt="">
+                                    </span>
+                                </div>
+                                <div class="col-8 pt-3">
+                                    <h4 class="fw-bold"><?php echo $currentdata->display_name; ?></h4>   
+                                </div>
                             </div>
-                            <div class="text-center mb-5">
-                                <h4 class="fw-bold"><?php echo $currentdata->display_name; ?></h4>                    
-                            </div> 
 
                             <?php
                             if(current_user_can('administrator') || current_user_can('guru')):

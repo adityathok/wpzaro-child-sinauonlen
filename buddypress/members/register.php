@@ -4,121 +4,70 @@
  *
  * @since 3.0.0
  * @version 8.0.0
+ * 
+ * Edit by Adityathok
  */
 
+
+if(!isset($_SESSION['sesiform']) || empty($_SESSION['sesiform'])) {
+	$_SESSION['sesiform'] = uniqid();
+}
+
+$sesiformPost = isset($_POST['sesiform']) ? $_POST['sesiform'] : '';
 ?>
 
 	<?php bp_nouveau_signup_hook( 'before', 'page' ); ?>
 
 	<div id="register-page"class="page register-page">
 
-		<?php bp_nouveau_template_notices(); ?>
-
-			<?php bp_nouveau_user_feedback( bp_get_current_signup_step() ); ?>
-
-			<form action="" name="signup_form" id="signup-form" class="standard-form signup-form clearfix" method="post" enctype="multipart/form-data">
-
-			<div class="layout-wrap">
-
-			<?php if ( 'request-details' === bp_get_current_signup_step() ) : ?>
-
-				<?php bp_nouveau_signup_hook( 'before', 'account_details' ); ?>
-
-				<div class="register-section default-profile" id="basic-details-section">
-
-					<?php /***** Basic Account Details ******/ ?>
-
-					<h2 class="bp-heading"><?php esc_html_e( 'Account Details', 'buddypress' ); ?></h2>
-
-					<?php bp_nouveau_signup_form(); ?>
-
-				</div><!-- #basic-details-section -->
-
-				<?php bp_nouveau_signup_hook( 'after', 'account_details' ); ?>
-
-				<?php /***** Extra Profile Details ******/ ?>
-
-				<?php if ( bp_is_active( 'xprofile' ) && bp_nouveau_has_signup_xprofile_fields( true ) ) : ?>
-
-					<?php bp_nouveau_signup_hook( 'before', 'signup_profile' ); ?>
-
-					<div class="register-section extended-profile" id="profile-details-section">
-
-						<h2 class="bp-heading"><?php esc_html_e( 'Profile Details', 'buddypress' ); ?></h2>
-
-						<?php /* Use the profile field loop to render input fields for the 'base' profile field group */ ?>
-						<?php while ( bp_profile_groups() ) : bp_the_profile_group(); ?>
-
-							<?php while ( bp_profile_fields() ) : bp_the_profile_field(); ?>
-
-								<div<?php bp_field_css_class( 'editfield' ); ?>>
-									<fieldset>
-
-									<?php
-									$field_type = bp_xprofile_create_field_type( bp_get_the_profile_field_type() );
-									$field_type->edit_field_html();
-
-									bp_nouveau_xprofile_edit_visibilty();
-									?>
-
-									</fieldset>
-								</div>
-
-							<?php endwhile; ?>
-
-						<input type="hidden" name="signup_profile_field_ids" id="signup_profile_field_ids" value="<?php bp_the_profile_field_ids(); ?>" />
-
-						<?php endwhile; ?>
-
-						<?php bp_nouveau_signup_hook( '', 'signup_profile' ); ?>
-
-					</div><!-- #profile-details-section -->
-
-					<?php bp_nouveau_signup_hook( 'after', 'signup_profile' ); ?>
-
-				<?php endif; ?>
-
-				<?php if ( bp_get_blog_signup_allowed() ) : ?>
-
-					<?php bp_nouveau_signup_hook( 'before', 'blog_details' ); ?>
-
-					<?php /***** Blog Creation Details ******/ ?>
-
-					<div class="register-section blog-details" id="blog-details-section">
-
-						<h2><?php esc_html_e( 'Site Details', 'buddypress' ); ?></h2>
-
-						<p><label for="signup_with_blog"><input type="checkbox" name="signup_with_blog" id="signup_with_blog" value="1" <?php checked( (int) bp_get_signup_with_blog_value(), 1 ); ?>/> <?php esc_html_e( "Yes, i'd like to create a new site", 'buddypress' ); ?></label></p>
-
-						<div id="blog-details"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?>class="show"<?php endif; ?>>
-
-							<?php bp_nouveau_signup_form( 'blog_details' ); ?>
-
+	<?php if (!is_user_logged_in()) : ?>
+		<?php if($sesiformPost !== $_SESSION['sesiform'] ):  ?>
+			<div class="card card-register-page">
+				<div class="card-body p-3">
+					<form action="" method="POST">
+						<div class="form-group mb-3">
+							<label class="form-label text-success">Daftar sebagai :</label>
+							<select class="form-select text-success border-success" name="role" aria-label="Default select siswa">
+								<option value="siswa">Siswa</option>
+								<option value="guru">Guru</option>
+							</select>
 						</div>
+						<div class="form-group mb-3">
+							<label for="user_login" class="form-label">Username</label>
+							<input type="text" name="user_login" class="form-control" id="user_login" placeholder="username" required>
+							<div id="user_loginHelp" class="form-text">id unik, tanpa spasi dan tanda baca</div>
+						</div>
+						<div class="form-group mb-3">
+							<label for="first_name" class="form-label">Nama</label>
+							<input type="text" name="first_name" class="form-control" id="first_name" placeholder="Nama" required>
+						</div>
+						<div class="form-group mb-3">
+							<label for="email" class="form-label">Email</label>
+							<input type="email" name="user_email" class="form-control" id="email" placeholder="Alamat Email" required>
+						</div>
+						<div class="form-group mb-3">
+							<label for="pass" class="form-label">Password</label>
+							<input type="password" name="user_pass" class="form-control" id="pass" placeholder="Password" required>
+						</div>
+						<input type="hidden" name="sesiform" value="<?php echo $_SESSION['sesiform'];?>">
+						<button type="submit" id="submit-register" class="btn btn-info my-2">Daftar</button>
+						<a href="<?= home_url();?>/login" class="btn btn-outline-dark btn-sm my-2 ml-2">Login</a>
+					</form>					
+				</div>
+			</div>
+		<?php else : ?>
+			<?php 
+				echo AdMember::tambahMember( $_POST,
+					[
+						'message-success'=>'Pendaftaran berhasil, silahkan login'
+					]
+				);
+				$_SESSION['sesiform'] = uniqid();
+			?>
+		<?php endif; ?>
+	<?php else : ?>
 
-					</div><!-- #blog-details-section -->
-
-					<?php bp_nouveau_signup_hook( 'after', 'blog_details' ); ?>
-
-				<?php endif; ?>
-
-			<?php endif; // request-details signup step ?>
-
-			</div><!-- //.layout-wrap -->
-
-			<?php bp_nouveau_signup_hook( 'custom', 'steps' ); ?>
-
-			<?php if ( 'request-details' === bp_get_current_signup_step() ) : ?>
-
-				<?php if ( bp_signup_requires_privacy_policy_acceptance() ) : ?>
-					<?php bp_nouveau_signup_privacy_policy_acceptance_section(); ?>
-				<?php endif; ?>
-
-				<?php bp_nouveau_submit_button( 'register' ); ?>
-
-			<?php endif; ?>
-
-			</form>
+	<?php endif; ?>
 
 	</div>
 

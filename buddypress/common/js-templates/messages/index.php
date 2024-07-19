@@ -6,13 +6,14 @@
  * dealing with user's private messages.
  *
  * @since 3.0.0
- * @version 3.1.0
+ * @version 12.0.0
  */
-?>
-<div class="subnav-filters filters user-subnav bp-messages-filters" id="subsubnav"></div>
 
-<div class="bp-messages-feedback"></div>
-<div class="bp-messages-content"></div>
+// Backward Compatibility for plugins still needing the placeholders to be located into this file.
+if ( ! did_action( '_bp_nouveau_messages_print_placeholders' ) ) {
+	bp_nouveau_messages_print_placeholders();
+}
+?>
 
 <script type="text/html" id="tmpl-bp-messages-feedback">
 	<div class="bp-feedback {{data.type}}">
@@ -36,7 +37,7 @@
 	<label for="send-to-input"><?php esc_html_e( 'Send @Username', 'buddypress' ); ?></label>
 	<input type="text" name="send_to" class="send-to-input" id="send-to-input" />
 
-	<label for="subject"><?php _e( 'Subject', 'buddypress' ); ?></label>
+	<label for="subject"><?php esc_html_e( 'Subject', 'buddypress' ); ?></label>
 	<input type="text" name="subject" id="subject"/>
 
 	<div id="bp-message-content"></div>
@@ -130,7 +131,7 @@
 	<# if ( ! data.recipientsCount ) { #>
 		<div class="thread-from">
 			<a class="user-link" href="{{data.sender_link}}">
-				<img class="avatar" src="{{data.sender_avatar}}" alt="" />
+				<img class="avatar" src="{{{data.sender_avatar}}}" alt="" />
 				<span class="bp-screen-reader-text"><?php esc_html_e( 'From:', 'buddypress' ); ?></span>
 				<span class="user-name">{{data.sender_name}}</span>
 			</a>
@@ -140,7 +141,7 @@
 		#>
 		<div class="thread-to">
 			<a class="user-link" href="{{recipient.user_link}}">
-				<img class="avatar" src="{{recipient.avatar}}" alt="" />
+				<img class="avatar" src="{{{recipient.avatar}}}" alt="" />
 				<span class="bp-screen-reader-text"><?php esc_html_e( 'To:', 'buddypress' ); ?></span>
 				<span class="user-name">{{recipient.user_name}}</span>
 			</a>
@@ -154,9 +155,9 @@
 	<div class="thread-content" data-thread-id="{{data.id}}">
 		<div class="thread-subject">
 			<span class="thread-count">({{data.count}})</span>
-			<a class="subject" href="../view/{{data.id}}/">{{data.subject}}</a>
+			<a class="subject" href="./view/{{data.id}}/">{{{data.subject}}}</a>
 		</div>
-		<p class="excerpt">{{data.excerpt}}</p>
+		<p class="excerpt">{{{data.excerpt}}}</p>
 	</div>
 	<div class="thread-date">
 		<time datetime="{{data.date.toISOString()}}">{{data.display_date}}</time>
@@ -176,7 +177,7 @@
 						<dd>
 							<ul class="participants-list">
 								<# for ( i in data.recipients ) { #>
-									<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="{{data.recipients[i].user_name}}" /></a></li>
+									<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{{data.recipients[i].avatar}}}" alt="{{data.recipients[i].user_name}}" /></a></li>
 								<# } #>
 							</ul>
 						</dd>
@@ -188,6 +189,12 @@
 					<button type="button" class="message-action-delete bp-tooltip bp-icons" data-bp-action="delete" data-bp-tooltip="<?php esc_attr_e( 'Delete conversation.', 'buddypress' ); ?>">
 						<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'buddypress' ); ?></span>
 					</button>
+
+					<# if ( undefined !== data.recipients && data.recipients.length > 2 ) { #>
+						<button type="button" class="message-action-exit bp-tooltip bp-icons" data-bp-action="exit" data-bp-tooltip="<?php esc_attr_e( 'Exit conversation.', 'buddypress' ); ?>">
+							<span class="bp-screen-reader-text"><?php esc_html_e( 'Exit conversation.', 'buddypress' ); ?></span>
+						</button>
+					<# } #>
 
 					<# if ( undefined !== data.star_link ) { #>
 
@@ -239,7 +246,7 @@
 				<dd>
 					<ul class="participants-list">
 						<# for ( i in data.recipients ) { #>
-							<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{data.recipients[i].avatar}}" alt="{{data.recipients[i].user_name}}" /></a></li>
+							<li><a href="{{data.recipients[i].user_link}}" class="bp-tooltip" data-bp-tooltip="{{data.recipients[i].user_name}}"><img class="avatar mini" src="{{{data.recipients[i].avatar}}}" alt="{{data.recipients[i].user_name}}" /></a></li>
 						<# } #>
 					</ul>
 				</dd>
@@ -250,6 +257,12 @@
 			<button type="button" class="message-action-delete bp-tooltip bp-icons" data-bp-action="delete" data-bp-tooltip="<?php esc_attr_e( 'Delete conversation.', 'buddypress' ); ?>">
 				<span class="bp-screen-reader-text"><?php esc_html_e( 'Delete conversation.', 'buddypress' ); ?></span>
 			</button>
+
+			<# if ( undefined !== data.recipients && data.recipients.length > 2 ) { #>
+				<button type="button" class="message-action-exit bp-tooltip bp-icons" data-bp-action="exit" data-bp-tooltip="<?php esc_attr_e( 'Exit conversation.', 'buddypress' ); ?>">
+					<span class="bp-screen-reader-text"><?php esc_html_e( 'Exit conversation.', 'buddypress' ); ?></span>
+				</button>
+			<# } #>
 		</div>
 	</header>
 </script>
@@ -261,7 +274,7 @@
 		<# } #>
 
 		<a href="{{data.sender_link}}" class="user-link">
-			<img class="avatar" src="{{data.sender_avatar}}" alt="" />
+			<img class="avatar" src="{{{data.sender_avatar}}}" alt="" />
 			<strong>{{data.sender_name}}</strong>
 		</a>
 
@@ -331,7 +344,7 @@
 
 				<?php bp_nouveau_messages_hook( 'before', 'reply_box' ); ?>
 
-				<label for="message_content" class="bp-screen-reader-text"><?php _e( 'Reply to Message', 'buddypress' ); ?></label>
+				<label for="message_content" class="bp-screen-reader-text"><?php esc_html_e( 'Reply to Message', 'buddypress' ); ?></label>
 				<div id="bp-message-content"></div>
 
 				<?php bp_nouveau_messages_hook( 'after', 'reply_box' ); ?>

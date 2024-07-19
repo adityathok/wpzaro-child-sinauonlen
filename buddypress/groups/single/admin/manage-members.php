@@ -3,7 +3,7 @@
  * BP Nouveau Group's manage members template.
  *
  * @since 3.0.0
- * @version 5.0.0
+ * @version 10.0.0
  */
 ?>
 
@@ -14,12 +14,8 @@
 <p class="bp-help-text"><?php esc_html_e( 'Manage your group members; promote to moderators, admins or demote or ban.', 'buddypress' ); ?></p>
 
 <?php if ( bp_rest_api_is_available() ) :
-	/**
-	 * Get the templates to manage Group Members using the BP REST API.
-	 *
-	 * @since 5.0.0
-	 */
-	bp_get_template_part( 'common/js-templates/group-members/index' );
+
+	bp_groups_manage_group_members_interface();
 
 else : ?>
 
@@ -34,7 +30,10 @@ else : ?>
 				<?php while ( bp_members() ) : bp_the_member(); ?>
 				<li class="member-entry clearfix">
 
-					<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => '' ) ); ?>
+					<?php
+					// phpcs:ignore WordPress.Security.EscapeOutput
+					echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => '' ) );
+					?>
 					<p class="list-title member-name">
 						<a href="<?php bp_member_permalink(); ?>"> <?php bp_member_name(); ?></a>
 					</p>
@@ -65,7 +64,10 @@ else : ?>
 				<?php while ( bp_members() ) : bp_the_member(); ?>
 				<li class="members-entry clearfix">
 
-					<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => '' ) ); ?>
+					<?php
+					// phpcs:ignore WordPress.Security.EscapeOutput
+					echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'thumb', 'width' => 30, 'height' => 30, 'alt' => '' ) );
+					?>
 					<p class="list-title member-name">
 						<a href="<?php bp_member_permalink(); ?>"> <?php bp_member_name(); ?></a>
 					</p>

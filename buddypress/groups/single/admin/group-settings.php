@@ -70,8 +70,8 @@ if ( $group_types ) : ?>
 
 		<?php foreach ( $group_types as $type ) : ?>
 			<div class="checkbox">
-				<label for="<?php printf( 'group-type-%s', $type->name ); ?>">
-					<input type="checkbox" name="group-types[]" id="<?php printf( 'group-type-%s', $type->name ); ?>" value="<?php echo esc_attr( $type->name ); ?>" <?php bp_nouveau_group_type_checked( $type ); ?>/> <?php echo esc_html( $type->labels['name'] ); ?>
+				<label for="<?php printf( 'group-type-%s', esc_attr( $type->name ) ); ?>">
+					<input type="checkbox" name="group-types[]" id="<?php printf( 'group-type-%s', esc_attr( $type->name ) ); ?>" value="<?php echo esc_attr( $type->name ); ?>" <?php bp_nouveau_group_type_checked( $type ); ?>/> <?php echo esc_html( $type->labels['name'] ); ?>
 					<?php
 					if ( ! empty( $type->description ) ) {
 						printf( '&ndash; %s', '<span class="bp-group-type-desc">' . esc_html( $type->description ) . '</span>' );
@@ -85,6 +85,8 @@ if ( $group_types ) : ?>
 	</fieldset>
 
 <?php endif; ?>
+
+<?php if ( bp_is_active( 'groups', 'invitations' ) ): ?>
 
 	<fieldset class="radio group-invitations">
 		<legend><?php esc_html_e( 'Group Invitations', 'buddypress' ); ?></legend>
@@ -107,5 +109,7 @@ if ( $group_types ) : ?>
 		</label>
 
 	</fieldset>
+
+<?php endif; ?>
 
 </div><!-- // .group-settings-selections -->

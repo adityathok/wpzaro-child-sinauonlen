@@ -3,42 +3,28 @@
  * BuddyPress Single Members item Navigation
  *
  * @since 3.0.0
- * @version 3.1.0
+ * @version 12.0.0
  */
-
-$current_id = get_current_user_id();
-global $bp;
-$id_displayed_user = $bp->displayed_user->id;
-
-$menuex = [
-	'notifications-personal-li','messages-personal-li','forums-personal-li',
-];
 ?>
 
 <nav class="<?php bp_nouveau_single_item_nav_classes(); ?>" id="object-nav" role="navigation" aria-label="<?php esc_attr_e( 'Member menu', 'buddypress' ); ?>">
 
 	<?php if ( bp_nouveau_has_nav( array( 'type' => 'primary' ) ) ) : ?>
 
-		<ul>
+		<ul id="member-primary-nav" class="bp-priority-object-nav-nav-items">
 
 			<?php
 			while ( bp_nouveau_nav_items() ) :
 				bp_nouveau_nav_item();
-				// echo bp_nouveau_get_nav_id();
-				if ($id_displayed_user != $current_id && in_array(bp_nouveau_get_nav_id(), $menuex)) { 
-					continue;
-				}
 			?>
 
 				<li id="<?php bp_nouveau_nav_id(); ?>" class="<?php bp_nouveau_nav_classes(); ?>">
 					<a href="<?php bp_nouveau_nav_link(); ?>" id="<?php bp_nouveau_nav_link_id(); ?>">
-					
 						<?php bp_nouveau_nav_link_text(); ?>
 
 						<?php if ( bp_nouveau_nav_has_count() ) : ?>
 							<span class="count"><?php bp_nouveau_nav_count(); ?></span>
 						<?php endif; ?>
-
 					</a>
 				</li>
 
@@ -49,5 +35,7 @@ $menuex = [
 		</ul>
 
 	<?php endif; ?>
+
+	<?php bp_nouveau_member_hook( '', 'primary_nav' ); ?>
 
 </nav>

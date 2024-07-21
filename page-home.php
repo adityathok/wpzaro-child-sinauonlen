@@ -23,21 +23,22 @@ $AdAbsenPost    = new AdAbsenPost();
 
         <div class="profile-homepage">
 
-            <div class="bg-head-svg">
-            
-            <svg xmlns="http://www.w3.org/2000/svg" height="150px" >
-                <defs>
-                <linearGradient id="lgrad" x1="50%" y1="100%" x2="50%" y2="0%" >
-                    <stop offset="0%" style="stop-color:rgb(102,139,230);stop-opacity:1.00" />
-                    <stop offset="100%" style="stop-color:rgb(110,0,183);stop-opacity:1.00" />
-                </linearGradient>
-                </defs>
-                <rect x="0" y="0" width="100%" height="100%" fill="url(#lgrad)"/>
-            </svg>
-
-            </div>
-
                 <?php if(is_user_logged_in()): ?>
+
+                        <div class="bg-head-svg">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" height="150px" >
+                                <defs>
+                                <linearGradient id="lgrad" x1="50%" y1="100%" x2="50%" y2="0%" >
+                                    <stop offset="0%" style="stop-color:rgb(102,139,230);stop-opacity:1.00" />
+                                    <stop offset="100%" style="stop-color:rgb(110,0,183);stop-opacity:1.00" />
+                                </linearGradient>
+                                </defs>
+                                <rect x="0" y="0" width="100%" height="100%" fill="url(#lgrad)"/>
+                            </svg>
+
+                        </div>
+
                         <div class="content-profile-homepage">
 
                             <div class="row align-items-center mt-5 mb-3">
@@ -51,12 +52,25 @@ $AdAbsenPost    = new AdAbsenPost();
                                 </div>
                             </div>
 
+
                             <?php
                             if(current_user_can('administrator') || current_user_can('guru')):
                                 require_once('inc/guru/card-home.php');
                             else:
                                 require_once('inc/siswa/card-home.php');
                             endif;
+                            ?>
+                            
+                            <?php
+                            if($themeoption['_theme_bannerhome']) {
+                                echo '<div class="pghome-slider mb-5 mt-2 overflow-hidden">';
+                                foreach ($themeoption['_theme_bannerhome'] as $key => $value) {
+                                    echo '<div class="item-pghome-slider p-1">';
+                                        echo '<img src="'.$value.'" loading="lazy" class="w-100 rounded shadow-sm"/>';
+                                    echo '</div>';
+                                }
+                                echo '</div>';
+                            }
                             ?>
 
                             <div class="list-materi-last my-4">                        

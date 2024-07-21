@@ -42,7 +42,7 @@ function cmb2_ad_metaboxes( array $meta_boxes ) {
 	 */
 	$meta_boxes['options_page'] = array(
 		'id'      => 'wpzaro_options_page',
-		'title'   => __( 'WPzaro Theme Options', 'cmb2' ),
+		'title'   => __( 'Pengaturan Sinauonlen', 'cmb2' ),
 		'show_on' => array( 'options-page' => array( $prefix . 'wpzaro_theme_options', ), ),
 		'fields'  => array(			
 			array(
@@ -78,7 +78,25 @@ function cmb2_ad_metaboxes( array $meta_boxes ) {
                         'image/webp',
                     ),
                 ),
+			),		
+			array(
+				'name' => __( 'Banner Home', 'wpzaro' ),
+				'desc' => __( '', 'wpzaro' ),
+				'id'   => $prefix . '_theme_bannerhome',
+				'type' => 'file_list',
+                'options' => array(
+                    'url' => false, // Hide the text input for the url
+                ),
+                'query_args' => array(
+                    'type' => array(
+                        'image/gif',
+                        'image/jpeg',
+                        'image/png',
+                        'image/webp',
+                    ),
+                ),
 			),
+			
 		)
 	);
     

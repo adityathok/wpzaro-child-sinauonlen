@@ -160,6 +160,15 @@ function wpdocs_register_private_taxonomy() {
         'hierarchical' => true
     );     
     register_taxonomy( 'mapel', 'admateri', $args );
+
+    $args = array(
+        'label'        => __( 'Tema', 'wpzaro' ),
+        'public'       => true,
+        'rewrite'      => true,
+        'hierarchical' => true
+    );     
+    register_taxonomy( 'adtema', 'admateri', $args );
+
 }
 add_action( 'init', 'wpdocs_register_private_taxonomy', 0 );
 

@@ -38,8 +38,10 @@ if ( ! function_exists( 'wpzaro_header_nav_menu' ) ) {
                                         echo 'Pengaturan profile';
                                     } else if (get_post_type() === 'post' || get_post_type() === 'page') {
                                         echo get_the_title();
-                                    } else if (get_post_type() === 'admateri') {
+                                    } else if (is_single() && get_post_type() === 'admateri') {
                                         echo 'Materi | '.get_the_title();
+                                    } else if (is_tax('adtema') && get_post_type() === 'admateri') {
+                                        echo get_the_archive_title();
                                     } else if(is_bbpress()) {
                                         echo 'Forums';
                                     }

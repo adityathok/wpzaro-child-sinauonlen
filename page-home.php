@@ -72,6 +72,30 @@ $AdAbsenPost    = new AdAbsenPost();
                                 echo '</div>';
                             }
                             ?>
+                            
+                            <div class="my-4">
+                                <div class="fw-bold text-muted mb-2">
+                                    Tema
+                                </div>
+                                <div class="mb-2">
+                                    <?php                                    
+            						$get_tema = get_categories( array('taxonomy' => 'adtema','hide_empty'=> false,));
+                                    ?>
+                                    <?php if($get_tema): ?>
+                                        <div class="list-group">
+                                            <?php foreach( $get_tema as $tema): ?>
+                                                <a href="<?php echo get_term_link( $tema ); ?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                                    <?php echo $tema->name; ?>
+                                                    <span class="opacity-50">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/> </svg>
+                                                    </span>
+                                                </a>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                </div>
+                            </div>
 
                             <div class="list-materi-last my-4">                        
                                 <?php 

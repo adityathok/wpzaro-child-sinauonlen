@@ -97,11 +97,17 @@ $AdAbsenPost    = new AdAbsenPost();
                         
                     <?php
                         // If comments are open or we have at least one comment, load up the comment template.
-                        if ( comments_open() || get_comments_number() ) {
-                            comments_template();
-                        }
+                        // if ( comments_open() || get_comments_number() ) {
+                        //     comments_template();
+                        // }
                     }
+
+                    $user_info = get_userdata($post->post_author);
                     ?>
+                    
+                    <a class="btn btn-success w-100" href="<?php echo bp_members_get_user_url(get_current_user_id());?>messages/compose/?r=<?php echo $user_info->user_login; ?>">
+                        Komentari <i class="fa fa-commenting-o"></i>
+                    </a>
 
                 </main><!-- #main -->
 

@@ -28,7 +28,8 @@ $urlpage    = get_the_permalink();
                         require_once('inc/materi/form.php');
                         break;
                     default:
-                        require_once('inc/materi/daftar-materi.php');
+                        // require_once('inc/materi/daftar-materi.php');
+                        require_once('inc/materi/daftar-tema.php');
                         break;
                 }
             endif;

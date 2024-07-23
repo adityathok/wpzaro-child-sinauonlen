@@ -20,6 +20,16 @@ function sinauonlen_admateri_custom_query( $query ) {
             ));
         }
 
+        if(isset($_GET['setkelas']) && $_GET['setkelas']){
+            $query->set( 'meta_query', array(
+                array(
+                    'key'       => 'kelas',
+                    'value'     => $_GET['setkelas'],
+                    'compare'   => 'like'
+                )
+            ));
+        }
+
     }
 
 }

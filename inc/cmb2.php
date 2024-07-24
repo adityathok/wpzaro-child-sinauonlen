@@ -96,7 +96,25 @@ function cmb2_ad_metaboxes( array $meta_boxes ) {
                     ),
                 ),
 			),
-			
+				
+			array(
+				'name' => __( 'Banner Home 2', 'wpzaro' ),
+				'desc' => __( '', 'wpzaro' ),
+				'id'   => $prefix . '_theme_bannerhome2',
+				'type' => 'file_list',
+                'options' => array(
+                    'url' => false, // Hide the text input for the url
+                ),
+                'query_args' => array(
+                    'type' => array(
+                        'image/gif',
+                        'image/jpeg',
+                        'image/png',
+                        'image/webp',
+                    ),
+                ),
+			),
+
 		)
 	);
     

@@ -61,17 +61,54 @@ $AdAbsenPost    = new AdAbsenPost();
                             endif;
                             ?>
                             
-                            <?php
-                            if($themeoption['_theme_bannerhome']) {
-                                echo '<div class="pghome-slider mb-5 mt-2 overflow-hidden">';
-                                foreach ($themeoption['_theme_bannerhome'] as $key => $value) {
-                                    echo '<div class="item-pghome-slider p-1">';
-                                        echo '<img src="'.$value.'" loading="lazy" class="w-100 rounded shadow-sm"/>';
-                                    echo '</div>';
-                                }
-                                echo '</div>';
-                            }
-                            ?>
+                            <div class="row">
+                                <div class="col-6">
+                                    <?php if($themeoption['_theme_bannerhome']): ?>
+                                        <div id="carouselHomeS1" class="carousel slide" data-bs-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <?php $s1=0;?>
+                                                <?php foreach ($themeoption['_theme_bannerhome'] as $key => $value): ?>
+                                                    <div class="<?php echo $s1==0?'carousel-item active':'carousel-item'; ?>">
+                                                        <img src="<?php echo $value; ?>" loading="lazy" class="w-100 rounded shadow-sm"/>
+                                                    </div>                                                
+                                                    <?php $s1++;?>
+                                                <?php endforeach; ?>
+                                            </div>
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselHomeS1" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselHomeS1" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="col-6">
+                                    <?php if($themeoption['_theme_bannerhome2']): ?>
+                                        <div id="carouselHomeS2" class="carousel slide" data-bs-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <?php $s1=0;?>
+                                                <?php foreach ($themeoption['_theme_bannerhome2'] as $key => $value): ?>
+                                                    <div class="<?php echo $s1==0?'carousel-item active':'carousel-item'; ?>">
+                                                        <img src="<?php echo $value; ?>" loading="lazy" class="w-100 rounded shadow-sm"/>
+                                                    </div>                                                
+                                                    <?php $s1++;?>
+                                                <?php endforeach; ?>
+                                            </div>
+                                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselHomeS2" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button" data-bs-target="#carouselHomeS2" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                             
                             <div class="my-4">
                                 <div class="fw-bold text-muted mb-2">

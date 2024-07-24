@@ -138,12 +138,12 @@ jQuery(function($) {
         }
     });
 
-    $('.pghome-slider').slick({
-        infinite: true,
-        dots: true,
-        arrows: false,
-        slidesToShow: 2,
-        slidesToScroll: 1
-    });
+    // $('.pghome-slider').slick({
+    //     infinite: true,
+    //     dots: true,
+    //     arrows: false,
+    //     slidesToShow: 2,
+    //     slidesToScroll: 1
+    // });
 
 });

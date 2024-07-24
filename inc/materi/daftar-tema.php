@@ -1,5 +1,9 @@
 <?php
 $data_kelas = get_option( '_data_kelas', ['Kelas'] );
+
+if(current_user_can('siswa')) {
+    $data_kelas = [get_user_meta(get_current_user_id(), 'kelas', true)];
+}
 ?>
 <div class="accordion" id="accordionKelas">
 
@@ -25,6 +29,9 @@ $data_kelas = get_option( '_data_kelas', ['Kelas'] );
                     'compare'   => 'like'
                 )
             );
+            if(current_user_can('guru')) {
+                $args['author'] = get_current_user_id();
+            }
             $the_query = new WP_Query( $args );
             if ( $the_query->have_posts() ) {
                 echo '<div class="list-group list-group-flush">';

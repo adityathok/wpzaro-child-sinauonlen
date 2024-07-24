@@ -37,6 +37,17 @@ $urlpage    = get_the_permalink();
                 require_once('inc/materi/daftar-materi.php');
             endif;
         echo '</div>';
+        ?>
+        <?php if(!current_user_can('siswa')): ?>
+            <div class="float-button-bottom">
+                <div class="container text-end">
+                    <a href="<?php echo $urlpage;?>?pg=add" class="btn btn-success rounded-circle shadow">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php
     else:
         echo '<div class="container py-3 text-center">';
             echo '<div class="card p-3 text-start">';

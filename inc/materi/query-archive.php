@@ -30,6 +30,16 @@ function sinauonlen_admateri_custom_query( $query ) {
             ));
         }
 
+        if(isset($_GET['setmapel']) && $_GET['setmapel']){
+            $query->set( 'tax_query', array(
+                array(
+                    'taxonomy' => 'mapel',
+                    'field'    => 'term_id',
+                    'terms'    => $_GET['setmapel'],
+                )
+            ));
+        }
+
     }
 
 }

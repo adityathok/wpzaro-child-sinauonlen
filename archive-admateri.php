@@ -59,6 +59,16 @@ $container = wpzaro_theme_setting( 'wpzaro_container_type' );
 				}
 				?>
 
+				<?php if(!current_user_can('siswa')): ?>
+					<div class="float-button-bottom">
+						<div class="container text-end">
+							<a href="<?php echo get_site_url();?>/materi?pg=add" class="btn btn-success rounded-circle shadow">
+								<i class="fa fa-plus"></i>
+							</a>
+						</div>
+					</div>
+				<?php endif; ?>
+
 			</main><!-- #main -->
 
 			<?php

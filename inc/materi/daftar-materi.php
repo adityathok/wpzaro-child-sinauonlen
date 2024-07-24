@@ -65,7 +65,7 @@ wp_reset_postdata();
 ?>
 
 <?php if(!current_user_can('siswa')): ?>
-    <div class="float-button-bottom">
+    <div class="float-button-bottom d-none">
         <div class="container text-end">
             <a href="<?php echo $urlpage;?>?pg=add" class="btn btn-success rounded-circle shadow">
                 <i class="fa fa-plus"></i>

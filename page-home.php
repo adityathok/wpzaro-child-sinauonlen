@@ -52,7 +52,6 @@ $AdAbsenPost    = new AdAbsenPost();
                                 </div>
                             </div>
 
-
                             <?php
                             if(current_user_can('administrator') || current_user_can('guru')):
                                 require_once('inc/guru/card-home.php');
@@ -110,12 +109,6 @@ $AdAbsenPost    = new AdAbsenPost();
                                 </div>
                             </div>
                             
-                            <div class="my-4">
-                                <?php                          
-                                require_once('inc/materi/daftar-tema.php');
-                                ?>
-                            </div>
-
                             <div class="list-materi-last my-4">                        
                                 <?php 
                                 if($visit_materi):

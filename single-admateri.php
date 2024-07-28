@@ -8,6 +8,12 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
+
+if(!is_user_logged_in()) {
+    header('Location: '.get_site_url());
+    die();
+}
+
 get_header();
 $container      = get_theme_mod( 'wpzaro_container_type' );
 $AdMateri       = new AdMateri();
@@ -53,61 +59,78 @@ $AdAbsenPost    = new AdAbsenPost();
                             <?php else: ?>
                                 <div class="alert alert-secondary bg-white shadow-sm my-4">
                                     <div class="btn-group w-100" role="group">
-                                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#dataAbsenModal">Cek Presensi</button>
+                                        <!-- <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#dataAbsenModal">Cek Presensi</button> -->
+                                         <?php if(isset($_GET['showpresensi'])): ?>
+                                            <a href="<?php echo get_the_permalink();?>" class="btn btn-dark">Lihat Materi</a>
+                                        <?php else: ?>
+                                            <a href="<?php echo get_the_permalink();?>/?showpresensi=true" class="btn btn-dark">Cek Presensi</a>
+                                         <?php endif; ?>
                                         <a href="<?php echo get_home_url();?>/materi/?pg=edit&id=<?php echo get_the_ID(); ?>" class="btn btn-secondary">Edit Materi</a>
                                     </div>
                                 </div>
                             <?php endif; ?>
 
-                            <?php 
-                             $getfile   = get_post_meta( get_the_ID(), 'file_add', true );
-                             $fileurl   = $getfile?wp_get_attachment_url($getfile):$getfile;
-                             if($fileurl):
-                             ?>
-                                <div class="card shadow-sm my-4">
-                                    <div class="card-header text-center">File Lampiran</div>
-                                    <div class="card-body text-center">
-                                        <a href="<?php echo $fileurl; ?>" class="btn btn-secondary" download>Download</a>
+                            <?php if(!current_user_can('siswa') && isset($_GET['showpresensi'])): ?>
+
+                                <?php
+                                require_once('inc/materi/presensi.php');    
+                                ?>
+
+                            <?php else: ?>
+
+                                <?php 
+                                $getfile   = get_post_meta( get_the_ID(), 'file_add', true );
+                                $fileurl   = $getfile?wp_get_attachment_url($getfile):$getfile;
+                                if($fileurl):
+                                ?>
+
+                                    <div class="card shadow-sm my-4">
+                                        <div class="card-header text-center">File Lampiran</div>
+                                        <div class="card-body text-center">
+                                            <a href="<?php echo $fileurl; ?>" class="btn btn-secondary" download>Download</a>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+
+                                <div class="entry-content">
+                                    <?php
+                                    the_content();
+                                    wpzaro_link_pages();
+                                    ?>
+                                </div><!-- .entry-content -->
+                                
+                                <div class="my-3">
+                                    <?php 
+                                    $kls = get_post_meta(get_the_ID(),'kelas',true);
+                                    echo $kls?'<span class="badge bg-secondary me-1 mb-1">'.implode('</span><span class="badge bg-secondary me-1 mb-1">',$kls).'</span>':'';
+                                    ?>
+                                    <div class="mb-3">
+                                        <span class="badge bg-dark"><?php echo get_the_date('d M Y H:i:s'); ?></span>
                                     </div>
                                 </div>
-                             <?php endif; ?>
 
-                            <div class="entry-content">
-                                <?php
-                                the_content();
-                                wpzaro_link_pages();
-                                ?>
-                            </div><!-- .entry-content -->
-                            
-                            <div class="my-3">
-                                <?php 
-                                $kls = get_post_meta(get_the_ID(),'kelas',true);
-                                echo $kls?'<span class="badge bg-secondary me-1 mb-1">'.implode('</span><span class="badge bg-secondary me-1 mb-1">',$kls).'</span>':'';
-                                ?>
-                                <div class="mb-3">
-                                    <span class="badge bg-dark"><?php echo get_the_date('d M Y H:i:s'); ?></span>
-                                </div>
                             </div>
+                            
+                            <?php 
+                            $uservisit = $AdMateri->uservisit(get_current_user_id(),get_the_ID());
+                            ?>
+                            
+                            <?php
+                            // If comments are open or we have at least one comment, load up the comment template.
+                            if ( comments_open() || get_comments_number() ) {
+                                comments_template();
+                            }
+                            $user_info = get_userdata($post->post_author);
+                            ?>
 
-                        </div>
-                        
-                        <?php 
-                        $uservisit = $AdMateri->uservisit(get_current_user_id(),get_the_ID());
-                        ?>
-                        
-                    <?php
-                        // If comments are open or we have at least one comment, load up the comment template.
-                        // if ( comments_open() || get_comments_number() ) {
-                        //     comments_template();
-                        // }
-                    }
+                            <a class="d-none btn btn-success w-100" href="<?php echo bp_members_get_user_url(get_current_user_id());?>messages/compose/?r=<?php echo $user_info->user_login; ?>">
+                                Komentari <i class="fa fa-commenting-o"></i>
+                            </a>
 
-                    $user_info = get_userdata($post->post_author);
-                    ?>
+                        <?php endif; ?>
+
+                    <?php } ?>
                     
-                    <a class="btn btn-success w-100" href="<?php echo bp_members_get_user_url(get_current_user_id());?>messages/compose/?r=<?php echo $user_info->user_login; ?>">
-                        Komentari <i class="fa fa-commenting-o"></i>
-                    </a>
 
                 </main><!-- #main -->
 
@@ -119,56 +142,6 @@ $AdAbsenPost    = new AdAbsenPost();
 
 </div><!-- #single-wrapper -->
 
-
-<?php if(!current_user_can('siswa')): ?>
-    <!-- Modal -->
-    <div class="modal fade" id="dataAbsenModal" tabindex="-1" aria-labelledby="dataAbsenModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="dataAbsenModalLabel">Data Presensi</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php            
-                        $AdAbsenPost    = new AdAbsenPost();
-                        $dataabsen      = $AdAbsenPost->fetch("post_id = ".get_the_ID()."");
-                        ?>
-                        <?php if($dataabsen): ?>
-                            <?php foreach( $dataabsen as $key => $value): ?>
-                                <tr>
-                                    <td><?php echo $key+1; ?></td>
-                                    <td>
-                                        <div> <?php echo get_userdata($value->user_id)->display_name; ?> </div>  
-                                        <span class="badge bg-danger"><?php echo $value->date; ?></span>                                      
-                                    </td>
-                                    <td class="text-end">
-                                        <?php echo get_user_meta($value->user_id,'kelas',true); ?>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-        </div>
-    </div>
-    </div>
-<?php endif; ?>
 
 <?php
 get_footer();

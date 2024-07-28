@@ -30,6 +30,11 @@ $urlpage    = get_the_permalink();
                     default:
                         // require_once('inc/materi/daftar-materi.php');
                         require_once('inc/materi/daftar-tema.php');
+
+                        echo '<a href="'.get_site_url().'/admateri" class="btn btn-primary w-100 mt-4">';
+                        echo 'Lihat semua materi';
+                        echo '</a>';
+
                         break;
                 }
             endif;

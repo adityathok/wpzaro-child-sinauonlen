@@ -61,7 +61,7 @@ class AdNilaiSiswa {
             'can_export'            => true,
             'has_archive'           => true,
             'exclude_from_search'   => false,
-            'publicly_queryable'    => true,
+            'publicly_queryable'    => false,
             'capability_type'       => 'page',
         );
         register_post_type( 'adnilaisiswa', $args );

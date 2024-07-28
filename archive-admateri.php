@@ -7,6 +7,11 @@
  * @package wpzaro
  */
 
+if(!is_user_logged_in()) {
+    header('Location: '.get_site_url());
+    die();
+}
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 

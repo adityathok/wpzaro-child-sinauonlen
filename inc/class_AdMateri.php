@@ -25,7 +25,7 @@ class AdMateri {
                 'required'  => false,
             ],
             'post_content'  => [
-                'type'      => 'textarea',
+                'type'      => 'editor',
                 'title'     => 'Deskripsi',
                 'desc'      => '',
                 'required'  => false,

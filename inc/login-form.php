@@ -8,6 +8,7 @@ function ad_login_form() {
     'value_remember'  => true,
   );
   echo wp_login_form( $args );
+  echo '<script src="https://www.google.com/recaptcha/api.js?hl=en&amp;ver=5.3.1" id="google-recaptcha-v2-js"></script>';
   $form = ob_get_clean();
 
   $form = str_replace('input', 'input form-control', $form);
@@ -30,6 +31,7 @@ function shortode_formlogin(){
         echo '<p>You are logged in</p>';
       else:
         echo ad_login_form();
+        // wp_login_form();
       endif;
     echo '</div>';
   echo '</div>';

@@ -1,6 +1,9 @@
 <article <?php post_class('article-card-admateri mb-4'); ?>>
 
     <?php 
+    if(!is_user_logged_in())
+    return false;
+
     $urlpage        = get_home_url().'/materi/';
     $AdAbsenPost    = new AdAbsenPost();
     ?>
@@ -26,8 +29,14 @@
             <img src="<?php echo get_thumbnail_url_resize(get_the_ID(),300,150);?>" class="card-img-top rounded-0" alt="<?php echo get_the_title();?>" loading="lazy">
         </a>
         <div class="card-body">
-            <a class="card-title fw-bold text-dark" href="<?php echo get_the_permalink();?>">
-                <?php echo get_the_title();?>
+            <a class="card-title text-dark" href="<?php echo get_the_permalink();?>">
+                <strong><?php echo get_the_title();?></strong>
+                <?php
+                $termsmapel = get_the_terms( get_the_ID(), 'mapel' );
+                if ( $termsmapel && ! is_wp_error( $termsmapel ) ) : 
+                    echo ' | '.$termsmapel[0]->name;
+                endif;
+                ?>
             </a>
         </div>
         <div class="card-footer border-0 text-muted d-flex justify-content-between">
@@ -35,16 +44,20 @@
                 <?php echo post_date_ago(get_the_ID());?>
             </small>
             
+            <small>
                 <?php
-                $termsmapel = get_the_terms( get_the_ID(), 'mapel' );
-                if ( $termsmapel && ! is_wp_error( $termsmapel ) ) : 
-                    echo '<small>';
-                        foreach ( $termsmapel as $term ) {
-                            echo '| <a href="?setmapel='.$term->term_id.'">'.$term->name.'</a> ';
-                        }
-                    echo '</small>';
-                endif;
+                $mkelas = get_post_meta(get_the_ID(),'kelas',true);
+                if($mkelas){
+                    echo implode(",",$mkelas);
+                }
+                // $termsmapel = get_the_terms( get_the_ID(), 'mapel' );
+                // if ( $termsmapel && ! is_wp_error( $termsmapel ) ) : 
+                //         foreach ( $termsmapel as $term ) {
+                //             echo '| <a href="?setmapel='.$term->term_id.'">'.$term->name.'</a> ';
+                //         }
+                // endif;
                 ?>
+            </small>
                 
         </div>
     </div>

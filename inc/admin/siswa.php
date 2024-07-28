@@ -137,7 +137,7 @@ $current_id = get_current_user_id(); ?>
                                 </div>
                                 <div class="modal-footer">
                                     <a href="<?php echo $urlpage;?>?pg=nilai&id=<?php echo $user->ID;?>" class="btn btn-danger"> <i class="fa fa-plus"></i> Nilai</a>
-                                    <a href="<?php echo bp_members_get_user_url($user->ID);?>" class="btn btn-secondary">Edit</a>
+                                    <a href="<?php echo bp_members_get_user_url($user->ID);?>profile/edit/group/1/" class="btn btn-secondary">Edit Profil</a>
                                 </div>
                             </div>
                         </div>

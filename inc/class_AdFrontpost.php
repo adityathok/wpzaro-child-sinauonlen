@@ -283,9 +283,15 @@ class AdFrontpost {
             			if ($fields['type']=='textarea') {
             				echo '<textarea id="'.$idmeta.'" class="form-control" rows="15" name="'.$idmeta.'" '.$req.' '.$read.'>'.$value.'</textarea>';
             			} 
+
+						// if($fields['type']=='textarea' && ){
+						// 	wp_editor( $content, $editor_id, $options );
+						// }
+
             			//type input editor
             			if ($fields['type']=='editor') {
-            				wp_editor( $value, $idmeta );
+							$settings  = array( 'media_buttons' => false );
+            				wp_editor( $value, $idmeta,$settings);
             			} 
             			//type input email
             			else if ($fields['type']=='email') {

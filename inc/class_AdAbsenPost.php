@@ -92,6 +92,10 @@ class AdAbsenPost {
         return $getdata;
     }
 
+    public function delete($id){ 
+        return $this->wpdb->delete( $this->table, array( 'id' => $id ) );
+    }
+
 }
 
 $AdAbsenPost = new AdAbsenPost();

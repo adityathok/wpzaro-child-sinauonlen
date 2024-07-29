@@ -25,19 +25,23 @@ $AdAbsenPost    = new AdAbsenPost();
 
                 <?php if(is_user_logged_in()): ?>
 
-                        <div class="bg-head-svg">
-
-                            <svg xmlns="http://www.w3.org/2000/svg" height="150px" >
-                                <defs>
-                                <linearGradient id="lgrad" x1="50%" y1="100%" x2="50%" y2="0%" >
-                                    <stop offset="0%" style="stop-color:rgb(102,139,230);stop-opacity:1.00" />
-                                    <stop offset="100%" style="stop-color:rgb(110,0,183);stop-opacity:1.00" />
-                                </linearGradient>
-                                </defs>
-                                <rect x="0" y="0" width="100%" height="100%" fill="url(#lgrad)"/>
-                            </svg>
-
-                        </div>
+                        <?php if($themeoption['_bg_home']): ?>
+                            <div class="ratio ratio-21x9 rounded-bottom overflow-hidden" style="margin:0 0rem -6rem;">
+                                <img src="<?php echo $themeoption['_bg_home']; ?>" alt="" class="w-100">
+                            </div>
+                        <?php else: ?>
+                            <div class="bg-head-svg">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="150px" >
+                                    <defs>
+                                    <linearGradient id="lgrad" x1="50%" y1="100%" x2="50%" y2="0%" >
+                                        <stop offset="0%" style="stop-color:rgb(102,139,230);stop-opacity:1.00" />
+                                        <stop offset="100%" style="stop-color:rgb(110,0,183);stop-opacity:1.00" />
+                                    </linearGradient>
+                                    </defs>
+                                    <rect x="0" y="0" width="100%" height="100%" fill="url(#lgrad)"/>
+                                </svg>
+                            </div>
+                        <?php endif; ?>
 
                         <div class="content-profile-homepage">
 
@@ -124,7 +128,9 @@ $AdAbsenPost    = new AdAbsenPost();
                                                 <div class="row g-0">
                                                     <div class="col-4 col-md-3">
                                                         <a href="<?php echo get_the_permalink($idmateri);?>">
-                                                            <img src="<?php echo get_thumbnail_url_resize($idmateri,150,150);?>" class="img-fluid rounded-start" alt="...">
+                                                            <div class="ratio ratio-4x3">
+                                                                <img src="<?php echo get_thumbnail_url_resize($idmateri,150,150);?>" class="img-fluid rounded-start" alt="...">
+                                                            </div>
                                                         </a>
                                                     </div>
                                                     <div class="col-8 col-md-9">

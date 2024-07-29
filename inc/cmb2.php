@@ -78,7 +78,24 @@ function cmb2_ad_metaboxes( array $meta_boxes ) {
                         'image/webp',
                     ),
                 ),
-			),		
+			),			
+			array(
+				'name' => __( 'Background Home', 'wpzaro' ),
+				'desc' => __( '', 'wpzaro' ),
+				'id'   => $prefix . '_bg_home',
+				'type' => 'file',
+                'options' => array(
+                    'url' => false, // Hide the text input for the url
+                ),
+                'query_args' => array(
+                    'type' => array(
+                        'image/gif',
+                        'image/jpeg',
+                        'image/png',
+                        'image/webp',
+                    ),
+                ),
+			),	
 			array(
 				'name' => __( 'Banner Home', 'wpzaro' ),
 				'desc' => __( '', 'wpzaro' ),

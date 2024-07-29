@@ -9,11 +9,13 @@ function ad_login_form() {
   );
   echo wp_login_form( $args );
   echo '<script src="https://www.google.com/recaptcha/api.js?hl=en&amp;ver=5.3.1" id="google-recaptcha-v2-js"></script>';
+  // echo '<a class="btn btn-outline-primary" href="'.get_site_url().'/register">Daftar</a>';
   $form = ob_get_clean();
 
   $form = str_replace('input', 'input form-control', $form);
   $form = str_replace('login-submit', 'login-submit text-end', $form);
   $form = str_replace('button button-primary', 'button button-primary btn btn-primary px-4', $form);
+  $form = str_replace('<p class="login-submit text-end">', '<p class="login-submit text-end"><a class="btn btn-outline-primary" href="'.get_site_url().'/register">Daftar</a>', $form);
 
   return $form;
 }

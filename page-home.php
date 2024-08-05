@@ -52,7 +52,7 @@ $AdAbsenPost    = new AdAbsenPost();
                                     </span>
                                 </div>
                                 <div class="col-8 pt-3">
-                                    <h4 class="fw-bold"><?php echo $currentdata->display_name; ?></h4>   
+                                    <h4 class="fw-bold display-name"><?php echo $currentdata->display_name; ?></h4>   
                                 </div>
                             </div>
 

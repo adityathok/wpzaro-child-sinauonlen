@@ -288,4 +288,7 @@ body > .bp-messages-contents {
     .bg-head-svg svg {
         height: 50px;
     }
+    .content-profile-homepage .display-name {
+        margin-top: 1.5rem;
+    }
 }

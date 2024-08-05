@@ -42,12 +42,12 @@ class AdMateri {
                 'desc'      => '',
                 'required'  => false,
             ],
-            'adtema' => [
-                'type'      => 'taxonomy',
-                'title'     => 'Tema',
-                'desc'      => '',
-                'required'  => false,
-            ],
+            // 'adtema' => [
+            //     'type'      => 'taxonomy',
+            //     'title'     => 'Tema',
+            //     'desc'      => '',
+            //     'required'  => false,
+            // ],
             'kelas'=> [
                 'type'      => 'checkbox',
                 'title'     => 'Kelas',

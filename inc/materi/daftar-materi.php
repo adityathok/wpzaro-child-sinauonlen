@@ -9,7 +9,14 @@ $args = array(
 );
 
 if(current_user_can('guru')) {
-    $args['author'] = get_current_user_id();
+    // $args['author'] = get_current_user_id();
+    $args['meta_query'] = array(
+        array(
+            'key'       => 'kelas',
+            'value'     => get_user_meta(get_current_user_id(), 'kelas', true),
+            'compare'   => 'IN'
+        )
+    );
 }
 
 if(current_user_can('siswa')) {

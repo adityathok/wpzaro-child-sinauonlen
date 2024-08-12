@@ -99,3 +99,16 @@ class AdAbsenPost {
 }
 
 $AdAbsenPost = new AdAbsenPost();
+
+add_action('before_delete_post', 'delete_ad_absen_post_data', 10, 1);
+function delete_ad_absen_post_data($post_id)
+{
+    global $wpdb;
+
+    // Cek jika post type yang dihapus adalah 'admateri'
+    $post_type = get_post_type($post_id);
+    if ($post_type === 'admateri') {
+        // Hapus data dari tabel 'wp_ad_absen_post' dengan post_id yang sama
+        $wpdb->delete($wpdb->prefix . 'ad_absen_post', array('post_id' => $post_id));
+    }
+}

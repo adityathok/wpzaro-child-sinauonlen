@@ -43,4 +43,8 @@ if (isset($_GET['delete_nonce']) && isset($_GET['idhapus']) && wp_verify_nonce($
             </tbody>
         </table>
     </div>
+<?php else: ?>
+    <div class="alert alert-warning">
+        Belum ada presensi
+    </div>
 <?php endif; ?>

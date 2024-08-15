@@ -7,7 +7,32 @@ function sinauonlen_admateri_custom_query( $query ) {
     if ( is_archive() && is_post_type_archive( 'admateri' )  && $query->is_main_query() || is_tax() && $query->is_main_query() ) {
         
         if(current_user_can('guru')) {
-            $query->set( 'author', get_current_user_id());
+            $include_kelas  = get_user_meta(get_current_user_id(), 'kelas', true);
+            $datakelas      = get_option( '_data_kelas', ['Kelas'] );
+            $exclude_kelas  = array_diff( $datakelas, $include_kelas );
+
+            // print_r($include_kelas);
+            // print_r($exclude_kelas);
+
+            // $query->set( 'author', get_current_user_id());
+            $query->set( 'meta_query', array(
+                // array(
+                //     'key'       => 'kelas',
+                //     'value'     => $kls,
+                //     'compare'   => 'Like'
+                // )
+                'relation' => 'AND',
+                // array(
+                //     'key' => 'kelas',
+                //     'value' => $include_kelas,
+                //     'compare' => 'IN'
+                // ),
+                array(
+                    'key' => 'kelas',
+                    'value' => $exclude_kelas,
+                    'compare' => 'NOT IN'
+                )
+            ));
         }
         
         if(current_user_can('siswa')) {

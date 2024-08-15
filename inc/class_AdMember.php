@@ -309,6 +309,9 @@ class AdMember {
 				 		//type input checkbox
             			else if ($fields['type']=='checkbox') {
 							$val = $value?$value:[];
+							if(!is_array($val)) {
+								$val = [$val];
+							}
 							foreach ($fields['option'] as $option1 => $option2 ) {
 								$option1	= is_numeric($option1)?$option2:$option1;
 								$stringname	= str_replace(' ', '', $option2);
@@ -453,6 +456,9 @@ class AdMember {
 						echo '</td>';
 					} else if($fields['type']=='checkbox')  {
 						echo '<td>';
+						if($value && !is_array($value)){
+							$value = [$value];
+						}
 						echo $value?implode(', ',$value):'';
 						echo '</td>';
 					} else if($fields['type']=='geolocation')  {

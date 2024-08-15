@@ -47,6 +47,7 @@
             <small>
                 <?php
                 $mkelas = get_post_meta(get_the_ID(),'kelas',true);
+                print_r($mkelas);
                 if($mkelas){
                     echo implode(",",$mkelas);
                 }

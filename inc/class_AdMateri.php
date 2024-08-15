@@ -67,7 +67,7 @@ class AdMateri {
                 'name'                  => _x( 'Materi', 'Post Type General Name', 'wpzaro' ),
                 'singular_name'         => _x( 'Materi', 'Post Type Singular Name', 'wpzaro' ),
             ],
-            'supports'              => array( 'title', 'editor', 'thumbnail', 'comments' ),
+            'supports'              => array( 'title', 'editor', 'thumbnail', 'comments','author' ),
             'taxonomies'            => array( 'category', 'post_tag' ),
             'hierarchical'          => false,
             'public'                => true,

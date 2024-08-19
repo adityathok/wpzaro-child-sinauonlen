@@ -9,7 +9,7 @@
                     </div>
                     <div class="text-end">
                         <h4 class="card-title">0</h4>
-                        <p class="mb-0">Absen siswa hari ini</p>
+                        <p class="mb-0">Presensi siswa hari ini</p>
                     </div>
                     </div>
                 </div>

@@ -30,12 +30,12 @@ class AdMateri {
                 'desc'      => '',
                 'required'  => false,
             ],
-            'file_add'=> [
-                'type'      => 'file',
-                'title'     => 'Lampiran',
-                'desc'      => 'File lampiran',
-                'required'  => false,
-            ],
+            // 'file_add'=> [
+            //     'type'      => 'file',
+            //     'title'     => 'Lampiran',
+            //     'desc'      => 'File lampiran',
+            //     'required'  => false,
+            // ],
             'mapel' => [
                 'type'      => 'taxonomy',
                 'title'     => 'Mata Pelajaran',
